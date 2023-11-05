@@ -56,4 +56,11 @@ class User extends Authenticatable
     public function events(): HasMany {
         return $this->hasMany(Event::class);
     }
+    
+    /*
+     * get any schedules for this user
+     */
+    public function schedules(): HasMany {
+        return $this->hasMany(Schedule::class);
+    }
 }

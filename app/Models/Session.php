@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Session extends Model
 {
@@ -29,5 +30,12 @@ class Session extends Model
      */
     public function slot(): BelongsTo {
         return $this->belongsTo(Slot::class); 
+    }
+
+    /*
+     * get any schedules for this session
+     */
+    public function schedules(): HasMany {
+        return $this->hasMany(Schedule::class);
     }
 }
