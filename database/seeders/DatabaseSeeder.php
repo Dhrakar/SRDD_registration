@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         // run the seeders
         $this->call([
             UserSeeder::class,
+            TrackSeeder::class,
         ]);
     }
 }
