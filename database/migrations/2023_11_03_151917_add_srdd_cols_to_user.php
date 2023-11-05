@@ -12,9 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function ($table) {
-            $table->string('gauth_id')->nullable();
-            $table->string('gauth_type')->nullable();
-            // additional fields for auth and tracking logins
+            $table->string('gauth_token')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->smallInteger('level')->default(0);
             $table->integer('login_count')->default(0);
@@ -28,8 +26,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function ($table) {
-            $table->dropColumn('gauth_id');
-            $table->dropColumn('gauth_type');
+            $table->dropColumn('gauth_token');
             $table->dropColumn('last_login');
             $table->dropColumn('level');
             $table->dropColumn('login_count');

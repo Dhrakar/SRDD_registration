@@ -25,6 +25,7 @@ class UserSeeder extends Seeder
             'updated_at'        => now(),
             'last_login'        => now(),
             'level'             => 2, // admin level
+            'login_count'       => 1, 
         ]);
     }
 }
