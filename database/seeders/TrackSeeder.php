@@ -15,25 +15,25 @@ class TrackSeeder extends Seeder
     {
         // insert the default Tracks 
         DB::Table('tracks')->insert([
-            'title'   => 'Core Event',
+                  'title' => 'Core Event',
             'description' => 'These are the main events for Staff Recognition and Development Day',
-            'color' => 'sky-400',
-            'created_at'        => now(),
-            'updated_at'        => now(),
+                  'color' => 'sky-400',
+             'created_at' => now(),
+             'updated_at' => now(),
         ]);
         DB::Table('tracks')->insert([
-            'title'   => 'Professional Development',
+                  'title' => 'Professional Development',
             'description' => 'Events to help your current career skills -- or to introduce new ones',
-            'color' => 'amber-400',
-            'created_at'        => now(),
-            'updated_at'        => now(),
+                  'color' => 'amber-400',
+             'created_at' => now(),
+             'updated_at' => now(),
         ]);
         DB::Table('tracks')->insert([
-            'title'   => 'Personal Development',
+                  'title' => 'Personal Development',
             'description' => 'Events to help with life outside of UAF',
-            'color' => 'emerald-400',
-            'created_at'        => now(),
-            'updated_at'        => now(),
+                  'color' => 'emerald-400',
+             'created_at' => now(),
+             'updated_at' => now(),
         ]);
     }
 }
