@@ -20,7 +20,9 @@ class EventFactory extends Factory
             'title'       => fake()->sentence(),
             'description' => fake()->text(50),
             'needs_reg'   => fake()->boolean(),
-            'user_id'     => 1,
+            'user_id'     => function () {
+                return \App\Models\User::factory()->create()->id;
+            },
             'track_id'    => 1,
             'year'        => fake()->year(),
         ];

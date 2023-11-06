@@ -17,7 +17,9 @@ class SessionFactory extends Factory
     public function definition(): array
     {
         return [
-            'event_id'   => 1,
+            'event_id'   => function () {
+                return \App\Models\Event::factory()->create()->id;
+            },
             'venue_id'   => fake()->numberBetween(1, 7),
             'slot_id'    => fake()->numberBetween(1, 7),
             'date_held'  => fake()->date(),
