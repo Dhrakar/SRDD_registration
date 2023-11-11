@@ -21,7 +21,10 @@
         </main>
 
         {{-- page footer --}}
-        
+        <footer>
+            <x-global.footer/>
+        </footer>
+
         {{-- Include late-loading items --}}
         <x-global.scripts/>
     </body>
