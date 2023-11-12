@@ -2,7 +2,7 @@
   // page variables for text color, etc
   $m_text_def  = config('constants.colors.menu.def-text');  // default text color
   $m_text_sel  = config('constants.colors.menu.sel-text');  // test color when on that route
-  $m_icon_def  = config('constants.colors.menu.icon.def');  // icon color
+  $m_icon_def  = config('constants.colors.icon');  // icon color
 ?>
 
 <nav x-data="{ open: false }" class="bg-blue-900">
