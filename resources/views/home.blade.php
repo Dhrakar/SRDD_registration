@@ -3,8 +3,14 @@
 @section('content')
 
     <div class="h-screen w-screen border border-slate-200 rounded-sm">
-        Welcome!
-
+        <div id="welcome" class="p-5 bg-slate-100 text-sky-900 border-2 border-sky-950 rounded-sm">
+            <span class="text-3xl mx-auto">
+                Welcome to the Staff Recognition and Development Day registration tool
+            </span>
+            <span class="text-justify"> 
+                {!! Str::markdown(__('ui.markdown.welcome')); !!}
+            </span>
+        </div>
         @if (Route::has('login'))
                 <div class="">
                     @auth
