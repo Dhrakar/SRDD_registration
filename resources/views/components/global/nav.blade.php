@@ -2,7 +2,6 @@
   // page variables for text color, etc
   $m_text_def  = config('constants.colors.menu.def-text');  // default text color
   $m_text_sel  = config('constants.colors.menu.sel-text');  // test color when on that route
-  $m_icon_def  = config('constants.colors.icon');  // icon color
 ?>
 
 <nav x-data="{ open: false }" class="bg-blue-900">
@@ -12,28 +11,22 @@
             <div class="flex">
                 {{-- Menu Icon --}}
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ url('/home') }}"
+                    <a href="{{ route('home') }}"
                        class="inline-flex items-center px-1 pt-1
-                            @php 
-                                if(Str::endsWith(url()->current(), '/')) { 
-                                    echo $m_text_sel; 
-                                } else { 
-                                    echo $m_text_def; 
-                                } 
-                            @endphp"
+                         {{ (url()->current() == route('home'))?$m_text_sel:$m_text_def }}"
                     >
-                        <i class="bi bi-house-door text-xl {{ $m_icon_def }}"></i>
+                        <i class="bi {{ config('constants.icon.home') }} text-xl"></i>
                     </a>
                 </div>
                 {{-- Links --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <span class="inline-flex items-center px-1 pt-1 ">
-                        {{ __('schedule') }}
+                        {{ __('ui.menu.register') }}
                     </span>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <span class="inline-flex items-center px-1 pt-1 ">
-                        {{ __('register') }}
+                        {{ __('ui.menu.schedule') }}
                     </span>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -42,6 +35,14 @@
                         {{ (url()->current() == route('admin.index'))?$m_text_sel:$m_text_def }}"
                     >
                         {{ __('admin') }}
+                    </a>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <a href="{{ route('about') }}"
+                        class="inline-flex items-center px-1 pt-1 
+                        {{ (url()->current() == route('about'))?$m_text_sel:$m_text_def }}"
+                    >
+                        {{ __('ui.menu.about') }}
                     </a>
                 </div>
             </div> {{-- END MENU LINKS --}}
@@ -53,7 +54,7 @@
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div>
-                                <i class="bi bi-person-circle"></i>
+                                <i class="bi {{ config('constants.icon.user') }}"></i>
                                 {{ Auth::user()->name }}
                             </div>
 
