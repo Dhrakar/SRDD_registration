@@ -25,6 +25,9 @@ return [
               'def-text' => 'text-cyan-50',     // unselected text
               'sel-text' => 'text-yellow-400',  // selected or active menu item text
         ],
-        'icon' => 'text-slate-200',   // default Icon color
+    ],
+    // default botstrap icons
+    'icon' => [
+        'home' => 'bi-house-door',
     ],
 ];
