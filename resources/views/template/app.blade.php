@@ -7,7 +7,7 @@
         {{-- Meta tags, CSS and JS libraries --}}
         <x-global.header/>
     </head>
-    <body>
+    <body class="bg-slate-50 text-base leading-normal {{ config('constants.colors.text.def') }}">
 
         {{-- Banner and navigation blocks --}}
         <header>
