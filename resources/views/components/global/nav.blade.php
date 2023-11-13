@@ -1,7 +1,7 @@
 <?php
   // page variables for text color, etc
-  $m_text_def  = config('constants.colors.menu.def-text');  // default text color
-  $m_text_sel  = config('constants.colors.menu.sel-text');  // test color when on that route
+  $m_text_def  = "text-md text-slate-50 hover:text-teal-200";  // default menu text attributes 
+  $m_text_sel  = "text-md font-semibold text-[#FFC000] ";  // test color when on that route
 ?>
 
 <nav x-data="{ open: false }" class="bg-blue-900">
@@ -20,13 +20,15 @@
                 </div>
                 {{-- Links --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <span class="inline-flex items-center px-1 pt-1 ">
+                    <span class="inline-flex items-center px-1 pt-1 
+                         {{ (url()->current() == route('dashboard'))?$m_text_sel:$m_text_def }}">
                         {{ __('ui.menu.register') }}
                     </span>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <span class="inline-flex items-center px-1 pt-1 ">
-                        {{ __('ui.menu.schedule') }}
+                    <span class="inline-flex items-center px-1 pt-1 
+                         {{ (url()->current() == route('dashboard'))?$m_text_sel:$m_text_def }}">
+                        {{ __('ui.menu.reports') }}
                     </span>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -34,7 +36,7 @@
                         class="inline-flex items-center px-1 pt-1 
                         {{ (url()->current() == route('admin.index'))?$m_text_sel:$m_text_def }}"
                     >
-                        {{ __('admin') }}
+                        {{ __('ui.menu.admin') }}
                     </a>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -47,9 +49,9 @@
                 </div>
             </div> {{-- END MENU LINKS --}}
 
-            {{-- User dropdown --}}
+            {{-- Logged in User dropdown --}}
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                @auth {{-- Only show dropdown if logged in --}}
+                @auth 
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
