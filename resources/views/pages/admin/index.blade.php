@@ -4,6 +4,9 @@
      */
 
     use function Laravel\Folio\name;
+    use function Laravel\Folio\{middleware};
+ 
+    middleware(['auth', 'verified']);
  
     name('admin.index');
 
