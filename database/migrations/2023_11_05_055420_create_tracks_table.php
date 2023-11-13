@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('description');
             $table->string('title');
-            $table->string('bgcolor');
-            $table->string('txtcolor');
+            $table->tinyInteger('color');
             $table->timestamps();
         });
     }
