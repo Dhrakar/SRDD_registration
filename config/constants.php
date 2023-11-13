@@ -21,13 +21,10 @@ return [
             'blue' => '#236192',
             'yellow' => '#FFC000',      
          ],
-        'menu' => [
-              'def-text' => 'text-cyan-50',     // unselected text
-              'sel-text' => 'text-yellow-400',  // selected or active menu item text
-        ],
     ],
     // default botstrap icons
     'icon' => [
         'home' => 'bi-house-door',
+        'user' => 'bi-person-circle',
     ],
 ];
