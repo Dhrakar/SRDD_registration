@@ -17,21 +17,24 @@ class TrackSeeder extends Seeder
         DB::Table('tracks')->insert([
                   'title' => 'Core Event',
             'description' => 'These are the main events for Staff Recognition and Development Day',
-                  'color' => 'sky-400',
+                'bgcolor' => '#3170168',
+               'txtcolor' => '#2500650',
              'created_at' => now(),
              'updated_at' => now(),
         ]);
         DB::Table('tracks')->insert([
                   'title' => 'Professional Development',
             'description' => 'Events to help your current career skills -- or to introduce new ones',
-                  'color' => 'amber-400',
+                'bgcolor' => '#580FAS',
+               'txtcolor' => '#2500650',
              'created_at' => now(),
              'updated_at' => now(),
         ]);
         DB::Table('tracks')->insert([
                   'title' => 'Personal Development',
             'description' => 'Events to help with life outside of UAF',
-                  'color' => 'emerald-400',
+                'bgcolor' => '#2719844',
+               'txtcolor' => '#2500650',
              'created_at' => now(),
              'updated_at' => now(),
         ]);
