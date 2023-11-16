@@ -10,6 +10,12 @@
     .callout {
         @apply ml-8 mr-3 my-2 px-2 py-4 rounded-sm border-l-4 border-sky-700 bg-sky-50 shadow-md text-sm;
     }
+    .table-header {
+        @apply bg-indigo-600 text-center text-indigo-50 border border-indigo-100;
+    }
+    .table-row {
+        @apply bg-indigo-100 text-sm text-center text-slate-700 border border-indigo-900;
+    }
 }
 @tailwind components;
 @tailwind utilities;

@@ -18,7 +18,7 @@
     <div class="bg-green-200 ">
         Admin pages
 
-        <a href="/admin/Track">Tracks</a>
+        <a href="{{ route('tracks.index') }}">Tracks</a>
     </div>
 
 @endsection

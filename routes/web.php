@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TrackController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
-
-Route::get('/home', function () {
-    return view('home');
 })->name('home');
+
+Route::get('/admin', function () {
+    return view('admin.index');
+})->middleware(['auth', 'verified'])->name('admin.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -30,6 +31,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // admin functions
+    Route::get('/admin/tracks', [TrackController::class, 'index'])->name('tracks.index');
 });
+
+// Routing for the admin updates
+Route::resource('/admin/tracks', TrackController::class)
+    ->only(['store', 'edit', 'update'])
+    ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
