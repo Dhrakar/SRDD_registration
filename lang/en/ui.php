@@ -22,6 +22,12 @@ return [
             'lib' => 'Included Packages',
           'login' => 'Non-UA Domain Login',
     ],
+    'button' => [
+        'save' => 'Save',  
+        'cancel'  => 'Cancel',
+        'update'  => 'Save Changes',
+        'new-track' => "Save New Track",
+    ],
     'markdown' => [
         // As these are rather longer, they pull in markdown text from files in 
         // the resources/md folder

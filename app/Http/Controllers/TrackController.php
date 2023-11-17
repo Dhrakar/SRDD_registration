@@ -17,13 +17,16 @@ class TrackController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        // validate the data from the form
         $validated = $request->validate([
             'title' => 'required|string|max:40',
+            'description' => 'required|string|max:80',
+            'color' => 'required|numeric|between:1,4',
         ]);
- 
-        $request->track()->create($validated);
- 
-        return redirect(route('admin.tracks.index'));
+        
+        $track = Track::create($validated);
+            
+        return redirect(route('tracks.index'));
     }
 
     public function edit(Track $track): View
@@ -33,5 +36,10 @@ class TrackController extends Controller
         return view('admin.tracks.edit', [
             'track' => $track,
         ]);
+    }
+
+    public function update(Track $track): RedirectResponse
+    {
+        dd($track);
     }
 }

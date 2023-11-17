@@ -31,13 +31,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    // admin functions
+    // 
     Route::get('/admin/tracks', [TrackController::class, 'index'])->name('tracks.index');
+    Route::post('/admin/tracks/store', [TrackController::class, 'store'])->name('tracks.store');
+    Route::get('/admin/tracks/{track}/edit', [TrackController::class, 'edit'])->name('tracks.edit');
+    Route::patch('/admin/tracks/{track}', [TrackController::class, 'update'])->name('tracks.update');
 });
 
-// Routing for the admin updates
-Route::resource('/admin/tracks', TrackController::class)
-    ->only(['store', 'edit', 'update'])
-    ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
