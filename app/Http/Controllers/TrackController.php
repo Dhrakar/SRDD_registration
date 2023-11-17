@@ -21,7 +21,7 @@ class TrackController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:40',
             'description' => 'required|string|max:80',
-            'color' => 'required|numeric|between:1,4',
+            'color' => 'required|numeric|between:1,5',
         ]);
         
         $track = Track::create($validated);

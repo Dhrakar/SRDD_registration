@@ -30,16 +30,14 @@
                 <div class="table-row col-span-3">{{ $track->title }}</div>
                 <div class="table-row col-span-5">{{ $track->description}}</div>
                 <div class="table-row col-span-2">
-                <span class="w-32 px-8 rounded-md 
                     @switch($track->color)
-                        @case (1) bg-sky-400 @break;
-                        @case (2) bg-emerald-400 @break;
-                        @case (3) bg-amber-400 @break;
-                        @case (4) bg-indigo-400 @break;
-                        @default: bg-slate-400
-                    @endswitch">
-                    &nbsp;
-                </span>
+                    @case (1) <span class="w-32 px-8 rounded-md bg-sky-400">@break
+                    @case (2) <span class="w-32 px-8 rounded-md bg-emerald-400">@break
+                    @case (3) <span class="w-32 px-8 rounded-md bg-amber-400">@break
+                    @case (4) <span class="w-32 px-8 rounded-md bg-indigo-400">@break
+                    @case (5) <span class="w-32 px-8 rounded-md bg-slate-400">@break
+                    @endswitch
+                    &nbsp; </span>
                 </div>
                 <div class="table-row col-span-1">
                     @if($track->id != 1 ) {{-- don't allow track 1 to be edited/deleted  --}}
@@ -101,11 +99,13 @@
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
+                <option value="5">5</option>
               </select>
               <span class="w-32 px-4 rounded-md bg-sky-400">1</span>
               <span class="w-32 px-4 rounded-md bg-emerald-400">2</span>
               <span class="w-32 px-4 rounded-md bg-amber-400">3</span>
               <span class="w-32 px-4 rounded-md bg-indigo-400">4</span>
+              <span class="w-32 px-4 rounded-md bg-slate-400">5</span>
             </div>
             <div class="col-span-1 text-xs text-red-600 italic pl-2">
               &nbsp;

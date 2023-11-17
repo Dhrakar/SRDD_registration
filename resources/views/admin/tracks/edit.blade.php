@@ -53,10 +53,10 @@
           </div>
           <div class="col-span-4 border border-indigo-800">
             <select id="track-color" name="track-color">
-              @for ($i = 1; $i < 5; $i++)
+              @for ($i = 1; $i < 6; $i++)
                 <option value="{{$i}}" 
                   @if ($track->color == $i) 
-                    selected
+                    selected="selected"
                   @endif
                   >{{$i}}
                 </option>
@@ -66,6 +66,7 @@
             <span class="w-32 px-4 rounded-md bg-emerald-400">2</span>
             <span class="w-32 px-4 rounded-md bg-amber-400">3</span>
             <span class="w-32 px-4 rounded-md bg-indigo-400">4</span>
+            <span class="w-32 px-4 rounded-md bg-slate-400">5</span>
           </div>
           <div class="col-span-1 text-xs text-red-600 italic pl-2">
             &nbsp;
