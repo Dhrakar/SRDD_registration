@@ -42,4 +42,11 @@ class TrackController extends Controller
     {
         dd($track);
     }
+
+    public function destroy(Track $track): RedirectResponse
+    {
+        $track->delete();
+
+        return redirect(route('tracks.index'));
+    }
 }

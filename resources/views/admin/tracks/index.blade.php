@@ -40,14 +40,12 @@
                     &nbsp; </span>
                 </div>
                 <div class="table-row col-span-1">
-                    @if($track->id != 1 ) {{-- don't allow track 1 to be edited/deleted  --}}
+                    @if($track->id != 1 ) {{-- don't allow track 1 to be edited  --}}
                     <a href="{{ route('tracks.edit', $track) }}">
                         <i class="bi bi-pencil-square mx-2"></i>
-                        <i class="bi bi-trash"></i>
                     </a>
                     @else
                         <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
-                        <i class="text-slate-400 bi bi-trash"></i>
                     @endif
                 </div>
             @endforeach

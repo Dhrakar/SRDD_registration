@@ -27,6 +27,7 @@ return [
         'cancel'  => 'Cancel',
         'update'  => 'Save Changes',
         'new-track' => "Save New Track",
+        'delete' => 'Delete!',
     ],
     'markdown' => [
         // As these are rather longer, they pull in markdown text from files in 

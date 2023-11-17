@@ -71,7 +71,14 @@
           <div class="col-span-1 text-xs text-red-600 italic pl-2">
             &nbsp;
           </div>
-          <div class="col-span-3">&nbsp;</div>
+          <form method="POST" action="{{ route('tracks.destroy', $track) }}">
+            @csrf
+            @method('delete')
+            <x-danger-button class="col-span-1 mt-4 mx-2" >
+                {{ __('ui.button.delete') }}
+            </x-danger-button>
+          </form>
+          <div class="col-span-2">&nbsp;</div>
           <a class="inline-flex items-center mt-4 mx-2 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150"
             href="{{ route('tracks.index') }}">           
             {{__('ui.button.cancel') }}

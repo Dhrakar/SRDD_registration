@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/tracks/store', [TrackController::class, 'store'])->name('tracks.store');
     Route::get('/admin/tracks/{track}/edit', [TrackController::class, 'edit'])->name('tracks.edit');
     Route::patch('/admin/tracks/{track}', [TrackController::class, 'update'])->name('tracks.update');
+    Route::delete('/admin/tracks/{track}', [TrackController::class, 'destroy'])->name('tracks.destroy');
 });
 
 
