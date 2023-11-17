@@ -11,6 +11,7 @@
 @extends('template.app')
 
 @section('content')
+<x-admin.nav-admin/>
 <div class="container">
   <div class="mx-20 mt-4 pb-5 w-auto border border-indigo-900 rounded-md">
     <div class="ml-10 px-2 -translate-y-3 w-min bg-white font-bold">
@@ -31,7 +32,7 @@
               maxlength="50"
               width="50"/>
           </div>
-          <div class="col-span-1 text-base text-red-600 italic pl-2">
+          <div class="col-span-1 text-xs text-red-600 italic pl-2">
             40 chars maximum
           </div>
           <div class="table-header col-span-1 text-right pr-4">
@@ -44,7 +45,7 @@
               maxlength="50"
               width="50"/>
           </div>
-          <div class="col-span-1 text-base text-red-600 italic pl-2">
+          <div class="col-span-1 text-xs text-red-600 italic pl-2">
             80 chars maximum
           </div>
           <div class="table-header col-span-1 text-right pr-4">

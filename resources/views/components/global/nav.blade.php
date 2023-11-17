@@ -34,7 +34,8 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <a href="{{ route('admin.index') }}"
                         class="inline-flex items-center px-1 pt-1 
-                        {{ (url()->current() == route('admin.index'))?$m_text_sel:$m_text_def }}"
+                        {{-- Check to see if this route is for any admin uri --}}
+                        {{ (strpos(url()->current(), 'admin') !== false )?$m_text_sel:$m_text_def }}"
                     >
                         {{ __('ui.menu.admin') }}
                     </a>
