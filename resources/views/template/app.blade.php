@@ -8,6 +8,8 @@
         <x-global.header/>
     </head>
     <body>
+        {{-- Hidden items for pre-conditioning tailwinds and modals --}}
+        <x-global.tw-hidden/>
 
         {{-- Banner and navigation blocks --}}
         <header>
