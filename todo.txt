@@ -1,0 +1,10 @@
+[] add in google auth javascript widget
+[] rewrite login dialog to allow for registration, UA auth and guests
+[] add in auth levels ( 1 - guest, 2 - logged in normal user, 3 - UA login? , 5 - event admin, 9 - app admin) 
+[]  update tracks to use auth levels and to have delete confirmation
+ -- add remaining components
+ [] Venues
+ [] Slots
+ [] Events
+ [] Sessions
+[] main registration controller (for building Schedule objects)

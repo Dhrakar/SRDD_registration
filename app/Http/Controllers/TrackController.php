@@ -21,7 +21,7 @@ class TrackController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:40',
             'description' => 'required|string|max:80',
-            'color' => 'required|numeric|between:1,5',
+            'color' => 'required|numeric|between:1,' . count(config('constants.colors.tracks')),
         ]);
         
         $track = Track::create($validated);
@@ -44,7 +44,7 @@ class TrackController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:40',
             'description' => 'required|string|max:80',
-            'color' => 'required|numeric|between:1,5',
+            'color' => 'required|numeric|between:1,' . count(config('constants.colors.tracks')),
         ]);
         
         $track = Track::update($validated);

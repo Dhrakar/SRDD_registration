@@ -15,50 +15,62 @@
 @section('content')
 <x-admin.nav-admin/>
 <div class="container">
-    <div class="mx-10 mt-4 pb-5 w-auto border border-indigo-900 rounded-md">
+    <div class="mx-10 mt-4 pb-5 w-full border border-indigo-900 rounded-md">
         <div class="ml-10 px-2 -translate-y-3 w-min bg-white font-bold">
         Currently&nbsp;Configured&nbsp;Tracks
         </div> 
         <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
-            <div class="table-header col-span-1">Id</div>
-            <div class="table-header col-span-3">Title</div>
-            <div class="table-header col-span-5">Description</div>
-            <div class="table-header col-span-2">Color</div>
-            <div class="table-header col-span-1">Edit</div>
+            <div class="px-2 table-header col-span-1">Id</div>
+            <div class="px-2 table-header col-span-3">Title</div>
+            <div class="px-2 table-header col-span-4">Description</div>
+            <div class="px-2 table-header col-span-2">Color</div>
+            <div class="px-2 table-header col-span-2">Edit/Delete</div>
             @foreach(Track::all() as $track) {{-- iterate thru the defined tracks --}}
                 <div class="table-row col-span-1">{{ $track->id }}</div>
                 <div class="table-row col-span-3">{{ $track->title }}</div>
-                <div class="table-row col-span-5">{{ $track->description}}</div>
+                <div class="table-row col-span-4">{{ $track->description}}</div>
                 <div class="table-row col-span-2">
-                    @switch($track->color)
-                    @case (1) <span class="w-32 px-8 rounded-md bg-sky-400">@break
-                    @case (2) <span class="w-32 px-8 rounded-md bg-emerald-400">@break
-                    @case (3) <span class="w-32 px-8 rounded-md bg-amber-400">@break
-                    @case (4) <span class="w-32 px-8 rounded-md bg-indigo-400">@break
-                    @case (5) <span class="w-32 px-8 rounded-md bg-slate-400">@break
-                    @endswitch
-                    &nbsp; </span>
+                    @php 
+                        $bgc = config('constants.colors.tracks.' . $track->color);
+                        $cn = substr($bgc, 3, strlen($bgc) - 7);
+                        echo "<span class=\"block w-4/5 m-2 px-4 rounded-md $bgc\">$cn</span>";
+                    @endphp
                 </div>
-                <div class="table-row col-span-1 inline:block">
-                    @if($track->id != 1 ) {{-- don't allow track 1 to be edited  --}}
+                <div class="table-row col-span-2 inline:block">
+                    @if($track->id != 1 ) {{-- don't allow track 1 to be edited or deleted --}}
                     <a href="{{ route('tracks.edit', $track) }}">
                         <i class="bi bi-pencil-square mx-2"></i>
                     </a>
-                    <form method="POST" action="{{ route('tracks.destroy', $track) }}">
-                        @csrf
-                        @method('delete')
-                        <a  type="button"
-                            href="route('tracks.destroy', $track)" 
-                            onclick="alert('deleting'); event.preventDefault(); this.closest('form').submit();">
-                            <i class="bi bi-trash mx-2"></i>
-                        </a>
-                    </form>
+                    <button {{-- Confirms delete using modal below --}}
+                      x-data=""
+                      x-on:click.prevent="$dispatch('open-modal', 'confirm-deletion')"
+                    ><i class="text-red-500 bi bi-trash mx-2"></i></button>
                     @else
                         <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
+                        <i class="text-slate-400 bi bi-trash mx-2"></i>
                     @endif
                 </div>
             @endforeach
-        </div>
+        </div><x-modal name="confirm-deletion" :show="$errors->eletion->isNotEmpty()" focusable>
+        <form method="post" action="{{ route('tracks.destroy', $track) }}" class="p-6">
+            @csrf
+            @method('delete')
+
+            <p class="text-lg font-medium text-gray-900">
+                {{ __('Are you sure you want to delete this track?') }}
+            </p>
+
+            <div class="mt-6 flex justify-end">
+                <x-secondary-button x-on:click="$dispatch('close')">
+                    {{ __('Cancel') }}
+                </x-secondary-button>
+
+                <x-danger-button class="ml-3">
+                    {{ __('Confirm Delete') }}
+                </x-danger-button>
+            </div>
+        </form>
+    </x-modal>
     </div>
     <div class="mx-auto my-4 w-4/5 h-1 bg-slate-400"></div>
     <div class="mx-10 mt-4 pb-5 w-auto border border-indigo-900 rounded-md">
@@ -101,21 +113,26 @@
               <label for="color">Background Color</label>
             </div>
             <div class="col-span-4 border border-indigo-800">
-              <select name="color">
-                <option value="1" selected="selected">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-              <span class="w-32 px-4 rounded-md bg-sky-400">1</span>
-              <span class="w-32 px-4 rounded-md bg-emerald-400">2</span>
-              <span class="w-32 px-4 rounded-md bg-amber-400">3</span>
-              <span class="w-32 px-4 rounded-md bg-indigo-400">4</span>
-              <span class="w-32 px-4 rounded-md bg-slate-400">5</span>
+              <select id="color" name="color">
+              @for ($i = 1; $i <= count(config('constants.colors.tracks')); $i++)
+                <option value="{{$i}}" 
+                  @if ($track->color == $i) 
+                    selected="selected"
+                  @endif
+                  >{{$i}}
+                </option>
+              @endfor
+            </select>
+            @php
+              // build the color swatches using the config colors
+              for ( $i = 1; $i <= count(config('constants.colors.tracks')); $i++ ) {
+                $color = config('constants.colors.tracks.' . $i-1);
+                echo "<span class=\"w-32 px-4 rounded-md $color\">$i</span>";
+              }
+            @endphp
             </div>
             <div class="col-span-1 text-xs text-red-600 italic pl-2">
-              &nbsp;
+              Background color for tracks
             </div>
             <div class="col-span-1">&nbsp;</div>
             <x-primary-button class="col-span-2 mt-4 mx-2">

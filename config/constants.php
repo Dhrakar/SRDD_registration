@@ -21,6 +21,19 @@ return [
             'blue' => '#236192',
             'yellow' => '#FFC000',      
          ],
+         'tracks' => [
+            // array of possible colors for the track backgrounds. Note that any updates here
+            // need to be mirrored in the hidden swatches in the header.blade.php file so that 
+            // Tailwind.css does not filter out the colors.
+            'bg-sky-400',
+            'bg-emerald-400',
+            'bg-amber-400',
+            'bg-indigo-400',
+            'bg-slate-400',
+            'bg-red-400',
+            'bg-orange-400',
+            'bg-teal-400',
+         ],
     ],
     // default botstrap icons
     'icon' => [
