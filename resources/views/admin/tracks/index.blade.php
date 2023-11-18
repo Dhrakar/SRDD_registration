@@ -39,11 +39,20 @@
                     @endswitch
                     &nbsp; </span>
                 </div>
-                <div class="table-row col-span-1">
+                <div class="table-row col-span-1 inline:block">
                     @if($track->id != 1 ) {{-- don't allow track 1 to be edited  --}}
                     <a href="{{ route('tracks.edit', $track) }}">
                         <i class="bi bi-pencil-square mx-2"></i>
                     </a>
+                    <form method="POST" action="{{ route('tracks.destroy', $track) }}">
+                        @csrf
+                        @method('delete')
+                        <a  type="button"
+                            href="route('tracks.destroy', $track)" 
+                            onclick="alert('deleting'); event.preventDefault(); this.closest('form').submit();">
+                            <i class="bi bi-trash mx-2"></i>
+                        </a>
+                    </form>
                     @else
                         <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
                     @endif

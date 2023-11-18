@@ -40,7 +40,16 @@ class TrackController extends Controller
 
     public function update(Track $track): RedirectResponse
     {
-        dd($track);
+        // validate the data from the form
+        $validated = $request->validate([
+            'title' => 'required|string|max:40',
+            'description' => 'required|string|max:80',
+            'color' => 'required|numeric|between:1,5',
+        ]);
+        
+        $track = Track::update($validated);
+
+        return redirect(route('tracks.index'));
     }
 
     public function destroy(Track $track): RedirectResponse
