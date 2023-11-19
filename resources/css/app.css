@@ -4,11 +4,11 @@
     h1 {
         @apply ml-2 py-2 text-2xl text-left italic text-sky-800;
     }
+    h2 {
+        @apply ml-2 py-2 text-xl text-left font-bold text-sky-800;
+    }
     a {
         @apply text-blue-600;
-    }
-    .callout {
-        @apply ml-8 mr-3 my-2 px-2 py-4 rounded-sm border-l-4 border-sky-700 bg-sky-50 shadow-md text-sm;
     }
     .table-header {
         @apply bg-indigo-600 text-center text-indigo-50 border border-indigo-100;
