@@ -20,14 +20,18 @@
                 </div>
                 {{-- Links --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <span class="inline-flex items-center px-1 pt-1 
-                         {{ (url()->current() == route('dashboard'))?$m_text_sel:$m_text_def }}">
+                    <a href="{{ route('schedule.index') }}" 
+                        class="inline-flex items-center px-1 pt-1 
+                         {{ (url()->current() == route('schedule.index'))?$m_text_sel:$m_text_def }}"
+                    >
                         {{ __('ui.menu.register') }}
                     </span>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <span class="inline-flex items-center px-1 pt-1 
-                         {{ (url()->current() == route('dashboard'))?$m_text_sel:$m_text_def }}">
+                    <a href="{{ route('reports.index') }}"  
+                        class="inline-flex items-center px-1 pt-1 
+                         {{ (url()->current() == route('reports.index'))?$m_text_sel:$m_text_def }}"
+                    >
                         {{ __('ui.menu.reports') }}
                     </span>
                 </div>
