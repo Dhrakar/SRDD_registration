@@ -38,8 +38,8 @@ class TrackController extends Controller
         ]);
     }
 
-    public function update(Track $track): RedirectResponse
-    {
+    public function update(Request $request, Track $track): RedirectResponse
+    { 
         // validate the data from the form
         $validated = $request->validate([
             'title' => 'required|string|max:40',
@@ -47,7 +47,7 @@ class TrackController extends Controller
             'color' => 'required|numeric|between:1,' . count(config('constants.colors.tracks')),
         ]);
         
-        $track = Track::update($validated);
+        $track->update($validated);
 
         return redirect(route('tracks.index'));
     }

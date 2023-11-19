@@ -22,6 +22,7 @@ return [
             'yellow' => '#FFC000',      
          ],
          'tracks' => [
+            'no-color', // to force array to start with 1
             // array of possible colors for the track backgrounds. Note that any updates here
             // need to be mirrored in the hidden swatches in the header.blade.php file so that 
             // Tailwind.css does not filter out the colors.

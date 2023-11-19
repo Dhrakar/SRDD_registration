@@ -16,12 +16,12 @@
       @method ('patch')
         <div class="mx-2 grid grid-cols-6 auto-col-max-6 gap-0">
           <div class="col-span-1 table-header text-right pr-4">
-            <label for="track-title">Title</label>
+            <label for="title">Title</label>
           </div>
           <x-input-error :messages="$errors->get('title')" class="mt-2" />
           <div class="col-span-4 border border-indigo-800">
             <input class="text-slate-900 w-4/5 "
-              type="input" name="track-title" 
+              type="input" name="title" 
               value="{{$track->title}}" 
               maxlength="50"
               width="50"/>
@@ -30,11 +30,11 @@
             40 chars maximum
           </div>
           <div class="table-header col-span-1 text-right pr-4">
-            <label for="track-desc">Description</label>
+            <label for="description">Description</label>
           </div>
           <div class="col-span-4 border border-indigo-800">
             <input class="text-slate-900 w-4/5 "
-              type="input" name="track-desc" 
+              type="input" name="description" 
               value="{{$track->description}}" 
               maxlength="50"
               width="50"/>
@@ -43,11 +43,11 @@
             80 chars maximum
           </div>
           <div class="table-header col-span-1 text-right pr-4">
-            <label for="track-color">Background Color</label>
+            <label for="color">Background Color</label>
           </div>
           <div class="col-span-4 border border-indigo-800">
-            <select id="track-color" name="track-color">
-              @for ($i = 1; $i <= count(config('constants.colors.tracks')); $i++)
+            <select name="color">
+              @for ($i = 1; $i < count(config('constants.colors.tracks')); $i++)
                 <option value="{{$i}}" 
                   @if ($track->color == $i) 
                     selected="selected"
@@ -58,8 +58,8 @@
             </select>
             @php
               // build the color swatches using the config colors
-              for ( $i = 1; $i <= count(config('constants.colors.tracks')); $i++ ) {
-                $color = config('constants.colors.tracks.' . $i-1);
+              for ( $i = 1; $i < count(config('constants.colors.tracks')); $i++ ) {
+                $color = config('constants.colors.tracks.' . $i);
                 echo "<span class=\"w-32 px-4 rounded-md $color\">$i</span>";
               }
             @endphp
