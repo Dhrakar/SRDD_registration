@@ -3,19 +3,13 @@
      *  All about this application
      */
 
-    use function Laravel\Folio\name;
- 
-    name('about');
-
  ?>
 @extends('template.app')
 
 @section('content')
 
-    <h1>
-        About This Application
-    </h1>
-    <div class="callout">
+    <h1>About This Application</h1>
+    <x-srdd.callout>
         
         <em>Staff Recognition &amp; Development Day</em> is a time for us to recognize and thank the hard work done by UAF staff throughout the year.
 	    It is also an opportunity to celebrate some longevity milestones for our staff.  Lastly, it is a day for staff to be able
@@ -29,6 +23,8 @@
 	        <li>Administration</li>
 	    </ol>
 
-    </div>
+</x-srdd.callout>
+
+{!! Str::markdown(__('ui.markdown.libraries')); !!}
 
 @endsection
