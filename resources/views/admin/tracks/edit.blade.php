@@ -1,13 +1,7 @@
-<?php 
-    /*
-     *  Administrative access landing page
-     */
+{{--
+  -- Used for editing and/or deleting Tracks
+--}}
 
-     use function Laravel\Folio\{middleware};
- 
-     middleware(['auth', 'verified']);
-
- ?>
 @extends('template.app')
 
 @section('content')
