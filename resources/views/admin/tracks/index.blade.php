@@ -4,9 +4,6 @@
  ``  */
 
     use App\Models\Track;
-    use function Laravel\Folio\{middleware};
- 
-    middleware(['auth', 'verified']);
 
  ?>
 
@@ -15,6 +12,9 @@
 @section('content')
 <x-admin.nav-admin/>
 <div class="container">
+  <x-srdd.callout>
+    {!! Str::markdown(__('ui.markdown.intro-tracks')); !!}
+  </x-srdd.callout>
     <div class="mx-10 mt-4 pb-5 w-full border border-indigo-900 rounded-md">
         <div class="ml-10 px-2 -translate-y-3 w-min bg-white font-bold">
         Currently&nbsp;Configured&nbsp;Tracks
@@ -51,8 +51,9 @@
                     @endif
                 </div>
             @endforeach
-        </div><x-modal name="confirm-deletion" :show="$errors->eletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('tracks.destroy', $track) }}" class="p-6">
+        </div>
+        <x-modal name="confirm-deletion" focusable>
+          <form method="post" action="{{ route('tracks.destroy', $track) }}" class="p-6">
             @csrf
             @method('delete')
 
@@ -69,8 +70,8 @@
                     {{ __('Confirm Delete') }}
                 </x-danger-button>
             </div>
-        </form>
-    </x-modal>
+          </form>
+        </x-modal>
     </div>
     <div class="mx-auto my-4 w-4/5 h-1 bg-slate-400"></div>
     <div class="mx-10 mt-4 pb-5 w-auto border border-indigo-900 rounded-md">
