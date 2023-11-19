@@ -1,0 +1,9 @@
+17 Nov 23
+ - added a new tw-hidden.blade.php global components.  This is to house hidden versions of the color swatches
+  (as well as future dialog divs).  The reason it is needed is that tailwinds prunes out CSS it does not think
+  is used in the app.  Since it scans for css prior to the PHP vars being resolved, then it does not see them
+  and they are not included.  Putting hidden swatches in forces tw to include those classes
+- add todo file
+- add deletion validation for tracks. This is partly based on the delete-profile file and usess alpine to 
+  generate the dialog ( part of x-modal)
+- created new views/components/srdd ( <x-srdd.callout> ) for building std intro, info card 
