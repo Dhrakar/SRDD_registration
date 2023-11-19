@@ -11,11 +11,9 @@
 
     <div class="container">
         <h1> Welcome to the Staff Recognition and Development Day registration tool</h1>
-        <div class="callout">
-            <span class="text-justify"> 
-                {!! Str::markdown(__('ui.markdown.welcome')); !!}
-            </span>
-        </div>
+        <x-srdd.callout>
+            {!! Str::markdown(__('ui.markdown.welcome')); !!}
+        </x-srdd.callout>
         @if (Route::has('login'))
                 <div class="">
                     @auth
