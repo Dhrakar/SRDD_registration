@@ -40,5 +40,6 @@ return [
     'icon' => [
         'home' => 'bi-house-door',
         'user' => 'bi-person-circle',
+        'guest' => 'bi-person-fill-slash',
     ],
 ];
