@@ -7,3 +7,9 @@
 - add deletion validation for tracks. This is partly based on the delete-profile file and usess alpine to 
   generate the dialog ( part of x-modal)
 - created new views/components/srdd ( <x-srdd.callout> ) for building std intro, info card 
+- needed to set the HOME in the RouteServiceProvider to '/' instead of dashboard
+- lots of futzing with creating new form components
+- finslly found the framework version in Illuminate\Foundation\Application.php
+- once running, Laravel dumps any path info, so can't run composer, etc from within since it does not know php path
+
+-- UA Google auth does not work currently -- maybe becaue this is not an SSL or valid web site?

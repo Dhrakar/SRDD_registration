@@ -1,5 +1,8 @@
 [] add in google auth javascript widget
 [] rewrite login dialog to allow for registration, UA auth and guests
+    - this will be by having teh google widget fillin the email for the regular login dialog as well as hidden\
+      google auth fields.  Those will go to the login controller that will use a dummy password and the google 
+      email if the token is present.  Otherwise, it will try the given password and email.
 [] add in auth levels ( 1 - guest, 2 - logged in normal user, 3 - UA login? , 5 - event admin, 9 - app admin) 
 []  update tracks to use auth levels and to have delete confirmation
  -- add remaining components
