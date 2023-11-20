@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrackController;
+use App\Http\Controllers\Auth\UALoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// route for logging in via the UA domain
+Route::post('/ualogin', [UALoginController::class, 'uaLogin'])->name('ualogin');
 
 
 Route::middleware('auth')->group(function () {
