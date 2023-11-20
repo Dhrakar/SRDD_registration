@@ -5,9 +5,23 @@
   <div class="ml-8 mr-3 mt-2 mb-10 px-2 py-4 rounded-sm border-l-8 border-green-700 bg-green-50 shadow-md text-sm">
     {{-- Get Session Info --}}
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
+    {{--
+      -- <h2>University of Alaska Google SSO Login</h2>
+      -- <div class="inline-flex">
+      -- <div id="buttonDiv" class="w-auto px-4"></div>
+      -- <form name="gsuite_login" method="POST" action="{{ route('login') }}">
+      --     @csrf
+      --     {{-- Fields dynamically updated by widget and then will show submit --}}
+      --     <input type='hidden' id="gs_login_email" name='email' value='unset'/>
+      --     <input type='hidden' id="gs_login_id" name='name' value='unset'/>
+      --     <input type='hidden' id="gs_login_token" name='token' value='unset'/>
+      --     <button type="submit" id="gs_login_submit" class='btn btn-primary' disabled>Continue</button>
+      -- </form>
+      -- </div>
+      --}}
+      
     <h2>Non UA SSO Login</h2>
-    <form method="POST" action="{{ route('login') }}">
+    <form name="std_login" method="POST" action="{{ route('login') }}">
         @csrf
 
         <div class="mx-2 grid grid-cols-6 auto-col-max-6 gap-1">
@@ -41,6 +55,32 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
-
     </form>
 </div>
+
+
+<!-- script to process the UA auth -->
+
+<script>
+    function handleCredentialResponse(response) {
+      // get the JWT credential blob
+      var myCred = response.credential;
+      // get the payload object
+      var credPayload = KJUR.jws.JWS.readSafeJSONString(b64utoutf8(myCred.split(".")[1]));
+        // now that we have a google login, append hidden data to form and also turn on the submit button
+        $('#gs_login_email').val(credPayload.email);
+        $('#gs_login_id').val(credPayload.name);
+        $('#gs_login_token').val(myCred);
+        $("#gs_login_submit").removeAttr("disabled");
+    }
+    window.onload = function () {
+      google.accounts.id.initialize({
+        client_id: "{{ env('UA_CLIENT_ID') }}",
+        callback: handleCredentialResponse
+      });
+      google.accounts.id.renderButton(
+        document.getElementById("buttonDiv"),
+        { theme: "outline", size: "large" }  // customization attributes
+      );
+    }
+</script>
