@@ -15,7 +15,8 @@
             {!! Str::markdown(__('ui.markdown.welcome')); !!}
         </x-srdd.callout>
         {{-- Add in the Login and Registration forms --}}
-        <x-srdd.login-std/>
+        <x-srdd.login/>
+        <x-srdd.registration/>
         
         @if (Route::has('login'))
                 <div class="">
