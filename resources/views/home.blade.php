@@ -8,7 +8,6 @@
 @extends('template.app')
 
 @section('content')
-
     <div class="container">
         <h1> Welcome to the Staff Recognition and Development Day registration tool</h1>
         <x-srdd.callout>
