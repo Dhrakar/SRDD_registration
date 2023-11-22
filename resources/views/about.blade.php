@@ -5,6 +5,7 @@
 
     // current Laravel Framework version
     $laravel_ver = Illuminate\Foundation\Application::VERSION;
+
     // current tailwinds version
     $tw_ver = json_decode(file_get_contents( base_path('node_modules/tailwindcss/package.json')), true );
 
@@ -29,9 +30,9 @@
 	    This web application was created to enable UAF employees to easily view and register for those training and event sessions. It
 	    consists of 3 modules
         <br/>
-	    <div class="ml-8 text-md text-sky-900">Registration</div>
-	    <div class="ml-8 text-md text-sky-900">Reports</div>
-	    <div class="ml-8 text-md text-sky-900">Administration</div>
+	    <div class="ml-8 text-md">Registration</div>
+	    <div class="ml-8 text-md">Reports</div>
+	    <div class="ml-8 text-md">Administration</div>
     </x-srdd.callout>
 
     {{-- List out the libraries and licenses used --}}
@@ -73,11 +74,17 @@
             <div class="px-2 table-row col-span-2"></div>
             <div class="px-2 table-row col-span-2"></div>
 
-            <div class="px-2 table-row col-span-3"></div>
-            <div class="px-2 table-row col-span-1"></div>
-            <div class="px-2 table-row col-span-4"></div>
-            <div class="px-2 table-row col-span-2"></div>
-            <div class="px-2 table-row col-span-2"></div>
+<div class="px-2 table-row col-span-3"></div>
+<div class="px-2 table-row col-span-1"></div>
+<div class="px-2 table-row col-span-4"></div>
+<div class="px-2 table-row col-span-2"></div>
+<div class="px-2 table-row col-span-2"></div>
+
+<div class="px-2 table-row col-span-3"></div>
+<div class="px-2 table-row col-span-1"></div>
+<div class="px-2 table-row col-span-4"></div>
+<div class="px-2 table-row col-span-2"></div>
+<div class="px-2 table-row col-span-2"></div>
         </div>
     </div>
 </div>
