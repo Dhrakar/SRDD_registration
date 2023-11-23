@@ -11,9 +11,7 @@
   $m_text_sel  = "text-md font-semibold text-[#FFC000] ";  // test color when on that route
 ?>
 
-<div class="bg-slate-700 text-sm font-bold py-1" style="list-style-type: none;">
-    <ui class="flex">
-        <li class="mx-2 text-indigo-300"><i class="bi bi-gear-wide-connected"></i></li>
+<x-global.nav-header>
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'tracks') !== false )?$m_text_sel:$m_text_def }}" 
                 href="{{ route('tracks.index') }}">{{__('Tracks')}}</a>
@@ -38,5 +36,4 @@
             <a  class="{{ (url()->current() == route('home'))?$m_text_sel:$m_text_def }}" 
                 href="#">{{__('Sessions')}}</a>
         </li>
-    </ul>
-</div>
+</x-global.nav-header>
