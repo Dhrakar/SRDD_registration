@@ -9,8 +9,7 @@
 
 @section('content')
     <div class="container">
-        <h1> Welcome to the Staff Recognition and Development Day registration tool</h1>
-        <x-srdd.callout>
+        <x-srdd.callout :title="__('Welcome to the Staff Recognition and Development Day registration tool!')" >
             {!! Str::markdown(__('ui.markdown.welcome')); !!}
         </x-srdd.callout>
         {{-- Add in the Login and Registration forms --}}
