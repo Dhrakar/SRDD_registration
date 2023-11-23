@@ -12,81 +12,76 @@
 @section('content')
 <x-admin.nav-admin/>
 <div class="container w-full">
-  <x-srdd.callout>
+  <x-srdd.callout :title="__('Session Tracks')">
     {!! Str::markdown(__('ui.markdown.intro-tracks')); !!}
   </x-srdd.callout>
 
   {{-- Create a new Track --}}
-  <div class="mx-10 mt-4 pb-5 w-auto border border-indigo-900 rounded-md">
-        <div class="ml-10 px-2 -translate-y-3 w-min bg-white font-bold">
-        Create&nbsp;New&nbsp;Track
+  <x-global.title-box :title="__('Add a New Track')">
+    <form method="POST" action="{{ route('tracks.store') }}">
+      @csrf
+      <x-input-error :messages="$errors->get('title')" class="mt-2" />
+      <x-input-error :messages="$errors->get('description')" class="mt-2" />
+      <x-input-error :messages="$errors->get('color')" class="mt-2" />
+      <div class="mx-2 grid grid-cols-6 auto-col-max-6 gap-0">
+          <div class="col-span-1 table-header text-right pr-4">
+            <label for="title">Title</label>
+          </div>
+          <div class="col-span-4 border border-indigo-800">
+            <input class="text-slate-900 w-4/5 "
+              type="input" name="title" 
+              value="" 
+              maxlength="50"
+              width="50"/>
+          </div>
+          <div class="col-span-1 text-xs text-red-600 italic pl-2">
+            40 chars maximum
+          </div>
+          <div class="table-header col-span-1 text-right pr-4">
+            <label for="description">Description</label>
+          </div>
+          <div class="col-span-4 border border-indigo-800">
+            <input class="text-slate-900 w-4/5 "
+              type="input" name="description" 
+              value="" 
+              maxlength="50"
+              width="50"/>
+          </div>
+          <div class="col-span-1 text-xs text-red-600 italic pl-2">
+            80 chars maximum
+          </div>
+          <div class="table-header col-span-1 text-right pr-4">
+            <label for="color">Background Color</label>
+          </div>
+          <div class="col-span-4 border border-indigo-800">
+            <select id="color" name="color">
+              <option value="1" selected="selected">1</option>
+            @for ($i = 2; $i < count(config('constants.colors.tracks')); $i++)
+              <option value="{{$i}}">{{$i}}</option>
+            @endfor
+          </select>
+          @php
+            // build the color swatches using the config colors
+            for ( $i = 1; $i < count(config('constants.colors.tracks')); $i++ ) {
+              $color = config('constants.colors.tracks.' . $i);
+              echo "<span class=\"w-32 px-4 rounded-md $color\">$i</span>";
+            }
+          @endphp
+          </div>
+          <div class="col-span-1 text-xs text-red-600 italic pl-2">
+            Background color for tracks
+          </div>
+          <div class="col-span-1">&nbsp;</div>
+          <x-primary-button class="col-span-2 mt-4 mx-2">
+              {{ __('ui.button.new-track') }}
+          </x-primary-button>
         </div>
-        <form method="POST" action="{{ route('tracks.store') }}">
-            @csrf
-        <x-input-error :messages="$errors->get('title')" class="mt-2" />
-        <x-input-error :messages="$errors->get('description')" class="mt-2" />
-        <x-input-error :messages="$errors->get('color')" class="mt-2" />
-        <div class="mx-2 grid grid-cols-6 auto-col-max-6 gap-0">
-            <div class="col-span-1 table-header text-right pr-4">
-              <label for="title">Title</label>
-            </div>
-            <div class="col-span-4 border border-indigo-800">
-              <input class="text-slate-900 w-4/5 "
-                type="input" name="title" 
-                value="" 
-                maxlength="50"
-                width="50"/>
-            </div>
-            <div class="col-span-1 text-xs text-red-600 italic pl-2">
-              40 chars maximum
-            </div>
-            <div class="table-header col-span-1 text-right pr-4">
-              <label for="description">Description</label>
-            </div>
-            <div class="col-span-4 border border-indigo-800">
-              <input class="text-slate-900 w-4/5 "
-                type="input" name="description" 
-                value="" 
-                maxlength="50"
-                width="50"/>
-            </div>
-            <div class="col-span-1 text-xs text-red-600 italic pl-2">
-              80 chars maximum
-            </div>
-            <div class="table-header col-span-1 text-right pr-4">
-              <label for="color">Background Color</label>
-            </div>
-            <div class="col-span-4 border border-indigo-800">
-              <select id="color" name="color">
-                <option value="1" selected="selected">1</option>
-              @for ($i = 2; $i < count(config('constants.colors.tracks')); $i++)
-                <option value="{{$i}}">{{$i}}</option>
-              @endfor
-            </select>
-            @php
-              // build the color swatches using the config colors
-              for ( $i = 1; $i < count(config('constants.colors.tracks')); $i++ ) {
-                $color = config('constants.colors.tracks.' . $i);
-                echo "<span class=\"w-32 px-4 rounded-md $color\">$i</span>";
-              }
-            @endphp
-            </div>
-            <div class="col-span-1 text-xs text-red-600 italic pl-2">
-              Background color for tracks
-            </div>
-            <div class="col-span-1">&nbsp;</div>
-            <x-primary-button class="col-span-2 mt-4 mx-2">
-                {{ __('ui.button.new-track') }}
-            </x-primary-button>
-        </div>
-        </form>
-      </div>
+    </form>
+  </x-global.title-box>
 
   {{-- List existing tracks --}}
-  <div class="mx-10 mt-4 pb-5 w-auto border border-indigo-900 rounded-md">
-      <div class="ml-10 px-2 -translate-y-3 w-min bg-white font-bold">
-      Currently&nbsp;Configured&nbsp;Tracks
-      </div> 
+  
+  <x-global.title-box :title="__('Currently Configured Tracks')">
       <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
           <div class="px-2 table-header col-span-1">Id</div>
           <div class="px-2 table-header col-span-3">Title</div>
@@ -137,7 +132,7 @@
           </div>
         </form>
       </x-modal>
-  </div>
+  </x-global.title-box>
     
 </div>
 @endsection
