@@ -20,6 +20,7 @@
 
 @section('content')
 <div class="container w-full">
+    <x-global.nav-header />
     <x-srdd.callout :title="__('SRDD Registration Tool')">
         <em>Staff Recognition &amp; Development Day</em> is a time for us to recognize and thank the hard work done by UAF staff throughout the year.
 	    It is also an opportunity to celebrate some longevity milestones for our staff.  Lastly, it is a day for staff to be able
@@ -35,7 +36,8 @@
 
     {{-- List out the libraries and licenses used --}}
     <x-global.title-box :title="__('Libraries and Licenses')">
-        <p class="px-8 text-sm italic ">Note that there are many other packeges included in the Laravel framework.  This table only lists the major
+        <p class="px-8 text-std text-sm italic">
+            Note that there are many other packeges included in the Laravel framework.  This table only lists the major
             packages that have been installed beyond laravel.
         </p>
         <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
