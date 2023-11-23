@@ -2,7 +2,7 @@
   -- Login form component 
   --}}
 
-  <div class="ml-8 mr-3 mt-2 mb-10 px-2 py-4 rounded-sm border-l-8 border-green-700 bg-green-50 shadow-md text-sm">
+  <div class="ml-8 mr-3 mt-2 mb-10 px-2 py-4 rounded-sm border-l-8 border-green-700 bg-green-50 shadow-md text-sm text-std">
     {{-- Get Session Info --}}
     <x-auth-session-status class="mb-4" :status="session('status')" />
     {{--
@@ -11,7 +11,7 @@
       -- <div id="buttonDiv" class="w-auto px-4"></div>
       -- <form name="gsuite_login" method="POST" action="{{ route('login') }}">
       --     @csrf
-      --     {{-- Fields dynamically updated by widget and then will show submit --}}
+      --     
       --     <input type='hidden' id="gs_login_email" name='email' value='unset'/>
       --     <input type='hidden' id="gs_login_id" name='name' value='unset'/>
       --     <input type='hidden' id="gs_login_token" name='token' value='unset'/>
@@ -19,8 +19,6 @@
       -- </form>
       -- </div>
       --}}
-      
-    <h2>Non UA SSO Login</h2>
     <form name="std_login" method="POST" action="{{ route('login') }}">
         @csrf
 

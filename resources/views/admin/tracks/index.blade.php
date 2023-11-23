@@ -119,7 +119,7 @@
         <form method="post" action="{{ route('tracks.destroy', $track) }}" class="p-6">
           @csrf
           @method('delete')
-          <p class="text-lg font-medium text-gray-900">
+          <p class="text-lg font-medium text-std">
               {{ __('Are you sure you want to delete this track?') }}
           </p>
           <div class="mt-6 flex justify-end">

@@ -32,6 +32,15 @@
 	    <div class="ml-8 text-md">Registration</div>
 	    <div class="ml-8 text-md">Reports</div>
 	    <div class="ml-8 text-md">Administration</div>
+        <x-global.divider/>
+        <div class="mx-auto w-4/5 p-2 text-center text-xs">
+            The <a class="dark:text-amber-400 underline" href="http://www.uaf.edu" > University of Alaska Fairbanks </a> is an affirmative action/equal 
+            opportunity employer and educational institution and is a part of the 
+            <a class="dark:text-amber-400 underline" href="http://www.alaska.edu" > University of Alaska </a> system. For questions or suggestions 
+            about this web application, please contact the  
+            <a class="dark:text-amber-400 underline" href="https://www.uaf.edu/uafgov/staff-council/index.php" > UAF Staff Council </a>
+        </div>
+    </div>
     </x-srdd.callout>
 
     {{-- List out the libraries and licenses used --}}

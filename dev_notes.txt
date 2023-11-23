@@ -13,3 +13,10 @@
 - once running, Laravel dumps any path info, so can't run composer, etc from within since it does not know php path
 
 -- UA Google auth does not work currently -- maybe becaue this is not an SSL or valid web site?
+
+- removed the themes for daisyui since tailwindcss supports dark mode jusrt fine when the OS switches.
+ -- updated callout component to do dark mode
+  text-slate-700 for light and text-slate-50 for dark
+
+---- removed daisy completely since it was spewing links to itself all thru my page
+- use text-std class for light/dark switching of text color 

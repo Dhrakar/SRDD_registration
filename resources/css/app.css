@@ -2,19 +2,22 @@
 
 @layer base {
     h1 {
-        @apply ml-2 py-2 text-2xl text-left italic text-sky-800;
+        @apply ml-2 py-2 text-2xl text-left italic text-blue-800 dark:text-blue-200;
     }
     h2 {
-        @apply ml-2 py-2 text-xl text-left font-bold text-sky-800;
+        @apply ml-2 py-2 text-xl text-left font-bold text-blue-800 dark:text-blue-200;
     }
     a {
-        @apply text-blue-600;
+        @apply text-blue-600 dark:text-blue-400;
     }
     .table-header {
         @apply bg-indigo-600 text-center text-indigo-50 border border-indigo-100;
     }
     .table-row {
         @apply bg-indigo-100 text-sm text-center text-slate-700 border border-indigo-900;
+    }
+    .text-std {
+        @apply text-slate-900 dark:text-slate-100;
     }
 }
 @tailwind components;
