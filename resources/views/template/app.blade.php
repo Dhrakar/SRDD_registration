@@ -27,7 +27,6 @@
             <x-global.footer/>
         </footer>
 
-        {{-- Include late-loading items --}}
         <x-global.scripts/>
     </body>
 </html>
