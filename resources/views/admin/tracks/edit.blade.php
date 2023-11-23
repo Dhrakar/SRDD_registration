@@ -7,10 +7,7 @@
 @section('content')
 <x-admin.nav-admin/>
 <div class="container">
-  <div class="mx-20 mt-4 pb-5 w-auto border border-indigo-900 rounded-md">
-    <div class="ml-10 px-2 -translate-y-3 w-min bg-white font-bold">
-      Editing&nbsp;Track&nbsp;#{{$track->id}}
-    </div> 
+  <x-global.title-box :title="__('Editing Track #' . $track->id)">
     <form method="POST" action="{{ route('tracks.update', $track) }}">
       @csrf
       @method ('patch')
@@ -77,6 +74,6 @@
           </x-primary-button>
         </div>
     </form>
-  </div>
+            </x-global.title-box>
 </div>
 @endsection
