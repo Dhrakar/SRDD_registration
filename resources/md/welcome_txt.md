@@ -1,3 +1,1 @@
 This registration tool will allow you to register for sessions presented by your fellow UAF employees covering many diverse topics.  The main sessions will be presented on the UAF live stream server: https://media.uaf.edu/home, while the remaining fun/development sessions may be presented via individual Zoom Conference. Please be sure to sign up for the sessions you are interested in so that we can send you any Zoom informaiton for these sessions.  Registration will also help us plan for future Staff Recognition days.
-
-_Thank you for all that you do all year 'round for UAF!_
