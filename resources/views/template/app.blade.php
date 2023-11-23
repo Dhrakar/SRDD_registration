@@ -18,12 +18,12 @@
         </header>
 
         {{-- pull in body content --}}
-        <main>
+        <main  class="bg-slate-50 dark:bg-slate-900 min-h-screen">
             @yield('content')
         </main>
 
         {{-- page footer --}}
-        <footer>
+        <footer class="fixed bottom-0 left-0 w-full bg-slate-50 dark:bg-slate-900">
             <x-global.footer/>
         </footer>
 
