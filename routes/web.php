@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrackController;
+use App\Http\Controllers\SlotController;
 use App\Http\Controllers\Auth\UALoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/tracks/{track}/edit', [TrackController::class, 'edit'])->name('tracks.edit');
     Route::patch('/admin/tracks/{track}', [TrackController::class, 'update'])->name('tracks.update');
     Route::delete('/admin/tracks/{track}', [TrackController::class, 'destroy'])->name('tracks.destroy');
+    // 
+    Route::get('/admin/slots', [SlotController::class, 'index'])->name('slots.index');
+    Route::post('/admin/slots/store', [SlotController::class, 'store'])->name('slots.store');
+    Route::get('/admin/slots/{slot}/edit', [SlotController::class, 'edit'])->name('slots.edit');
+    Route::patch('/admin/slots/{slot}', [SlotController::class, 'update'])->name('slots.update');
+    Route::delete('/admin/slots/{slot}', [SlotController::class, 'destroy'])->name('slots.destroy');
 });
 
 
