@@ -44,7 +44,7 @@ class TrackController extends Controller
     public function delete(Request $request, Track $track): View
     {
         // send the confirm message
-        return view('admin.tracks.edit', [
+        return view('admin.tracks.index', [
             'track' => $track,
             'confirm' => 'NEED',
         ]);
@@ -66,8 +66,11 @@ class TrackController extends Controller
 
     public function destroy(Track $track): RedirectResponse
     {
-        $track->delete();
+        //First, grab any related events
+        $events = $track->events()->get();
 
+        // $track->delete();
+        dd($events);
         return redirect(route('tracks.index'));
     }
 }

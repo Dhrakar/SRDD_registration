@@ -4,6 +4,7 @@
  ``  */
 
     use App\Models\Track;
+    use App\Models\Event;
 
  ?>
 
@@ -104,22 +105,52 @@ included.
               </div>
               <div class="table-row col-span-2 inline:block">
                   @if($track->id != 1 ) {{-- don't allow track 1 to be edited or deleted --}}
-                  <a href="{{ route('tracks.edit', $track) }}">
-                      <i class="bi bi-pencil-square mx-2"></i>
-                  </a>
-                  <form method="post" action="{{ route('tracks.delete', $track) }}" class="inline-block">
-                      @csrf 
-                      <input type="hidden" name="DEL_CONFIRM" value="NEED">
-                      <button type="submit"><i class="text-red-500 bi bi-trash mx-2"></i></button>
-                  </form>
+                    <a href="{{ route('tracks.edit', $track) }}">
+                        <i class="bi bi-pencil-square mx-2"></i>
+                    </a>
+                    <button type="submit" x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-deletion')">
+                      <i class="text-red-500 bi bi-trash mx-2"></i>
+                    </button>
                   @else
-                      <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
-                      <i class="text-slate-400 bi bi-trash mx-2"></i>
+                    <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
+                    <i class="text-slate-400 bi bi-trash mx-2"></i>
                   @endif
               </div>
           @endforeach
       </div>
   </x-srdd.title-box>
-    
+  
+  <x-modal name="confirm-deletion" maxwidth="full" focusable>
+    <div class="mt-6 pl-4 bg-amber-500 dark:bg-amber-200">
+      <span class="text-2xl text-amber-900 dark:text-amber-50">
+        <i class="font-bold text-3xl bi bi-exclamation-triangle"></i> Confirmation
+      </span>
+      <x-srdd.divider/>
+      Are you sure that you want to delete Track # {{ $track->id }} "{{ $track->title }}"?
+      <div class="pl-4 max-h-32">
+      @if ($track->events()->count() > 0) {{-- Any associated events? --}}
+        <div class="overflow-y-scroll border-1 border-amber-950 dark:border-amber-100">
+        <b>Note</b> This track is associated with {{ $track->events()->count() }} events:<br/>
+        @foreach ($track->events()->get() as $event )
+          &nbsp;[{{ $event->id }}] &dash; <i>{{ $event->title }}</i> <br/>
+        @endforeach
+        </div>
+        <i>If you confirm this deletion, those events will be updated to use Track 1.</i>
+      @endif
+    </div>
+    <form method="post" action="{{ route('tracks.destroy', $track) }}" class="inline-block">
+      @csrf 
+      @method('delete')
+      <div class="mt-6 mb-4 flex justify-end">
+        <x-secondary-button x-on:click="$dispatch('close')">
+            {{ __('Cancel') }}
+        </x-secondary-button>
+
+        <x-danger-button class="ml-3">
+            {{ __('Delete') }}
+        </x-danger-button>
+      </div>
+    </form>  
+  </x-modal>
 </div>
 @endsection
