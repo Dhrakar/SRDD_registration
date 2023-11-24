@@ -12,7 +12,7 @@
 @extends('template.app')
 
 @section('content')
-<x-admin.nav-admin/>
+<x-global.nav-admin/>
 <div class="container">
 @if (isset($confirm) && $confirm == 'NEED')
     <x-srdd.warning :title="__('Verify Deletion')">

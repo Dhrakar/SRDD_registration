@@ -23,3 +23,5 @@
 - updated track and slot to use an intermediate for deletion
  -- The index calls 'delete' that gets sent to edit with a hidden $confirmation attribute.  If edit see that, it puts up a 
  confirmation form that, if accepted, routes to the actual destroy methos -- otherwise back to index
+
+ ---- global views folder is for major nav and layout parts.  srdd is for components and widgets

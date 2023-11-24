@@ -10,7 +10,7 @@
 @extends('template.app')
 
 @section('content')
-<x-admin.nav-admin/>
+<x-global.nav-admin/>
 <div class="container w-full">
   <x-srdd.callout :title="__('Session Tracks')">
   Tracks are used to help organize Sessions into theme categories.  These categories can help attendees look for

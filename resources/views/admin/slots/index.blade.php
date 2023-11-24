@@ -10,7 +10,7 @@
 @extends('template.app')
 
 @section('content')
-<x-admin.nav-admin/>
+<x-global.nav-admin/>
 <div class="container w-full">
     <x-srdd.callout :title="__('Session Slots')">
     Session Slots are used to organize multiple sessions into specific time slots.  For example, from 9 am to 10 am.

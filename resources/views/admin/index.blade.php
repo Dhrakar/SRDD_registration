@@ -14,7 +14,7 @@
 @extends('template.app')
 
 @section('content')
-<x-admin.nav-admin/>
+<x-global.nav-admin/>
 <div class="container">
     <x-srdd.title-box :title="__('Admin/Configuration')">
         This is where you do stuff
