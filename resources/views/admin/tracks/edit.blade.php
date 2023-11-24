@@ -7,6 +7,24 @@
 @section('content')
 <x-admin.nav-admin/>
 <div class="container">
+@if (isset($confirm) && $confirm == 'NEED')
+    <x-srdd.warning :title="__('Verify Deletion')">
+        Are you sure that you want to delete Track # {{ $track->id }} "{{ $track->title }}"?
+        <form method="post" action="{{ route('tracks.destroy', $track) }}" class="p-6">
+            @csrf
+            @method('delete')
+            <a class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150"
+                href="{{ route('tracks.index') }}">
+                Cancel
+            </a>
+            &nbsp;
+            <x-danger-button>
+                {{ __('Confirm Delete') }}
+            </x-danger-button>
+        </div>
+        </form>
+    </x-srdd.warning>
+@else
   <x-global.title-box :title="__('Editing Track #' . $track->id)">
     <form method="POST" action="{{ route('tracks.update', $track) }}">
       @csrf
@@ -74,6 +92,7 @@
           </x-primary-button>
         </div>
     </form>
-            </x-global.title-box>
+  </x-global.title-box>
+@endif
 </div>
 @endsection

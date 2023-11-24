@@ -38,6 +38,18 @@ class TrackController extends Controller
         ]);
     }
 
+    /** 
+     * Verification that the user really wants to do the deletion
+     */
+    public function delete(Request $request, Track $track): View
+    {
+        // send the confirm message
+        return view('admin.tracks.edit', [
+            'track' => $track,
+            'confirm' => 'NEED',
+        ]);
+        
+    }
     public function update(Request $request, Track $track): RedirectResponse
     { 
         // validate the data from the form

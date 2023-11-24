@@ -73,7 +73,16 @@ class SlotController extends Controller
      */
     public function update(Request $request, Slot $slot)
     {
-        //
+        // validate the data from the form
+        $validated = $request->validate([
+            'title' => 'required|string|max:40',
+            'start_time' => 'required|before:end_time',
+            'end_time' => 'required',
+        ]);
+        
+        $slot->update($validated);
+            
+        return redirect(route('slots.index'));
     }
 
     /**

@@ -52,8 +52,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/tracks', [TrackController::class, 'index'])->name('tracks.index');
     Route::post('/admin/tracks/store', [TrackController::class, 'store'])->name('tracks.store');
     Route::get('/admin/tracks/{track}/edit', [TrackController::class, 'edit'])->name('tracks.edit');
+    Route::post('/admin/tracks/{track}/edit', [TrackController::class, 'delete'])->name('tracks.delete');
     Route::patch('/admin/tracks/{track}', [TrackController::class, 'update'])->name('tracks.update');
-    Route::delete('/admin/tracks/{track}', [TrackController::class, 'destroy'])->name('tracks.destroy');
+    Route::delete('/admin/tracks/{track}/destroy', [TrackController::class, 'destroy'])->name('tracks.destroy');
     // 
     Route::get('/admin/slots', [SlotController::class, 'index'])->name('slots.index');
     Route::post('/admin/slots/store', [SlotController::class, 'store'])->name('slots.store');

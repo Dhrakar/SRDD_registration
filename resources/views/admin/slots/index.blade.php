@@ -77,7 +77,7 @@
     </x-global.title-box>
 
     {{-- List existing slots --}}
-    <x-global.title-box :title="__('Currently Configured Tracks')">
+    <x-global.title-box :title="__('Currently Configured Time Slots')">
         <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
             <div class="px-2 table-header col-span-1">Id</div>
             <div class="px-2 table-header col-span-3">Title</div>

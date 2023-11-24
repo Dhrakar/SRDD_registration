@@ -20,3 +20,6 @@
 
 ---- removed daisy completely since it was spewing links to itself all thru my page
 - use text-std class for light/dark switching of text color 
+- updated track and slot to use an intermediate for deletion
+ -- The index calls 'delete' that gets sent to edit with a hidden $confirmation attribute.  If edit see that, it puts up a 
+ confirmation form that, if accepted, routes to the actual destroy methos -- otherwise back to index

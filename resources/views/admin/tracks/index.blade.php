@@ -57,7 +57,7 @@ included.
             <label for="color">Background Color</label>
           </div>
           <div class="col-span-4 border border-indigo-800">
-            <select id="color" name="color">
+            <select id="color" name="color" class="ml-1 mr-8">
               <option value="1" selected="selected">1</option>
             @for ($i = 2; $i < count(config('constants.colors.tracks')); $i++)
               <option value="{{$i}}">{{$i}}</option>
@@ -107,10 +107,11 @@ included.
                   <a href="{{ route('tracks.edit', $track) }}">
                       <i class="bi bi-pencil-square mx-2"></i>
                   </a>
-                  <button {{-- Confirms delete using modal below --}}
-                    x-data=""
-                    x-on:click.prevent="$dispatch('open-modal', 'confirm-deletion')"
-                  ><i class="text-red-500 bi bi-trash mx-2"></i></button>
+                  <form method="post" action="{{ route('tracks.delete', $track) }}" class="inline-block">
+                      @csrf 
+                      <input type="hidden" name="DEL_CONFIRM" value="NEED">
+                      <button type="submit"><i class="text-red-500 bi bi-trash mx-2"></i></button>
+                  </form>
                   @else
                       <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
                       <i class="text-slate-400 bi bi-trash mx-2"></i>
@@ -118,23 +119,6 @@ included.
               </div>
           @endforeach
       </div>
-      <x-modal name="confirm-deletion" focusable>
-        <form method="post" action="{{ route('tracks.destroy', $track) }}" class="p-6">
-          @csrf
-          @method('delete')
-          <p class="text-lg font-medium text-std">
-              {{ __('Are you sure you want to delete this track?') }}
-          </p>
-          <div class="mt-6 flex justify-end">
-              <x-secondary-button x-on:click="$dispatch('close')">
-                  {{ __('Cancel') }}
-              </x-secondary-button>
-              <x-danger-button class="ml-3">
-                  {{ __('Confirm Delete') }}
-              </x-danger-button>
-          </div>
-        </form>
-      </x-modal>
   </x-global.title-box>
     
 </div>
