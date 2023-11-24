@@ -42,7 +42,7 @@
         </x-srdd.callout>
         
         {{-- Add in the Login form or logged in user info --}}
-        <x-srdd.title-box :title="__('Login')">
+        <x-srdd.title-box :title="__('ui.menu.login')">
             @guest 
                 <x-srdd.login/>
             @endguest
