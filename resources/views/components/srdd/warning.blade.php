@@ -4,8 +4,14 @@
 
 @props(['title' => 'Warning'])
 
-<div class="ml-8 mr-3 mt-2 mb-10 px-2 py-4 rounded-sm border-l-8 border-red-700 dark:border-red-100 bg-red-200 dark:bg-red-700 shadow-md text-sm text-red-700 dark:text-red-50">
-    <i class="font-bold text-xl bi bi-exclamation-triangle"></i>
+<div class="ml-8 mr-3 mt-2 mb-10 
+            px-2 py-4 
+            w-8/12
+            border-1 border-l-8 border-amber-700 dark:border-amber-100 
+            bg-amber-200 dark:bg-amber-700 
+            shadow-md rounded-md
+            text-amber-700 dark:text-amber-50">
+    <i class="font-bold text-3xl bi bi-exclamation-triangle"></i>
     <span class="pl-4 font-semibold text-lg">
         {{ $title }}
     </span>

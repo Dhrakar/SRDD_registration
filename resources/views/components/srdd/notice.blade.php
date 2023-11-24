@@ -2,16 +2,16 @@
   -- Creates a warning message box for info that needs to be emphasized.  Can also have a title 
   --}}
 
-@props(['title' => 'Success'])
+@props(['title' => 'Notice'])
 
 <div class="ml-8 mr-3 mt-2 mb-10 
             px-2 py-4 
             w-8/12
-            border-1 border-l-8 border-green-700 dark:border-green-100 
-            bg-green-200 dark:bg-green-700  
+            border-1 border-l-8 border-sky-700 dark:border-sky-100 
+            bg-sky-200 dark:bg-sky-700 
             shadow-md rounded-md
-            text-green-700 dark:text-green-50">
-    <i class="font-bold text-3xl bi bi-info-circle"></i>
+            text-sky-700 dark:text-sky-50">
+    <i class="font-bold text-3xl bi bi-bell"></i>
     <span class="pl-4 font-semibold text-lg">
         {{ $title }}
     </span>
