@@ -47,12 +47,10 @@
                 <x-srdd.login/>
             @endguest
             @auth
-                <div class="ml-8 mr-3 mt-2 mb-10 px-2 py-4 rounded-sm border-l-8 border-green-700 dark:border-green-100 bg-green-200 dark:bg-green-700 shadow-md text-sm text-green-700 dark:text-green-50">
-                    <i class="bi bi-info-circle"></i><span class="pl-4 font-semibold">Logged In</span>
-                    <x-global.divider/>
+                <x-srdd.success :title="__('Logged In')">
                     Welcome back <span class="font-bold text-greem-700">{{ Auth::user()->name }}</span>! You last 
                     logged in on {{ Auth::user()->last_login }}.
-                </div>
+                </x-srdd.success>
             @endauth
         </x-global.title-box>
         
