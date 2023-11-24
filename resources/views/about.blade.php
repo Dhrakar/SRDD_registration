@@ -80,11 +80,11 @@
             <div class="px-2 table-row col-span-2"></div>
             <div class="px-2 table-row col-span-2"></div>
 
-            <div class="px-2 table-row col-span-3"></div>
-            <div class="px-2 table-row col-span-1"></div>
-            <div class="px-2 table-row col-span-4"></div>
-            <div class="px-2 table-row col-span-2"></div>
-            <div class="px-2 table-row col-span-2"></div>
+            <div class="px-2 table-row col-span-3">Flatpickr</div>
+            <div class="px-2 table-row col-span-1">v4</div>
+            <div class="px-2 table-row col-span-4">Date/Time JS input widget</div>
+            <div class="px-2 table-row col-span-2">{!! $lic_mit !!}</div>
+            <div class="px-2 table-row col-span-2"><a href="https://flatpickr.js.org" target="_blank">FlatpickrJS</a></div>
 
             <div class="px-2 table-row col-span-3"></div>
             <div class="px-2 table-row col-span-1"></div>

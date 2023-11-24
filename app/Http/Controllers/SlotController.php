@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Slot;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SlotController extends Controller
 {
@@ -12,15 +14,7 @@ class SlotController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('admin.slots.index');
     }
 
     /**
@@ -28,7 +22,16 @@ class SlotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate the data from the form
+        $validated = $request->validate([
+            'title' => 'required|string|max:40',
+            'start_time' => 'required|before:end_time',
+            'end_time' => 'required',
+        ]);
+        
+        $slot = Slot::create($validated);
+            
+        return redirect(route('slots.index'));
     }
 
     /**
@@ -42,9 +45,27 @@ class SlotController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Slot $slot)
+    public function edit(Slot $slot): View
     {
-        //
+        // $this->authorize('update', $slot);
+ 
+        return view('admin.slots.edit', [
+            'slot' => $slot,
+        ]);
+        
+    }
+
+    /** 
+     * Verification that the user really wants to do the deletion
+    */
+    public function delete(Request $request, Slot $slot): View
+    {
+        // send the confirm message
+        return view('admin.slots.edit', [
+            'slot' => $slot,
+            'confirm' => 'NEED',
+        ]);
+        
     }
 
     /**
@@ -58,8 +79,11 @@ class SlotController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Slot $slot)
+    public function destroy(Slot $slot): RedirectResponse
     {
-        //
+        // deletion is now verified, so wwhack it
+        $slot->delete();
+
+        return redirect(route('slots.index'));
     }
 }

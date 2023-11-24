@@ -27,6 +27,7 @@ return [
         'cancel'  => 'Cancel',
         'update'  => 'Save Changes',
         'new-track' => "Save New Track",
+        'new-slot' => "Save New Time Slot",
         'delete' => 'Delete!',
     ],
     'markdown' => [

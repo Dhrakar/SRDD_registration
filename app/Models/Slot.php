@@ -12,6 +12,17 @@ class Slot extends Model
      */
     public $timestamps = false;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'title',
+        'start_time',
+        'end_time',
+    ];
+
     /*
      * get any sessions for this slot
      */
