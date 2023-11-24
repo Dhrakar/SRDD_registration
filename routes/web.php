@@ -58,8 +58,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/slots', [SlotController::class, 'index'])->name('slots.index');
     Route::post('/admin/slots/store', [SlotController::class, 'store'])->name('slots.store');
     Route::get('/admin/slots/{slot}/edit', [SlotController::class, 'edit'])->name('slots.edit');
+    Route::post('/admin/slots/{slot}/edit', [SlotController::class, 'delete'])->name('slots.delete');
     Route::patch('/admin/slots/{slot}', [SlotController::class, 'update'])->name('slots.update');
-    Route::delete('/admin/slots/{slot}', [SlotController::class, 'destroy'])->name('slots.destroy');
+    Route::delete('/admin/slots/{slot}/destroy', [SlotController::class, 'destroy'])->name('slots.destroy');
 });
 
 
