@@ -1,7 +1,12 @@
-{{--
-  -- Used for editing and/or deleting Tracks
---}}
+<?php
+  /**
+   *  This is used to edit or delete Tracks.  It checks to see if there are associated events and sets them
+   *  to track 1 prior to deleting.
+   */
 
+   // grab any associated events (if any)
+  $events = $track->events()->get();
+?>
 @extends('template.app')
 
 @section('content')
@@ -10,6 +15,17 @@
 @if (isset($confirm) && $confirm == 'NEED')
     <x-srdd.warning :title="__('Verify Deletion')">
         Are you sure that you want to delete Track # {{ $track->id }} "{{ $track->title }}"?
+        <div class="mt-4 pl-4">
+        @if ($events->count() > 0) {{-- Any associated events? --}}
+          <b>Note</b> This track is associated with the following events:<br/>
+          @foreach ($events as $event )
+            &nbsp;&nbsp;&dash; ID: {{ $event->id }} Title: {{ $event->title }} <br/>
+          @endforeach
+          <br/>
+          <i>If you confirm this deletion, those events will be updated to use Track 1.</i>
+        @endif
+        </div>
+
         <form method="post" action="{{ route('tracks.destroy', $track) }}" class="p-6">
             @csrf
             @method('delete')
