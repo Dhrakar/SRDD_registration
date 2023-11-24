@@ -8,7 +8,7 @@
     <span class="py-2 text-2xl text-left italic text-blue-800 dark:text-blue-200">
             {{ $title }}
     </span>
-    <x-global.divider/>
+    <x-srdd.divider/>
     <span class="text-justify text-sm  text-blue-800 dark:text-blue-200 indent-4">
         {{ $slot }}
     </span>

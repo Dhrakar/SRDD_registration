@@ -9,6 +9,6 @@
 @section('content')
 <div class="container">
     <x-global.nav-header />
-    <x-global.title-box :title="__('Registration')"/>
+    <x-srdd.title-box :title="__('Registration')"/>
 </div>
 @endsection

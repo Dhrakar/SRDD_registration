@@ -16,8 +16,8 @@
 @section('content')
 <x-admin.nav-admin/>
 <div class="container">
-    <x-global.title-box :title="__('Admin/Configuration')">
+    <x-srdd.title-box :title="__('Admin/Configuration')">
         This is where you do stuff
-    </x-global.title-box>
+    </x-srdd.title-box>
 </div>
 @endsection

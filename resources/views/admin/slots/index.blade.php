@@ -18,7 +18,7 @@
     </x-srdd.callout>
 
     {{-- Create a new Slot --}}
-    <x-global.title-box :title="__('Add a New Time Slot')">
+    <x-srdd.title-box :title="__('Add a New Time Slot')">
         <form method="POST" action="{{ route('slots.store') }}">
             @csrf
             <x-input-error :messages="$errors->get('title')" class="mt-2" />
@@ -74,10 +74,10 @@
                 </x-primary-button>
             </div>
         </form>
-    </x-global.title-box>
+    </x-srdd.title-box>
 
     {{-- List existing slots --}}
-    <x-global.title-box :title="__('Currently Configured Time Slots')">
+    <x-srdd.title-box :title="__('Currently Configured Time Slots')">
         <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
             <div class="px-2 table-header col-span-1">Id</div>
             <div class="px-2 table-header col-span-3">Title</div>
@@ -111,7 +111,7 @@
               </div>
           @endforeach
         </div>
-    </x-global.title-box>
+    </x-srdd.title-box>
     <script>
         // wait until everything is loaded and then create the time widgets
         window.onload = function () {

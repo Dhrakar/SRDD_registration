@@ -25,7 +25,7 @@
         </form>
     </x-srdd.warning>
 @else
-  <x-global.title-box :title="__('Editing Track #' . $track->id)">
+  <x-srdd.title-box :title="__('Editing Track #' . $track->id)">
     <form method="POST" action="{{ route('tracks.update', $track) }}">
       @csrf
       @method ('patch')
@@ -92,7 +92,7 @@
           </x-primary-button>
         </div>
     </form>
-  </x-global.title-box>
+  </x-srdd.title-box>
 @endif
 </div>
 @endsection

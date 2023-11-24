@@ -9,7 +9,7 @@
     <span class="pl-4 font-semibold text-lg">
         {{ $title }}
     </span>
-     <x-global.divider/>
+     <x-srdd.divider/>
      <span class="text-justify text-sm indent-4">
         {{ $slot }}
     </span>

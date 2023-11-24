@@ -42,7 +42,7 @@
         </x-srdd.callout>
         
         {{-- Add in the Login form or logged in user info --}}
-        <x-global.title-box :title="__('Login')">
+        <x-srdd.title-box :title="__('Login')">
             @guest 
                 <x-srdd.login/>
             @endguest
@@ -52,7 +52,7 @@
                     logged in on {{ Auth::user()->last_login }}.
                 </x-srdd.success>
             @endauth
-        </x-global.title-box>
+        </x-srdd.title-box>
         
     </div>
 

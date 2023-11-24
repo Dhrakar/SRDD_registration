@@ -20,7 +20,7 @@ included.
   </x-srdd.callout>
 
   {{-- Create a new Track --}}
-  <x-global.title-box :title="__('Add a New Track')">
+  <x-srdd.title-box :title="__('Add a New Track')">
     <form method="POST" action="{{ route('tracks.store') }}">
       @csrf
       <x-input-error :messages="$errors->get('title')" class="mt-2" />
@@ -80,11 +80,11 @@ included.
           </x-primary-button>
         </div>
     </form>
-  </x-global.title-box>
+  </x-srdd.title-box>
 
   {{-- List existing tracks --}}
   
-  <x-global.title-box :title="__('Currently Configured Tracks')">
+  <x-srdd.title-box :title="__('Currently Configured Tracks')">
       <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
           <div class="px-2 table-header col-span-1">Id</div>
           <div class="px-2 table-header col-span-3">Title</div>
@@ -119,7 +119,7 @@ included.
               </div>
           @endforeach
       </div>
-  </x-global.title-box>
+  </x-srdd.title-box>
     
 </div>
 @endsection

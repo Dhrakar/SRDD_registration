@@ -32,7 +32,7 @@
         </form>
     </x-srdd.warning>
 @else 
-    <x-global.title-box :title="__('Editing Slot #' . $slot->id)">
+    <x-srdd.title-box :title="__('Editing Slot #' . $slot->id)">
         <form method="POST" action="{{ route('slots.update', $slot) }}">
             @csrf
             @method ('patch')
@@ -89,7 +89,7 @@
                   {{ __('ui.button.update') }}
             </x-primary-button>
         </form>
-    </x-global.title-box>
+    </x-srdd.title-box>
     <script>
         // wait until everything is loaded and then create the time widgets
         window.onload = function () {

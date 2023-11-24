@@ -32,7 +32,7 @@
 	    <div class="ml-8 text-md">Registration</div>
 	    <div class="ml-8 text-md">Reports</div>
 	    <div class="ml-8 text-md">Administration</div>
-        <x-global.divider/>
+        <x-srdd.divider/>
         <div class="mx-auto w-4/5 p-2 text-center text-xs">
             The <a class="dark:text-amber-400 underline" href="http://www.uaf.edu" > University of Alaska Fairbanks </a> is an affirmative action/equal 
             opportunity employer and educational institution and is a part of the 
@@ -44,7 +44,7 @@
     </x-srdd.callout>
 
     {{-- List out the libraries and licenses used --}}
-    <x-global.title-box :title="__('Libraries and Licenses')">
+    <x-srdd.title-box :title="__('Libraries and Licenses')">
         <p class="px-8 text-std text-sm italic">
             Note that there are many other packeges included in the Laravel framework.  This table only lists the major
             packages that have been installed beyond laravel.
@@ -92,7 +92,7 @@
             <div class="px-2 table-row col-span-2"></div>
             <div class="px-2 table-row col-span-2"></div>
         </div>
-    </x-global.title-box>
+    </x-srdd.title-box>
 </div>
 
 @endsection
