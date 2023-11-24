@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\SlotController;
+use App\Http\Controllers\VenueController;
 use App\Http\Controllers\Auth\UALoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +63,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/slots/{slot}/edit', [SlotController::class, 'delete'])->name('slots.delete');
     Route::patch('/admin/slots/{slot}', [SlotController::class, 'update'])->name('slots.update');
     Route::delete('/admin/slots/{slot}/destroy', [SlotController::class, 'destroy'])->name('slots.destroy');
+    // 
+    Route::get('/admin/venues', [VenueController::class, 'index'])->name('venues.index');
+    Route::post('/admin/venues/store', [VenueController::class, 'store'])->name('venues.store');
+    Route::get('/admin/venues/{venue}/edit', [VenueController::class, 'edit'])->name('venues.edit');
+    Route::post('/admin/venues/{venue}/edit', [VenueController::class, 'delete'])->name('venues.delete');
+    Route::patch('/admin/venues/{venue}', [VenueController::class, 'update'])->name('venues.update');
+    Route::delete('/admin/venues/{venue}/destroy', [VenueController::class, 'destroy'])->name('venues.destroy');
 });
 
 

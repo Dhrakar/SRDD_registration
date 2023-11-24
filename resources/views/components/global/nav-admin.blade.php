@@ -18,7 +18,7 @@
         </li>
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'venues') !== false )?$m_text_sel:$m_text_def }}" 
-                href="#">{{__('Venues')}}</a>
+                href="{{ route('venues.index') }}">{{__('Venues')}}</a>
         </li>
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'slots') !== false )?$m_text_sel:$m_text_def }}" 

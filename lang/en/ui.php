@@ -20,7 +20,7 @@ return [
            'help' => 'Application Help',
            'home' => 'Home',
             'lib' => 'Included Packages',
-          'login' => 'Non-UA Domain Login',
+          'login' => 'Please Login',
     ],
     'button' => [
         'save' => 'Save',  

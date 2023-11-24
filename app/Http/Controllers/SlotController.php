@@ -20,7 +20,7 @@ class SlotController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         // validate the data from the form
         $validated = $request->validate([
@@ -71,7 +71,7 @@ class SlotController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Slot $slot)
+    public function update(Request $request, Slot $slot): RedirectResponse
     {
         // validate the data from the form
         $validated = $request->validate([

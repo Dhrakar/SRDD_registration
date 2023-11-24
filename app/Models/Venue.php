@@ -12,6 +12,16 @@ class Venue extends Model
      */
     public $timestamps = false;
     
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'location',
+        'max_seats',
+    ];
+
     /*
      * get any sessions for this venue
      */
