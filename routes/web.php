@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\SlotController;
 use App\Http\Controllers\VenueController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\Auth\UALoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,23 +54,26 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/tracks', [TrackController::class, 'index'])->name('tracks.index');
     Route::post('/admin/tracks/store', [TrackController::class, 'store'])->name('tracks.store');
     Route::get('/admin/tracks/{track}/edit', [TrackController::class, 'edit'])->name('tracks.edit');
-    Route::post('/admin/tracks/{track}/edit', [TrackController::class, 'delete'])->name('tracks.delete');
     Route::patch('/admin/tracks/{track}', [TrackController::class, 'update'])->name('tracks.update');
     Route::delete('/admin/tracks/{track}/destroy', [TrackController::class, 'destroy'])->name('tracks.destroy');
     // 
     Route::get('/admin/slots', [SlotController::class, 'index'])->name('slots.index');
     Route::post('/admin/slots/store', [SlotController::class, 'store'])->name('slots.store');
     Route::get('/admin/slots/{slot}/edit', [SlotController::class, 'edit'])->name('slots.edit');
-    Route::post('/admin/slots/{slot}/edit', [SlotController::class, 'delete'])->name('slots.delete');
     Route::patch('/admin/slots/{slot}', [SlotController::class, 'update'])->name('slots.update');
     Route::delete('/admin/slots/{slot}/destroy', [SlotController::class, 'destroy'])->name('slots.destroy');
     // 
     Route::get('/admin/venues', [VenueController::class, 'index'])->name('venues.index');
     Route::post('/admin/venues/store', [VenueController::class, 'store'])->name('venues.store');
     Route::get('/admin/venues/{venue}/edit', [VenueController::class, 'edit'])->name('venues.edit');
-    Route::post('/admin/venues/{venue}/edit', [VenueController::class, 'delete'])->name('venues.delete');
     Route::patch('/admin/venues/{venue}', [VenueController::class, 'update'])->name('venues.update');
     Route::delete('/admin/venues/{venue}/destroy', [VenueController::class, 'destroy'])->name('venues.destroy');
+    // 
+    Route::get('/admin/events', [EventController::class, 'index'])->name('events.index');
+    Route::post('/admin/events/store', [EventController::class, 'store'])->name('events.store');
+    Route::get('/admin/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+    Route::patch('/admin/events/{event}', [EventController::class, 'update'])->name('events.update');
+    Route::delete('/admin/events/{event}/destroy', [EventController::class, 'destroy'])->name('events.destroy');
 });
 
 
