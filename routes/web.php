@@ -74,6 +74,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::patch('/admin/events/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/admin/events/{event}/destroy', [EventController::class, 'destroy'])->name('events.destroy');
+    // 
+    Route::get('/admin/sessions', [SessionController::class, 'index'])->name('sessions.index');
+    Route::post('/admin/sessions/store', [SessionController::class, 'store'])->name('sessions.store');
+    Route::get('/admin/sessions/{session}/edit', [SessionController::class, 'edit'])->name('sessions.edit');
+    Route::patch('/admin/sessions/{session}', [SessionController::class, 'update'])->name('sessions.update');
+    Route::delete('/admin/sessions/{session}/destroy', [SessionController::class, 'destroy'])->name('sessions.destroy');
 });
 
 
