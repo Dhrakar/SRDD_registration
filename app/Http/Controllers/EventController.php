@@ -2,25 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use App\Models\Event;
+use App\Models\Track;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function index(): View
+    { 
+        return view('admin.events.index');
     }
 
     /**
@@ -28,7 +24,22 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $num_tracks = Track::all()->count();
+        $num_users = User::all()->count();
+
+        // validate the data from the form
+        $validated = $request->validate([
+            'track_id'    => 'required|numeric|between:1,' . $num_tracks,
+            'user_id'     => 'required|numeric|between:0,' . $num_users,
+            'year'        => 'nullable|numeric',
+            'title'       => 'required|string|max:40',
+            'description' => 'required|string|max:80',
+            'needs_reg'   => 'boolean',
+        ]);
+        
+        $event = Event::create($validated);
+            
+        return redirect(route('events.index'));
     }
 
     /**
@@ -44,7 +55,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        dd($event);
     }
 
     /**
@@ -52,14 +63,27 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        dd($request, $event);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event)
+    public function destroy(Event $event): RedirectResponse
     {
-        //
+        // grab any related Sessiona and schedules and delete since without the event they are invalid
+        if( $event->sessions->count() > 0) {
+            foreach( $event->sessions as $session) {
+                if( $session->schedules->count() > 0) {
+                    foreach($session->schedules as $schedule) {
+                        $schedule->delete();
+                    }
+                }
+                $session->delete();
+            }
+        }
+        $event->delete();
+        
+        return redirect(route('events.index'));
     }
 }

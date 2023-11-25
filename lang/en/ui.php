@@ -23,12 +23,13 @@ return [
           'login' => 'Please Login',
     ],
     'button' => [
-        'save' => 'Save',  
-        'cancel'  => 'Cancel',
-        'update'  => 'Save Changes',
-        'new-track' => "Save New Track",
-        'new-slot' => "Save New Time Slot",
-        'delete' => 'Delete!',
+           'save' => 'Save',
+         'cancel' => 'Cancel',
+         'update' => 'Save Changes',
+      'new-track' => "Save New Track",
+       'new-slot' => "Save New Time Slot",
+      'new-event' => "Save New Event",
+         'delete' => 'Delete!',
     ],
     'markdown' => [
         // As these are rather longer, they pull in markdown text from files in 

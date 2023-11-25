@@ -11,6 +11,20 @@ class Event extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'track_id',
+        'user_id',
+        'year',
+        'title',
+        'description',
+        'needs_reg',
+    ];
+
     /*
      * get the Track for this event
      */

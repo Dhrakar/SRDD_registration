@@ -6,6 +6,11 @@
     use App\Models\Track;
     use App\Models\Event;
 
+    // did we get a deletion request? 
+    if( isset($_GET['CONFIRM']) ) {
+      $track = Track::find($_GET['CONFIRM']); 
+      unset($_GET['CONFIRM']);
+  }
  ?>
 
 @extends('template.app')
@@ -13,13 +18,48 @@
 @section('content')
 <x-global.nav-admin/>
 <div class="container w-full">
+@isset($track) {{-- dialog for validating an track deletion --}}
+<x-srdd.warning :title="__('Verify Deletion')">
+    <b>Warning!</b> Are you sure that you want to delete Track # {{ $track->id }} "{{ $track->title }}"?
+    <div class="pl-4 max-h-32">
+        @if ($track->events->count() > 0) {{-- Any associated events? --}}
+            This Track has been included in these {{ $track->events->count() }} Events:<br/>
+            @foreach ($track->events->all() as $event )
+                <span class="pl-4">
+                    <i class="bi bi-dot"></i>
+                    ID: {{ $event->id }} on {{ $event->title }} 
+                    <br/>
+                </span>
+            @endforeach
+            <br/>
+            <i>If you confirm this deletion, those events will be updated to use the default Track 1.</i>
+        @endif
+    </div>
+    <form method="post" action="{{ route('tracks.destroy', $track) }}" class="inline-block">
+        @csrf 
+        @method('delete')
+        <div class="mt-6 mb-4 flex justify-end">
+            <a class="px-4 py-2 
+                    bg-white border border-gray-300 rounded-md 
+                    font-semibold text-xs text-gray-700 uppercase tracking-widest 
+                    shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
+                    disabled:opacity-25 transition ease-in-out duration-150"
+                href="{{route('tracks.index')}}">
+                {{__('Cancel')}}
+            </a>
+            <x-danger-button class="ml-3">
+                {{ __('Delete') }}
+            </x-danger-button>
+        </div>
+    </form>  
+</x-srdd.warning>
+@endisset
   <x-srdd.callout :title="__('Session Tracks')">
   Tracks are used to help organize Sessions into theme categories.  These categories can help attendees look for
 the types of event sessions that they are interested in.  Events that belong to the _core_ track are also 
 automatically added to the schedules of each attendee.  This way, events like the Longevity Awards are always
 included.
   </x-srdd.callout>
-
   {{-- Create a new Track --}}
   <x-srdd.title-box :title="__('Add a New Track')">
     <form method="POST" action="{{ route('tracks.store') }}">
@@ -103,14 +143,17 @@ included.
                       echo "<span class=\"block w-4/5 m-2 px-4 rounded-md $bgc\">$cn</span>";
                   @endphp
               </div>
-              <div class="table-row col-span-2 inline:block">
+              <div class="table-row col-span-2">
                   @if($track->id != 1 ) {{-- don't allow track 1 to be edited or deleted --}}
                     <a href="{{ route('tracks.edit', $track) }}">
                         <i class="bi bi-pencil-square mx-2"></i>
                     </a>
-                    <button type="submit" x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-deletion')">
-                      <i class="text-red-500 bi bi-trash mx-2"></i>
-                    </button>
+                    <form name="track_{{ $track->id  }}" method="get" action="{{ route('tracks.index') }}">
+                        <input type="hidden" id="CONFIRM" name="CONFIRM" value="{{ $track->id  }}"/>
+                        <button type="submit" >
+                            <i class="text-red-500 bi bi-trash mx-2"></i>
+                        </button>
+                    </form>
                   @else
                     <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
                     <i class="text-slate-400 bi bi-trash mx-2"></i>
@@ -119,38 +162,5 @@ included.
           @endforeach
       </div>
   </x-srdd.title-box>
-  
-  <x-modal name="confirm-deletion" maxwidth="full" focusable>
-    <div class="mt-6 pl-4 bg-amber-500 dark:bg-amber-200">
-      <span class="text-2xl text-amber-900 dark:text-amber-50">
-        <i class="font-bold text-3xl bi bi-exclamation-triangle"></i> Confirmation
-      </span>
-      <x-srdd.divider/>
-      Are you sure that you want to delete Track # {{ $track->id }} "{{ $track->title }}"?
-      <div class="pl-4 max-h-32">
-      @if ($track->events()->count() > 0) {{-- Any associated events? --}}
-        <div class="overflow-y-scroll border-1 border-amber-950 dark:border-amber-100">
-        <b>Note</b> This track is associated with {{ $track->events()->count() }} events:<br/>
-        @foreach ($track->events()->get() as $event )
-          &nbsp;[{{ $event->id }}] &dash; <i>{{ $event->title }}</i> <br/>
-        @endforeach
-        </div>
-        <i>If you confirm this deletion, those events will be updated to use Track 1.</i>
-      @endif
-    </div>
-    <form method="post" action="{{ route('tracks.destroy', $track) }}" class="inline-block">
-      @csrf 
-      @method('delete')
-      <div class="mt-6 mb-4 flex justify-end">
-        <x-secondary-button x-on:click="$dispatch('close')">
-            {{ __('Cancel') }}
-        </x-secondary-button>
-
-        <x-danger-button class="ml-3">
-            {{ __('Delete') }}
-        </x-danger-button>
-      </div>
-    </form>  
-  </x-modal>
 </div>
 @endsection

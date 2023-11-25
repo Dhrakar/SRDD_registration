@@ -12,35 +12,6 @@
 @section('content')
 <x-global.nav-admin/>
 <div class="container">
-@if (isset($confirm) && $confirm == 'NEED')
-    <x-srdd.warning :title="__('Verify Deletion')">
-        Are you sure that you want to delete Track # {{ $track->id }} "{{ $track->title }}"?
-        <div class="mt-4 pl-4">
-        @if ($events->count() > 0) {{-- Any associated events? --}}
-          <b>Note</b> This track is associated with the following events:<br/>
-          @foreach ($events as $event )
-            &nbsp;&nbsp;&dash; ID: {{ $event->id }} Title: {{ $event->title }} <br/>
-          @endforeach
-          <br/>
-          <i>If you confirm this deletion, those events will be updated to use Track 1.</i>
-        @endif
-        </div>
-
-        <form method="post" action="{{ route('tracks.destroy', $track) }}" class="p-6">
-            @csrf
-            @method('delete')
-            <a class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150"
-                href="{{ route('tracks.index') }}">
-                Cancel
-            </a>
-            &nbsp;
-            <x-danger-button>
-                {{ __('Confirm Delete') }}
-            </x-danger-button>
-        </div>
-        </form>
-    </x-srdd.warning>
-@else
   <x-srdd.title-box :title="__('Editing Track #' . $track->id)">
     <form method="POST" action="{{ route('tracks.update', $track) }}">
       @csrf
@@ -109,6 +80,5 @@
         </div>
     </form>
   </x-srdd.title-box>
-@endif
 </div>
 @endsection

@@ -26,7 +26,7 @@
         </li>
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'events') !== false )?$m_text_sel:$m_text_def }}" 
-                href="#">{{__('Events')}}</a>
+                href="{{ route('events.index') }}">{{__('Events')}}</a>
         </li>
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'sessions') !== false )?$m_text_sel:$m_text_def }}" 

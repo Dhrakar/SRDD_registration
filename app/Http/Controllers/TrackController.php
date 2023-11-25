@@ -38,18 +38,6 @@ class TrackController extends Controller
         ]);
     }
 
-    /** 
-     * Verification that the user really wants to do the deletion
-     */
-    public function delete(Request $request, Track $track): View
-    {
-        // send the confirm message
-        return view('admin.tracks.index', [
-            'track' => $track,
-            'confirm' => 'NEED',
-        ]);
-        
-    }
     public function update(Request $request, Track $track): RedirectResponse
     { 
         // validate the data from the form
@@ -66,11 +54,16 @@ class TrackController extends Controller
 
     public function destroy(Track $track): RedirectResponse
     {
-        //First, grab any related events
-        $events = $track->events()->get();
+        //First, grab any related events and reset the track #
+         if($track->events->count() > 0) {
+            foreach($track->events as $event) {
+                $event->track_id = 1;
+                $event->save();
+            }
+         }
 
-        // $track->delete();
-        dd($events);
+        $track->delete();
+        
         return redirect(route('tracks.index'));
     }
 }
