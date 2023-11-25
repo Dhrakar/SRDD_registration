@@ -30,7 +30,7 @@
         </li>
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'sessions') !== false )?$m_text_sel:$m_text_def }}" 
-                href="#">{{__('Sessions')}}</a>
+                href="#{{ route('sessions.index') }}">{{__('Sessions')}}</a>
         </li>
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'users') !== false )?$m_text_sel:$m_text_def }}" 
