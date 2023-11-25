@@ -15,13 +15,21 @@ class TrackController extends Controller
         return view('admin.tracks.index');
     }
 
+    /**
+     * Display the specified resource.
+     */
+    public function show(Track $track)
+    {
+        //
+    }
+
     public function store(Request $request): RedirectResponse
     {
         // validate the data from the form
         $validated = $request->validate([
-            'title' => 'required|string|max:40',
+                  'title' => 'required|string|max:40',
             'description' => 'required|string|max:80',
-            'color' => 'required|numeric|between:1,' . count(config('constants.colors.tracks')),
+                  'color' => 'required|numeric|between:1,' . count(config('constants.colors.tracks')),
         ]);
         
         $track = Track::create($validated);
@@ -42,9 +50,9 @@ class TrackController extends Controller
     { 
         // validate the data from the form
         $validated = $request->validate([
-            'title' => 'required|string|max:40',
+                  'title' => 'required|string|max:40',
             'description' => 'required|string|max:80',
-            'color' => 'required|numeric|between:1,' . count(config('constants.colors.tracks')),
+                  'color' => 'required|numeric|between:1,' . count(config('constants.colors.tracks')),
         ]);
         
         $track->update($validated);
@@ -63,7 +71,7 @@ class TrackController extends Controller
          }
 
         $track->delete();
-        
+
         return redirect(route('tracks.index'));
     }
 }

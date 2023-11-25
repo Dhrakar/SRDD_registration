@@ -55,7 +55,9 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        dd($event);
+        return view('admin.events.edit', [
+            'event' => $event,
+        ]);
     }
 
     /**
@@ -63,7 +65,22 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        dd($request, $event);
+        $num_tracks = Track::all()->count();
+        $num_users = User::all()->count();
+
+        // validate the data from the form
+        $validated = $request->validate([
+            'track_id'    => 'required|numeric|between:1,' . $num_tracks,
+            'user_id'     => 'required|numeric|between:0,' . $num_users,
+            'year'        => 'nullable|numeric',
+            'title'       => 'required|string|max:40',
+            'description' => 'required|string|max:80',
+            'needs_reg'   => 'boolean',
+        ]);
+        
+        $event->update($validated);
+            
+        return redirect(route('events.index'));
     }
 
     /**

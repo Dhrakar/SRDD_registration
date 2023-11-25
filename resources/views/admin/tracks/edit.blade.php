@@ -1,11 +1,10 @@
 <?php
   /**
-   *  This is used to edit or delete Tracks.  It checks to see if there are associated events and sets them
-   *  to track 1 prior to deleting.
+   *  This is used to edit Tracks
    */
 
    // grab any associated events (if any)
-  $events = $track->events()->get();
+  $events = $track->events;
 ?>
 @extends('template.app')
 
