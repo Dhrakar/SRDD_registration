@@ -5,6 +5,8 @@ use App\Http\Controllers\TrackController;
 use App\Http\Controllers\SlotController;
 use App\Http\Controllers\VenueController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\Auth\UALoginController;
 use Illuminate\Support\Facades\Route;
 
