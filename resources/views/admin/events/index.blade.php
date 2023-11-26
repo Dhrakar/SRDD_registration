@@ -9,6 +9,7 @@
     use App\Models\Session;
     use Illuminate\Support\Facades\DB;
 
+    // build collections for the dropdown selectors
          $tracks = Track::all();
     $instructors = User::all();
 
@@ -117,7 +118,7 @@
                         width="5"/>
                 </div>
                 <div class="col-span-1 text-xs text-red-600 italic pl-2">
-                    Defaults to the current SRDD year
+                    Defaults to the current SRDD year and must br &gt;= that year
                 </div>
                 {{-- set the title --}}
                 <div class="col-span-1 table-header text-right pr-4">
@@ -161,7 +162,7 @@
                      Setting this also automatically adds these sessions to new schedules.
                 </div>
                 <div class="col-span-1">&nbsp;</div>
-                <x-primary-button class="col-span-2 mt-4 mx-2">
+                <x-primary-button class="col-span-1 mt-4 mx-2 justify-center">
                     {{ __('ui.button.new-event') }}
                 </x-primary-button>
             </div>
@@ -180,7 +181,7 @@
             <div class="px-2 table-header col-span-3">Description</div>
             <div class="px-2 table-header col-span-1">Need Reg?</div>
             <div class="px-2 table-header col-span-1">Edit/Delete</div>
-            @foreach(Event::all() as $event)
+            @foreach(Event::all()->sortBy('year') as $event)
                 <div class="table-row col-span-1">{{ $event->id  }}</div>
                 <div class="table-row col-span-1">{{ $event->track->title }}</div>
                 <div class="table-row col-span-2">
@@ -193,21 +194,30 @@
                 <div class="table-row col-span-1">{{ $event->year }}</div>
                 <div class="table-row col-span-2">{{ $event->title }}</div>
                 <div class="table-row col-span-3">{{ $event->description }}</div>
-                <div class="table-row col-span-1">
+                <div class="table-row col-span-1 text-2xl">
                     @if ($event->needs_reg == 1)
-                    <i class="bi bi-check-square-fill text-indigo-900"></i>
+                    <i class="bi bi-check-circle text-green-500"></i>
+                    @else
+                    <i class="bi bi-circle text-red-500"></i>
                     @endif
                 </div>
                 <div class="table-row col-span-1">
-                    <a href="{{ route('events.edit', $event) }}">
-                        <i class="bi bi-pencil-square mx-2"></i>
-                    </a>
-                    <form name="event_{{ $event->id  }}" method="get" action="{{ route('events.index') }}">
-                        <input type="hidden" id="CONFIRM" name="CONFIRM" value="{{ $event->id  }}"/>
-                        <button type="submit" >
-                            <i class="text-red-500 bi bi-trash mx-2"></i>
-                        </button>
-                    </form>
+                    @if ($event->year < config('constants.srdd_year') )  {{-- don't allow edits/deletion of historical events --}}
+                        <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
+                        <i class="text-slate-400 bi bi-trash mx-2"></i>
+                    @else
+                        <div class="flex justify-center">
+                            <a href="{{ route('events.edit', $event) }}">
+                                <i class="bi bi-pencil-square mx-2"></i>
+                            </a>
+                            <form name="event_{{ $event->id  }}" method="get" action="{{ route('events.index') }}">
+                                <input type="hidden" id="CONFIRM" name="CONFIRM" value="{{ $event->id  }}"/>
+                                <button type="submit" >
+                                    <i class="text-red-500 bi bi-trash mx-2"></i>
+                                </button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             @endforeach
         </div>

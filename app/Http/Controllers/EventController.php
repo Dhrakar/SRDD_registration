@@ -6,6 +6,8 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\Event;
 use App\Models\Track;
 use App\Models\User;
+use App\Models\Session;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -24,15 +26,16 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $num_tracks = Track::all()->count();
-        $num_users = User::all()->count();
+        // get totals for relationships
+        $track_keys = Track::all()->keys();
+         $user_keys = User::all()->keys();
 
         // validate the data from the form
         $validated = $request->validate([
-            'track_id'    => 'required|numeric|between:1,' . $num_tracks,
-            'user_id'     => 'required|numeric|between:0,' . $num_users,
-            'year'        => 'nullable|numeric',
-            'title'       => 'required|string|max:40',
+            'track_id'    => 'required|numeric|in:' . $track_keys,             // limit to current, valid tracks
+            'user_id'     => 'required|numeric|in:' . $user_keys,              // limit to current, valid users 
+            'year'        => 'nullable|numeric|gte:' . config('constants.srdd_year'), // limit to the curr SRDD year+
+            'title'       => 'required|string|max:40', 
             'description' => 'required|string|max:80',
             'needs_reg'   => 'boolean',
         ]);

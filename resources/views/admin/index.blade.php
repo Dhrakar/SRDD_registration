@@ -3,12 +3,7 @@
      *  Administrative access landing page
      */
 
-    use function Laravel\Folio\name;
-    use function Laravel\Folio\{middleware};
- 
-    middleware(['auth', 'verified']);
- 
-    name('admin.index');
+     $min = App\Models\Venue::all()->keys();
 
  ?>
 @extends('template.app')
