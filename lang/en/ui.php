@@ -14,7 +14,7 @@ return [
     'menu' => [
           'about' => 'About SRDD',
           'admin' => 'Admin/Config',
-       'register' => 'Session Registration',
+       'register' => 'Registration',
         'reports' => 'Reports',
          'define' => 'Field Definitions',
            'help' => 'Application Help',
@@ -25,13 +25,13 @@ return [
     'button' => [
            'save' => 'Save',
          'cancel' => 'Cancel',
+         'delete' => 'Delete!',
          'update' => 'Save Changes',
       'new-track' => "Save New Track",
        'new-slot' => "Save New Time Slot",
       'new-event' => "Save New Event",
     'new-session' => "Save New Session",
       'new-venue' => "Save New Location",
-         'delete' => 'Delete!',
     ],
     'markdown' => [
         // As these are rather longer, they pull in markdown text from files in 
