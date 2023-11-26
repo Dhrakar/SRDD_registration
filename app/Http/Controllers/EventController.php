@@ -36,7 +36,7 @@ class EventController extends Controller
             'user_id'     => 'required|numeric|in:' . $user_keys,              // limit to current, valid users 
             'year'        => 'nullable|numeric|gte:' . config('constants.srdd_year'), // limit to the curr SRDD year+
             'title'       => 'required|string|max:40', 
-            'description' => 'required|string|max:80',
+            'description' => 'required|string|max:150',
             'needs_reg'   => 'boolean',
         ]);
         
@@ -78,7 +78,7 @@ class EventController extends Controller
             'user_id'     => 'required|numeric|in:' . $user_keys,              // limit to current, valid users 
             'year'        => 'nullable|numeric|gte:' . config('constants.srdd_year'), // limit to the curr SRDD year+
             'title'       => 'required|string|max:40', 
-            'description' => 'required|string|max:80',
+            'description' => 'required|string|max:150',
             'needs_reg'   => 'boolean',
         ]);
         

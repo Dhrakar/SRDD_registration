@@ -101,11 +101,11 @@
                     <input class="text-slate-900 w-4/5 "
                         type="input" name="description" 
                         value="{{ $event->description }}" 
-                        maxlength="80"
+                        maxlength="150"
                         width="80"/>
                 </div>
                 <div class="col-span-1 text-xs text-red-600 italic pl-2">
-                     80 chars max length
+                     150 chars max length
                 </div>
                 {{-- dropdown for needing registration --}}
                 <x-input-error :messages="$errors->get('needs_reg')" class="mt-2" />
