@@ -55,19 +55,6 @@ class SlotController extends Controller
         
     }
 
-    /** 
-     * Verification that the user really wants to do the deletion
-    */
-    public function delete(Request $request, Slot $slot): View
-    {
-        // send the confirm message
-        return view('admin.slots.edit', [
-            'slot' => $slot,
-            'confirm' => 'NEED',
-        ]);
-        
-    }
-
     /**
      * Update the specified resource in storage.
      */
@@ -90,6 +77,14 @@ class SlotController extends Controller
      */
     public function destroy(Slot $slot): RedirectResponse
     {
+        // grab any related Sessiona and schedules and default the slot
+        if( $slot->sessions->count() > 0) {
+            foreach( $slot->sessions as $session) {
+                $session->slot_id = 1;
+                $session->save();
+            }
+        }
+
         // deletion is now verified, so wwhack it
         $slot->delete();
 

@@ -6,11 +6,12 @@
 [] add in auth levels ( 1 - guest, 2 - logged in normal user, 3 - UA login? , 5 - event admin, 9 - app admin) 
 [x]  update tracks to use auth levels and to have delete confirmation
  -- add remaining components
- [] Venues (needs fixes)
+ [x] Venues (needs fixes)
  [x] Slots
  [x] Events
- [] Sessions
+ [x] Sessions
  [] schedules
 [] main registration controller (for building Schedule objects)
 [] add new policies to keep from going straight to edit or delete pages (tokens?)
 [] fix the menu spacing
+[] add button to open/close 'New track/venue/slot/etc' sections.  Maybe a button to open the titlebox??
