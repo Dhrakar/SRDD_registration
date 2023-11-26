@@ -62,7 +62,7 @@
     </x-srdd.callout>
 
     {{-- Create a new Venue --}}
-    <x-srdd.title-box :title="__('Add a New Venue')">
+    <x-srdd.title-box :title="__('Add a New Venue')"  :state="0">
         <form method="POST" action="{{ route('venues.store') }}">
             @csrf
             <x-input-error :messages="$errors->get('location')" class="mt-2" />

@@ -61,7 +61,7 @@ the types of event sessions that they are interested in.  Events that belong to 
 This way, events like the Longevity Awards are always included.
   </x-srdd.callout>
   {{-- Create a new Track --}}
-  <x-srdd.title-box :title="__('Add a New Track')">
+  <x-srdd.title-box :title="__('Add a New Track')"  :state="0">
     <form method="POST" action="{{ route('tracks.store') }}">
       @csrf
       <x-input-error :messages="$errors->get('title')" class="mt-2" />

@@ -66,7 +66,7 @@
     </x-srdd.callout>
 
     {{-- Create a new Event --}}
-    <x-srdd.title-box :title="__('Add a New Event')">
+    <x-srdd.title-box :title="__('Add a New Event')"  :state="0">
         <form method="POST" action="{{ route('events.store') }}">
             @csrf
             <x-input-error :messages="$errors->get('track_id')" class="mt-2" />

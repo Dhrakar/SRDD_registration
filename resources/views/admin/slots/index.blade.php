@@ -59,7 +59,7 @@
     </x-srdd.callout>
 
     {{-- Create a new Slot --}}
-    <x-srdd.title-box :title="__('Add a New Time Slot')">
+    <x-srdd.title-box :title="__('Add a New Time Slot')"  :state="0">
         <form method="POST" action="{{ route('slots.store') }}">
             @csrf
             <x-input-error :messages="$errors->get('title')" class="mt-2" />

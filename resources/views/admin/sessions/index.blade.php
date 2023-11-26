@@ -29,7 +29,7 @@
 @section('content')
 <x-global.nav-admin/>
 @isset($session) {{-- dialogs for validating a session deletion --}}
-<x-srdd.warning :title="__('Verify Deletion')">
+<x-srdd.warning :title="__('Verify Deletion')" >
     <b>Warning!</b> Are you sure that you want to delete Session # {{ $session->id }}?
     <div class="pl-4 max-h-32">
         @if ($session->schedules->count() > 0) {{-- Any associated user schedules? --}}
@@ -70,7 +70,7 @@
     added to their Schedule for the day.  
     </x-srdd.callout>
     {{-- Create a new Session --}}
-    <x-srdd.title-box :title="__('Add a New Session')">
+    <x-srdd.title-box :title="__('Add a New Session')"  :state="0">
         <form method="POST" action="{{ route('sessions.store') }}">
             @csrf
                 {{-- validation error messages
