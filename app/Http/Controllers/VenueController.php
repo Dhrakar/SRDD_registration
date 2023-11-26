@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Venue;
+use App\Models\Session;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -88,6 +89,14 @@ class VenueController extends Controller
      */
     public function destroy(Venue $venue): RedirectResponse
     {
+        //First, grab any related sessions and reset the track #
+        if($venue->sessions->count() > 0) {
+            foreach($venue->sessions as $session) {
+                $session->venue_id = 1;
+                $session->save();
+            }
+         }
+         
         // deletion is now verified, so wwhack it
         $venue->delete();
 

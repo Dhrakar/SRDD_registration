@@ -133,4 +133,5 @@
             });
         }
     </script>
+</div>
 @endsection

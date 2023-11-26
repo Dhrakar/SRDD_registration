@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Session;
+use App\Models\Event;
+use App\Models\Venue;
+use App\Models\Slot;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class SessionController extends Controller
 {
@@ -12,15 +17,7 @@ class SessionController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('admin.sessions.index');
     }
 
     /**
@@ -28,7 +25,25 @@ class SessionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // get totals for relationships
+        $event_keys = Event::all()->keys();
+        $venue_keys = Venue::all()->keys(); 
+         $slot_keys = Slot::all()->keys();
+
+        // validate the data from the form
+        $validated = $request->validate([
+              'event_id' => 'required|numeric|in:' . $event_keys,      // limit to valid events
+              'venue_id' => 'required|numeric|in:' . $venue_keys,      // limit to valid locations
+               'slot_id' => 'required|numeric|in:' . $slot_keys,        // limit to valid time slots (can be 'custom' which is ID #1)
+             'date_held' => 'required|date',                                     // 
+            'start_time' => 'sometimes|required_if:slot_id,1',      // if the slot is custom, then this is required
+              'end_time' => 'sometimes|required_if:slot_id,1',                   // if the slot is custom, then this is required
+             'is_closed' => 'boolean',                                // not required, but must be boolean
+        ]);
+
+        $session = Session::create($validated);
+            
+        return redirect(route('sessions.index'));
     }
 
     /**
@@ -44,7 +59,9 @@ class SessionController extends Controller
      */
     public function edit(Session $session)
     {
-        //
+        return view('admin.sessions.edit', [
+            'session' => $session,
+        ]);
     }
 
     /**
@@ -52,14 +69,41 @@ class SessionController extends Controller
      */
     public function update(Request $request, Session $session)
     {
-        //
+        // get totals for relationships
+        $event_keys = Event::all()->keys();
+        $venue_keys = Venue::all()->keys(); 
+         $slot_keys = Slot::all()->keys();
+
+        // validate the data from the form
+        $validated = $request->validate([
+              'event_id' => 'required|numeric|in:' . $event_keys,      // limit to valid events
+              'venue_id' => 'required|numeric|in:' . $venue_keys,      // limit to valid locations
+               'slot_id' => 'required|numeric|in:' . $slot_keys,        // limit to valid time slots (can be 'custom' which is ID #1)
+             'date_held' => 'required|date',                                     // 
+            'start_time' => 'sometimes|required_if:slot_id,1',      // if the slot is custom, then this is required
+              'end_time' => 'sometimes|required_if:slot_id,1',                   // if the slot is custom, then this is required
+             'is_closed' => 'boolean',                                // not required, but must be boolean
+        ]);
+
+        $session->update($validated);
+            
+        return redirect(route('sessions.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Session $session)
+    public function destroy(Session $session): RedirectResponse
     {
-        //
+        // grab any relevant schedules and delete them as well
+        if($session->schedules->count() > 0 ) {
+            foreach ($session->schedules as $schedule ) {
+                $schedule->delete();
+            }
+        }
+
+        $session->delete();
+
+        return redirect(route('sessions.index'));
     }
 }

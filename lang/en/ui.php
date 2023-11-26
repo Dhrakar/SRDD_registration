@@ -29,6 +29,8 @@ return [
       'new-track' => "Save New Track",
        'new-slot' => "Save New Time Slot",
       'new-event' => "Save New Event",
+    'new-session' => "Save New Session",
+      'new-venue' => "Save New Location",
          'delete' => 'Delete!',
     ],
     'markdown' => [

@@ -1,6 +1,6 @@
 <?php 
     /*
-     *  This is the admin landing page for Venue models and it shows all of them in a table
+     *  This is the admin landing page for Session models and it shows all of them in a table
  ``  */
 
     use App\Models\Event;

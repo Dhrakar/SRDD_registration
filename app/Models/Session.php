@@ -11,6 +11,21 @@ class Session extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'event_id',
+        'venue_id',
+        'slot_id',
+        'date_held',
+        'start_time',
+        'end_time',
+        'is_closed',
+    ];
+
     /*
      * get the Event for this session
      */

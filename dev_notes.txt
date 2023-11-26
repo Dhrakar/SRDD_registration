@@ -25,3 +25,9 @@
  confirmation form that, if accepted, routes to the actual destroy methos -- otherwise back to index
 
  ---- global views folder is for major nav and layout parts.  srdd is for components and widgets
+  - for deleting objects, in order to pass the id filds, i needed to switch to having the delete done in the same index
+  file as the list of objects.  So there is a form attached to teh trashbutton that sends a hidden 'CONFIRMED' input
+  via get. If the index sees that value, it pops up a validation div that also has a from.  that form then submits to 
+  the destroy method or cancels back (it also unsets the CONFIRMED)
+
+-- conversion of srdd date const to a date field: date("Y-m-d", strtotime(config('constants.srdd_date')));
