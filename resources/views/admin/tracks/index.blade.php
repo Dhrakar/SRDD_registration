@@ -56,9 +56,9 @@
 @endisset
   <x-srdd.callout :title="__('Session Tracks')">
   Tracks are used to help organize Sessions into theme categories.  These categories can help attendees look for
-the types of event sessions that they are interested in.  Events that belong to the _core_ track are also 
-automatically added to the schedules of each attendee.  This way, events like the Longevity Awards are always
-included.
+the types of event sessions that they are interested in.  Events that belong to the
+<b class="bg-sky-400 rounded-md px-1">Core Events</b> track are also automatically added to the schedules of each attendee.  
+This way, events like the Longevity Awards are always included.
   </x-srdd.callout>
   {{-- Create a new Track --}}
   <x-srdd.title-box :title="__('Add a New Track')">
@@ -116,7 +116,7 @@ included.
             Background color for tracks
           </div>
           <div class="col-span-1">&nbsp;</div>
-          <x-primary-button class="col-span-2 mt-4 mx-2">
+          <x-primary-button class="col-span-1 mt-4 mx-2 justify-center">
               {{ __('ui.button.new-track') }}
           </x-primary-button>
         </div>
