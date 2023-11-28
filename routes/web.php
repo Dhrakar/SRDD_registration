@@ -43,12 +43,14 @@ Route::middleware('auth')->group(function () {
     // --------------------------------
     /* admin */
     Route::get('/admin', function () { return view('admin.index'); })->name('admin.index');
+
     /* session scheduling/viewing */
-    Route::get('/schedule', function () { return view('schedule.index'); })->name('schedule.index');
+    Route::get('/shedule', function () { return view('schedule.index'); })->name('schedule.index');
+
     /* Reports */
     Route::get('/reports', function () { return view('reports.index'); })->name('reports.index');
 
-    /* user profile */
+    /* config pages */
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

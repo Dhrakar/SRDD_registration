@@ -14,7 +14,7 @@ return [
     'menu' => [
           'about' => 'About SRDD',
           'admin' => 'Admin/Config',
-       'register' => 'Registration',
+       'schedule' => 'Registration',
         'reports' => 'Reports',
          'define' => 'Field Definitions',
            'help' => 'Application Help',
