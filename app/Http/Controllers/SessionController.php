@@ -26,15 +26,15 @@ class SessionController extends Controller
     public function store(Request $request)
     {
         // get totals for relationships
-        $event_keys = Event::all()->keys();
-        $venue_keys = Venue::all()->keys(); 
-         $slot_keys = Slot::all()->keys();
+        $event_keys = Event::all()->implode(',');
+        $venue_keys = Venue::all()->implode(','); 
+         $slot_keys = Slot::all()->implode(',');
 
         // validate the data from the form
         $validated = $request->validate([
-              'event_id' => 'required|numeric|in:' . $event_keys,      // limit to valid events
-              'venue_id' => 'required|numeric|in:' . $venue_keys,      // limit to valid locations
-               'slot_id' => 'required|numeric|in:' . $slot_keys,        // limit to valid time slots (can be 'custom' which is ID #1)
+              'event_id' => 'required|numeric',      // limit to valid events
+              'venue_id' => 'required|numeric',      // limit to valid locations
+               'slot_id' => 'required|numeric',        // limit to valid time slots (can be 'custom' which is ID #1)
              'date_held' => 'required|date',                                     // 
             'start_time' => 'sometimes|required_if:slot_id,1',      // if the slot is custom, then this is required
               'end_time' => 'sometimes|required_if:slot_id,1',                   // if the slot is custom, then this is required
@@ -76,9 +76,9 @@ class SessionController extends Controller
 
         // validate the data from the form
         $validated = $request->validate([
-              'event_id' => 'required|numeric|in:' . $event_keys,      // limit to valid events
-              'venue_id' => 'required|numeric|in:' . $venue_keys,      // limit to valid locations
-               'slot_id' => 'required|numeric|in:' . $slot_keys,        // limit to valid time slots (can be 'custom' which is ID #1)
+              'event_id' => 'required|numeric',      // limit to valid events
+              'venue_id' => 'required|numeric',      // limit to valid locations
+               'slot_id' => 'required|numeric',        // limit to valid time slots (can be 'custom' which is ID #1)
              'date_held' => 'required|date',                                     // 
             'start_time' => 'sometimes|required_if:slot_id,1',      // if the slot is custom, then this is required
               'end_time' => 'sometimes|required_if:slot_id,1',                   // if the slot is custom, then this is required
