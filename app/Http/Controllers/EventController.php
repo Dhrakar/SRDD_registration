@@ -27,8 +27,8 @@ class EventController extends Controller
     public function store(Request $request)
     {
         // get totals for relationships
-        $track_keys = Track::all()->keys();
-         $user_keys = User::all()->keys();
+        $track_keys = Track::all()->keys()->implode(',');
+         $user_keys = User::all()->keys()->implode(',');
 
         // validate the data from the form
         $validated = $request->validate([
@@ -69,8 +69,8 @@ class EventController extends Controller
     public function update(Request $request, Event $event)
     {
         // get totals for relationships
-        $track_keys = Track::all()->keys();
-         $user_keys = User::all()->keys();
+        $track_keys = Track::all()->keys()->implode(',');
+         $user_keys = User::all()->keys()->implode(',');
 
         // validate the data from the form
         $validated = $request->validate([

@@ -22,9 +22,15 @@
             @csrf
             @method ('patch')
 
+            {{-- Error widgets --}}
+                <x-input-error :messages="$errors->get('track_id')" class="mt-2" />
+                <x-input-error :messages="$errors->get('user_id')" class="mt-2" />
+                <x-input-error :messages="$errors->get('year')" class="mt-2" />
+                <x-input-error :messages="$errors->get('title')" class="mt-2" />
+                <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                <x-input-error :messages="$errors->get('needs_reg')" class="mt-2" />
             <div class="mx-1 grid grid-cols-6 auto-col-max-6 gap-0">
                 {{-- pick a related Track --}}
-                <x-input-error :messages="$errors->get('track_id')" class="mt-2" />
                 <div class="col-span-1 table-header text-right pr-4">
                     <label for="track_id">Track</label>
                 </div>
@@ -43,7 +49,6 @@
                     Select a Track for this event
                 </div>
                 {{-- Pick the Instructor --}}
-                <x-input-error :messages="$errors->get('user_id')" class="mt-2" />
                 <div class="col-span-1 table-header text-right pr-4">
                     <label for="user_id">Instructor</label>
                 </div>
@@ -63,7 +68,6 @@
                     Select an Instructor for this event
                 </div>
                 {{-- Set the year this event was added --}}
-                <x-input-error :messages="$errors->get('year')" class="mt-2" />
                 <div class="col-span-1 table-header text-right pr-4">
                     <label for="year">Event Year </label>
                 </div>
@@ -78,7 +82,6 @@
                     Defaults to the current SRDD year
                 </div>
                 {{-- set the title --}}
-                <x-input-error :messages="$errors->get('title')" class="mt-2" />
                 <div class="col-span-1 table-header text-right pr-4">
                     <label for="title">Title of Event</label>
                 </div>
@@ -93,7 +96,6 @@
                      40 chars max length
                 </div>
                 {{-- set the description --}}
-                <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 <div class="col-span-1 table-header text-right pr-4">
                     <label for="description">Description of Event</label>
                 </div>
@@ -108,7 +110,6 @@
                      150 chars max length
                 </div>
                 {{-- dropdown for needing registration --}}
-                <x-input-error :messages="$errors->get('needs_reg')" class="mt-2" />
                 <div class="col-span-1 table-header text-right pr-4">
                     <label for="needs_reg">Registration Required</label>
                 </div>
