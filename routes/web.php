@@ -5,9 +5,10 @@ use App\Http\Controllers\TrackController;
 use App\Http\Controllers\SlotController;
 use App\Http\Controllers\VenueController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\ScheduleController;  // schedules db controller
 use App\Http\Controllers\Auth\UALoginController;
+use App\Http\Controllers\SchedulerController;  // Scheduler page controller
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,7 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', function () { return view('admin.index'); })->name('admin.index');
 
     /* session scheduling/viewing */
-    Route::get('/shedule', function () { return view('schedule.index'); })->name('schedule.index');
+    Route::get('/schedule', [SchedulerController::class, 'index'])->name('schedule.index');
 
     /* Reports */
     Route::get('/reports', function () { return view('reports.index'); })->name('reports.index');

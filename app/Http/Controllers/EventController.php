@@ -32,8 +32,8 @@ class EventController extends Controller
 
         // validate the data from the form
         $validated = $request->validate([
-            'track_id'    => 'required|numeric|in:' . $track_keys,             // limit to current, valid tracks
-            'user_id'     => 'required|numeric|in:' . $user_keys,              // limit to current, valid users 
+            'track_id'    => 'required|numeric',             // limit to current, valid tracks
+            'user_id'     => 'required|numeric',              // limit to current, valid users 
             'year'        => 'nullable|numeric|gte:' . config('constants.srdd_year'), // limit to the curr SRDD year+
             'title'       => 'required|string|max:40', 
             'description' => 'required|string|max:150',
@@ -74,8 +74,8 @@ class EventController extends Controller
 
         // validate the data from the form
         $validated = $request->validate([
-            'track_id'    => 'required|numeric|in:' . $track_keys,             // limit to current, valid tracks
-            'user_id'     => 'required|numeric|in:' . $user_keys,              // limit to current, valid users 
+            'track_id'    => 'required|numeric',             // limit to current, valid tracks
+            'user_id'     => 'required|numeric',              // limit to current, valid users 
             'year'        => 'nullable|numeric|gte:' . config('constants.srdd_year'), // limit to the curr SRDD year+
             'title'       => 'required|string|max:40', 
             'description' => 'required|string|max:150',

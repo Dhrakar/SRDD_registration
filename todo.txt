@@ -15,3 +15,5 @@
 [] add new policies to keep from going straight to edit or delete pages (tokens?)
 [x] fix the menu spacing
 [x] add button to open/close 'New track/venue/slot/etc' sections.  Maybe a button to open the titlebox??
+[] add full calendar
+[] migrate scripts to a @push('scripts') 
