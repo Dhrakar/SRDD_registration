@@ -3,7 +3,11 @@
   --}}
 
 
-@props(['target' => '#'])
+@props(
+        [
+            'target' => '#',
+            'icon'   => 'bi-tools'
+        ])
 
 <div class="bg-slate-700 text-sm font-bold py-1 w-screen" style="list-style-type: none;">
     <ui class="flex">
@@ -11,7 +15,7 @@
             <a class=""
                 href="{{ $target }}"
             >
-                <i class="bi bi-pc-display-horizontal"></i>
+                <i class="bi {{ $icon }}"></i>
             </a>
         </li>
 
