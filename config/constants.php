@@ -9,10 +9,18 @@ return [
     |
     | 
     */
-
+    
     // date of SRDD
     'srdd_date' => '10 April 2024',
     'srdd_year' => 2024,
+
+    // User authorizatio levels
+    'auth_level' => [
+        0 => 'guest',
+        1 => 'attendee',
+        5 => 'admin',
+        9 => 'root'
+    ],
 
     // default colors
     'colors' => [
