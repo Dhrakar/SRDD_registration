@@ -19,8 +19,6 @@ class SchedulerController extends Controller
      */
     public function index(): View
     { 
-
-    return \App\Http\Controllers\CalendarController::class;
- 
+        //
     }
 }
