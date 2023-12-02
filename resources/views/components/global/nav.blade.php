@@ -19,6 +19,7 @@
                     </a>
                 </div>
                 {{-- Links --}}
+                @auth
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <a href="{{ route('calendar') }}" 
                         class="inline-flex items-center px-1 pt-1 
@@ -44,6 +45,7 @@
                         {{ __('ui.menu.admin') }}
                     </a>
                 </div>
+                @endauth
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <a href="{{ route('about') }}"
                         class="inline-flex items-center px-1 pt-1 
