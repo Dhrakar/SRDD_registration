@@ -4,12 +4,11 @@
 
 @props(['title' => 'Information'])
 
-<div class="mt-2 mb-8 mx-auto
+<div class="mt-2 mb-10 ml-8 mr-8
             px-2 py-4 
-            w-10/12
-            border-l-8 border-stone-700 dark:border-stone-100 
+            w-full
             bg-stone-100 dark:bg-stone-800 
-            shadow-slate-400 shadow-sm
+            shadow-slate-400 shadow-md
             text-indigo-700 dark:text-indigo-50">
     <span class="pl-4 font-semibold text-2xl">
         {{ $title }}
