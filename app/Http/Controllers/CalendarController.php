@@ -58,6 +58,7 @@ class CalendarController extends Controller
         }
         $this->out .= "], ";
 
+        // this returns the views/schedule/index.blade.php directly without the SchedulerController::index()
         return view('schedule.index', [
             'events' => $this->out, 
             ]
