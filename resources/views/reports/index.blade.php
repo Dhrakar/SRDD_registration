@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="container">
-    <x-global.nav-header />
+    <x-global.toolbar />
     <x-srdd.title-box :title="__('Reports')"/>
 </div>
 @endsection

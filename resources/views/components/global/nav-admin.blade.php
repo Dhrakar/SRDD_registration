@@ -11,7 +11,7 @@
   $m_text_sel  = "text-md font-semibold text-[#FFC000] ";  // test color when on that route
 ?>
 
-<x-global.nav-header :target="__('/admin')">
+<x-global.toolbar :target="__('/admin')" :icon="__('bi-gear')">
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'tracks') !== false )?$m_text_sel:$m_text_def }}" 
                 href="{{ route('tracks.index') }}">{{__('Tracks')}}</a>
@@ -36,4 +36,4 @@
             <a  class="{{ (strpos(url()->current(), 'users') !== false )?$m_text_sel:$m_text_def }}" 
                 href="#">{{__('Users')}}</a>
         </li>
-</x-global.nav-header>
+</x-global.toolbar>

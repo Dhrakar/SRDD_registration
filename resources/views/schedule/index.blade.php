@@ -15,7 +15,7 @@
 
 @section('content')
 <div class="container">
-    <x-global.nav-header />
+    <x-global.toolbar />
     <x-srdd.callout :title="__('Event Calendar')">
         This is the main calendar of events for this year's SRDD.  Events that are outlined in green are automatically
         added when you sign up for the day.
@@ -55,5 +55,3 @@
     }
 </script>
 @endsection
-
-{{-- @json($calendar_blocks) --}}
