@@ -6,9 +6,9 @@ use App\Http\Controllers\SlotController;
 use App\Http\Controllers\VenueController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\SessionController;
-use App\Http\Controllers\ScheduleController;  // schedules db controller
+use App\Http\Controllers\CalendarController;  
+use App\Http\Controllers\SchedulerController; 
 use App\Http\Controllers\Auth\UALoginController;
-use App\Http\Controllers\SchedulerController;  // Scheduler page controller
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,8 +45,8 @@ Route::middleware('auth')->group(function () {
     /* admin */
     Route::get('/admin', function () { return view('admin.index'); })->name('admin.index');
 
-    /* session scheduling/viewing */
-    Route::get('/schedule', [SchedulerController::class, 'index'])->name('schedule.index');
+    /* main calendar */
+    Route::get('/calendar', CalendarController::class)->name('calendar');
 
     /* Reports */
     Route::get('/reports', function () { return view('reports.index'); })->name('reports.index');
@@ -85,6 +85,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/sessions/{session}/edit', [SessionController::class, 'edit'])->name('sessions.edit');
     Route::patch('/admin/sessions/{session}', [SessionController::class, 'update'])->name('sessions.update');
     Route::delete('/admin/sessions/{session}/destroy', [SessionController::class, 'destroy'])->name('sessions.destroy');
+    //
+    
 });
 
 

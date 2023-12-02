@@ -20,9 +20,9 @@
                 </div>
                 {{-- Links --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <a href="{{ route('schedule.index') }}" 
+                    <a href="{{ route('calendar') }}" 
                         class="inline-flex items-center px-1 pt-1 
-                         {{ (url()->current() == route('schedule.index'))?$m_text_sel:$m_text_def }}"
+                         {{ (url()->current() == route('calendar'))?$m_text_sel:$m_text_def }}"
                     >
                         {{ __('ui.menu.schedule') }}
                     </span>

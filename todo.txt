@@ -17,3 +17,5 @@
 [x] add button to open/close 'New track/venue/slot/etc' sections.  Maybe a button to open the titlebox??
 [] add full calendar
 [] migrate scripts to a @push('scripts') 
+[] !! add in the aria stuff for screen readers and accessibility
+[] migrate the schedule to its own invokable class (and add another for the user schedule)
