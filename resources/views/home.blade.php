@@ -9,7 +9,17 @@
 
 @section('content')
     <div class="container">
-        <x-global.nav-header>
+        @guest 
+        <x-global.toolbar :icon="__('bi-person-plus')">
+            <li class="mx-6">
+                <a  class="text-md text-slate-100 hover:text-teal-200" href="#">
+                    {{__('ui.link.register')}}
+                </a>
+            </li>
+        </x-global.toolbar>
+        @endguest
+        @auth 
+        <x-global.toolbar>
             <li class="mx-6">
                 <a  class="text-md text-slate-100 hover:text-teal-200" href="#">
                     <i class="bi bi-eyeglasses"></i>
@@ -28,7 +38,8 @@
                     {{__('Email')}}
                 </a>
             </li>
-        </x-global.nav-header>
+        </x-global.toolbar>
+        @endauth
         <x-srdd.callout :title="__('Welcome to the Staff Recognition and Development Day registration tool!')" >
             <p>
                 This registration tool will allow you to register for sessions presented by your fellow UAF 
