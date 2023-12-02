@@ -12,7 +12,8 @@
         @guest 
         <x-global.toolbar :icon="__('bi-person-plus')">
             <li class="mx-6">
-                <a  class="text-md text-slate-100 hover:text-teal-200" href="#">
+                <a  class="text-md text-slate-100 hover:text-teal-200" 
+                    href="{{ route('register') }}">
                     {{__('ui.link.register')}}
                 </a>
             </li>
