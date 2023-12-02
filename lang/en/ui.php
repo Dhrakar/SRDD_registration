@@ -14,7 +14,7 @@ return [
     'menu' => [
           'about' => 'About SRDD',
           'admin' => 'Admin/Config',
-       'schedule' => 'Registration',
+       'schedule' => 'Add Sessions',
         'reports' => 'Reports',
          'define' => 'Field Definitions',
            'help' => 'Application Help',
@@ -22,6 +22,9 @@ return [
             'lib' => 'Included Packages',
           'login' => 'Please Login',
     ],
+    'link' => [
+       'register' => 'Create New Non-UA Account',
+    ], 
     'button' => [
            'save' => 'Save',
          'cancel' => 'Cancel',
