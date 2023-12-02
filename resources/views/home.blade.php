@@ -3,7 +3,6 @@
      *  This is the main landing page for the registration applicaiton
      */
 
-
 ?>
 @extends('template.app')
 
@@ -60,8 +59,8 @@
             @endguest
             @auth
                 <x-srdd.success :title="__('Logged In')">
-                    Welcome back <span class="font-bold text-greem-700">{{ Auth::user()->name }}</span>! You last 
-                    logged in on {{ Auth::user()->last_login }}.
+                    Welcome back <span class="font-bold text-greem-700">{{ Auth::user()->name }}</span>! This is your
+                    {{ ordinal(Auth::user()->login_count) }} login and your last login was on {{ Auth::user()->last_login }}.
                 </x-srdd.success>
             @endauth
         </x-srdd.title-box>

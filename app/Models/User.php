@@ -50,6 +50,14 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * Return true if this user has admin privs
+     */
+    public function isAdmin() {
+        // for now, just return yes
+        return true;
+    }
+
     /*
      * get any events that are taught by this user
      */
