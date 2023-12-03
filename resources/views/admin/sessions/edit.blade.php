@@ -19,7 +19,7 @@
 @extends('template.app')
 
 @section('content')
-<x-global.nav-admin/>
+<x-srdd.nav-admin/>
 <div class="container">
     <x-srdd.title-box :title="__('Editing Session #' . $session->id)">
         <form method="POST" action="{{ route('sessions.update', $session) }}">

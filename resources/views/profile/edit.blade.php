@@ -26,18 +26,18 @@ $return_status = session('status');
     </x-srdd.notice>
     @endif
 @endisset
-<x-srdd.title-box :title="__('Preferences')" :state="1">
-    <div class="m-2 p-4 bg-slate-200">
+<x-srdd.title-box :title="__('Preferences')" :state="0">
+    <div class="m-2 p-4 bg-slate-200 rounded-sm">
         Stuff go here
     </div>
 </x-srdd.title-box>
 <x-srdd.title-box :title="__('Update Account')" :state="0">
-    <div class="m-2 p-4 bg-slate-200">
+    <div class="m-2 p-4 bg-slate-200 rounded-sm">
         @include('profile.partials.update-account')
     </div>
 </x-srdd.title-box>
 <x-srdd.title-box :title="__('Reset Password')" :state="1">
-    <div class="m-2 p-4 bg-slate-200">
+    <div class="m-2 p-4 bg-slate-200 rounded-sm">
         @include('profile.partials.reset-password')
     </div>
 </x-srdd.title-box>

@@ -15,7 +15,7 @@
 @extends('template.app')
 
 @section('content')
-<x-global.nav-admin/>
+<x-srdd.nav-admin/>
 @isset($slot) {{-- dialog for validating an slot deletion --}}
 <x-srdd.warning :title="__('Verify Deletion')">
     <b>Warning!</b> Are you sure that you want to delete Time Slot # {{ $slot->id }} "{{ $slot->title }}"?

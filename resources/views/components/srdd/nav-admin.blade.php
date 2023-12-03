@@ -1,6 +1,3 @@
-{{--
-  -- Sub-navigation bar for admin configurations 
---}}
 <?php
     /*
      * Navigation sub-tabs for the SRDD parts administration/configuration
@@ -14,26 +11,38 @@
 <x-global.toolbar :target="__('/admin')" :icon="__('bi-gear')">
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'tracks') !== false )?$m_text_sel:$m_text_def }}" 
-                href="{{ route('tracks.index') }}">{{__('Tracks')}}</a>
+                href="{{ route('tracks.index') }}">
+                <i class="bi bi-pencil-square"></i>
+                {{__('Tracks')}}</a>
         </li>
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'venues') !== false )?$m_text_sel:$m_text_def }}" 
-                href="{{ route('venues.index') }}">{{__('Venues')}}</a>
+                href="{{ route('venues.index') }}">
+                <i class="bi bi-pencil-square"></i>
+                {{__('Venues')}}</a>
         </li>
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'slots') !== false )?$m_text_sel:$m_text_def }}" 
-                href="{{ route('slots.index') }}">{{__('Slots')}}</a>
+                href="{{ route('slots.index') }}">
+                <i class="bi bi-pencil-square"></i>
+                {{__('Slots')}}</a>
         </li>
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'events') !== false )?$m_text_sel:$m_text_def }}" 
-                href="{{ route('events.index') }}">{{__('Events')}}</a>
+                href="{{ route('events.index') }}">
+                <i class="bi bi-pencil-square"></i>
+                {{__('Events')}}</a>
         </li>
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'sessions') !== false )?$m_text_sel:$m_text_def }}" 
-                href="{{ route('sessions.index') }}">{{__('Sessions')}}</a>
+                href="{{ route('sessions.index') }}">
+                <i class="bi bi-pencil-square"></i>
+                {{__('Sessions')}}</a>
         </li>
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'users') !== false )?$m_text_sel:$m_text_def }}" 
-                href="#">{{__('Users')}}</a>
+                href="#">
+                <i class="bi bi-pencil-square"></i>
+                {{__('Users')}}</a>
         </li>
 </x-global.toolbar>

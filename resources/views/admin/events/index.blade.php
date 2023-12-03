@@ -22,7 +22,7 @@
 
 @extends('template.app')
 @section('content')
-<x-global.nav-admin/>
+<x-srdd.nav-admin/>
 @isset($event) {{-- dialog for validating an event deletion --}}
 <x-srdd.warning :title="__('Verify Deletion')">
     <b>Warning!</b> Are you sure that you want to delete Event # {{ $event->id }} "{{ $event->title }}"?

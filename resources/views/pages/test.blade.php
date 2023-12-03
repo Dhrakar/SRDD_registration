@@ -1,7 +1,7 @@
 @extends('template.app')
 @section('content')
 <div class="container h-view w-view">
-    <x-global.nav-admin/>
+    <x-srdd.nav-admin/>
     <x-srdd.callout>
         Test of the Callout widget ... 
     </x-srdd.callout>

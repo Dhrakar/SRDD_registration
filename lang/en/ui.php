@@ -20,7 +20,7 @@ return [
            'help' => 'Application Help',
            'home' => 'Home',
             'lib' => 'Included Packages',
-          'login' => 'Please Login',
+          'login' => 'Please Login or Register',
     ],
     'link' => [
        'register' => 'Create New Non-UA Account',

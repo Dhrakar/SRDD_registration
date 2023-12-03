@@ -16,7 +16,7 @@
 @extends('template.app')
 
 @section('content')
-<x-global.nav-admin/>
+<x-srdd.nav-admin/>
 <div class="container w-full">
 @isset($track) {{-- dialog for validating an track deletion --}}
 <x-srdd.warning :title="__('Verify Deletion')">

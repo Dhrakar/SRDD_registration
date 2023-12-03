@@ -17,7 +17,7 @@
 @extends('template.app')
 
 @section('content')
-<x-global.nav-admin/>
+<x-srdd.nav-admin/>
 @isset($venue) {{-- dialog for validating an venue deletion --}}
 <x-srdd.warning :title="__('Verify Deletion')">
     <b>Warning!</b> Are you sure that you want to delete Venue # {{ $venue->id }} "{{ $venue->location }}"?

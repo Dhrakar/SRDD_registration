@@ -15,7 +15,7 @@
 @extends('template.app')
 
 @section('content')
-<x-global.nav-admin/>
+<x-srdd.nav-admin/>
 <div class="container">
     <x-srdd.title-box :title="__('Editing Event #' . $event->id)">
         <form method="POST" action="{{ route('events.update', $event) }}">

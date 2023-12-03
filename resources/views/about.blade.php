@@ -23,6 +23,7 @@
 
 @section('content')
 <div class="container w-full">
+    <x-global.toolbar/>
     <x-srdd.callout :title="__('SRDD Registration Tool')">
         <em>Staff Recognition &amp; Development Day</em> is a time for us to recognize and thank the hard work done by UAF staff throughout the year.
 	    It is also an opportunity to celebrate some longevity milestones for our staff.  Lastly, it is a day for staff to be able
