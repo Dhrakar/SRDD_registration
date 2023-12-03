@@ -99,6 +99,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/sessions/{session}/edit', [SessionController::class, 'edit'])->name('sessions.edit');
     Route::patch('/admin/sessions/{session}', [SessionController::class, 'update'])->name('sessions.update');
     Route::delete('/admin/sessions/{session}/destroy', [SessionController::class, 'destroy'])->name('sessions.destroy');
+    // users
+    Route::get('/admin/sessions', [SessionController::class, 'index'])->name('sessions.index');
+    Route::post('/admin/sessions/store', [SessionController::class, 'store'])->name('sessions.store');
+    Route::get('/admin/sessions/{session}/edit', [SessionController::class, 'edit'])->name('sessions.edit');
+    Route::patch('/admin/sessions/{session}', [SessionController::class, 'update'])->name('sessions.update');
+    Route::delete('/admin/sessions/{session}/destroy', [SessionController::class, 'destroy'])->name('sessions.destroy');
 });
 
 

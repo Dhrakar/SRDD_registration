@@ -31,3 +31,8 @@
   the destroy method or cancels back (it also unsets the CONFIRMED)
 
 -- conversion of srdd date const to a date field: date("Y-m-d", strtotime(config('constants.srdd_date')));
+
+- 2 dec
+ -- added listeners for login/Logout so that the login count and last login can be updated
+ -- created new helpers.php file for custom functions (and added to composer.json)
+ 
