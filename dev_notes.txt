@@ -35,4 +35,5 @@
 - 2 dec
  -- added listeners for login/Logout so that the login count and last login can be updated
  -- created new helpers.php file for custom functions (and added to composer.json)
- 
+ -- rearranged the navigation and removed the user drop-down menu.  Also created a new nav-home page for those items
+ like printing, etc that may need sub pages from home.

@@ -54,12 +54,13 @@ class CalendarController extends Controller
                  .  "classNames: \"" . $this->colors[$session->event->track->color] . "\", "
                  .  "textColor: \"" . (($session->is_closed)?'#b91c1c':'#334155') . "\", " 
                  .  "borderColor: \"" . '#c084fc' . "\", "
+                 .  "url: \"" . route('schedule.add', $session) . "\", "
                  . "}, ";
         }
         $this->out .= "], ";
 
         // this returns the views/schedule/index.blade.php directly without the SchedulerController::index()
-        return view('schedule.index', [
+        return view('schedule.main.index', [
             'events' => $this->out, 
             ]
         );

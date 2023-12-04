@@ -8,6 +8,7 @@ $return_status = session('status');
 
 @section('content')
 <div class="container">
+<x-srdd.nav-home/>
 <x-srdd.callout :title="__('User Account Profile')">
     <p>Here is where you can edit your preferences, update your account or delete it.</P>
 </x-srdd.callout>

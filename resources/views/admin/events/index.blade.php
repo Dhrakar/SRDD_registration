@@ -194,13 +194,7 @@
                 <div class="table-row col-span-1">{{ $event->year }}</div>
                 <div class="table-row col-span-2">{{ $event->title }}</div>
                 <div class="table-row col-span-3">{{ $event->description }}</div>
-                <div class="table-row col-span-1 text-2xl">
-                    @if ($event->needs_reg == 1)
-                    <i class="bi bi-check-circle text-green-500"></i>
-                    @else
-                    <i class="bi bi-circle text-red-500"></i>
-                    @endif
-                </div>
+                <div class="table-row col-span-1">{{ ($event->needs_reg == 1)?'YES':'NO' }}</div>
                 <div class="table-row col-span-1">
                     @if ($event->year < config('constants.srdd_year') )  {{-- don't allow edits/deletion of historical events --}}
                         <i class="text-slate-400 bi bi-pencil-square mx-2"></i>

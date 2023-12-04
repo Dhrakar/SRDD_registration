@@ -9,16 +9,21 @@
     <div class="max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                {{-- Menu Icon --}}
+                {{-- Home Icon/Link --}}
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}"
                        class="inline-flex items-center px-1 pt-1
-                         {{ (url()->current() == route('home'))?$m_text_sel:$m_text_def }}"
+                        {{ 
+                            (   url()->current() == env('APP_URL')
+                             || url()->current() == route('home') 
+                             || url()->current() == route('profile.edit')
+                            )?$m_text_sel:$m_text_def 
+                        }}"
                     >
-                        <i class="bi {{ config('constants.icon.home') }} text-xl"></i>
+                        <i class="bi {{ config('constants.icon.home') }} mx-2"></i>
+                        {{ __('ui.menu.home')}}
                     </a>
                 </div>
-                {{-- Links --}}
                 @auth
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <a href="{{ route('calendar') }}" 

@@ -4,18 +4,24 @@
      */
 
      use Illuminate\Support\Js;
+     use App\Http\Controllers\CalendarController;
 
     // format the srdd date for use with teh DATE field
     $srdd_date = date("Y-m-d", strtotime(config('constants.srdd_date'))); 
-
-    $str = "Chancellor&#039;s Presentation"; 
-    //dd(htmlspecialchars_decode($str, ENT_QUOTES));
  ?>
 @extends('template.app')
 
 @section('content')
 <div class="container">
-    <x-global.toolbar />
+    <x-global.toolbar >
+        <li class="mx-6">
+            <a  class="text-md text-slate-100 hover:text-teal-200"" 
+                href="{{route('schedule')}}">
+                <i class="bi bi-eyeglasses"></i>
+                {{__('Review')}}
+            </a>
+        </li>
+    </x-global.toolbar>
     <x-srdd.callout :title="__('Event Calendar')">
         This is the main calendar of events for this year's SRDD.  Events that are outlined in green are automatically
         added when you sign up for the day.
@@ -28,27 +34,23 @@
         var calendarEl = document.getElementById('calendar');
         var calendar = new Calendar(calendarEl, {
             customButtons: {
-                allEventsButton: {
-                    text: 'All Events',
+                srddButton: {
+                    text: 'Return to SRDD',
                     click: function() {
-                    }
-                },
-                myEventsButton: {
-                    text: 'My Events',
-                    click: function() {
+                        calendar.gotoDate('{{ $srdd_date }}');
                     }
                 }
             },
             plugins: [timeGridPlugin],
             headerToolbar: {
-                left: 'allEventsButton myEventsButton',
-                center: 'title',
-                right:  '',
+                left: 'title',
+                center: '',
+                right:  'prev srddButton next',
             },
             initialView: 'timeGridDay',
             initialDate: '{{ $srdd_date }}',
-            slotMinTime: '8:00:00',
-            slotMaxTime: '18:00:00',
+            slotMinTime: '6:00:00',
+            slotMaxTime: '21:00:00',
             {!! $events !!}
         });
         calendar.render();

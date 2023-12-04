@@ -51,12 +51,19 @@ Route::middleware('auth')->group(function () {
     /* admin */
     Route::get('/admin', function () { return view('admin.index'); })->name('admin.index');
 
-    /* main calendar */
-    // index
+    /**
+     * Schedules
+     */
+    // Main calendar index
     Route::get('/calendar', CalendarController::class)->name('calendar');
+    // User calendar index
+    Route::get('/schedule', [SchedulerController::class, 'index'])->name('schedule');
     // add sessions
+    Route::get('/schedule/{session}/add', [SchedulerController::class, 'store'])->name('schedule.add');
     // delete sessions
-    // get schedule
+    Route::delete('/schedule/{schedule}/destroy', [SchedulerController::class, 'destroy'])->name('schedule.destroy');
+    // create initial schedule
+    Route::get('/schedule/init', [SchedulerController::class, 'init'])->name('schedule.init');
 
     /* Reports */
     Route::get('/reports', function () { return view('reports.index'); })->name('reports.index');
@@ -100,11 +107,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/admin/sessions/{session}', [SessionController::class, 'update'])->name('sessions.update');
     Route::delete('/admin/sessions/{session}/destroy', [SessionController::class, 'destroy'])->name('sessions.destroy');
     // users
-    Route::get('/admin/sessions', [SessionController::class, 'index'])->name('sessions.index');
-    Route::post('/admin/sessions/store', [SessionController::class, 'store'])->name('sessions.store');
-    Route::get('/admin/sessions/{session}/edit', [SessionController::class, 'edit'])->name('sessions.edit');
-    Route::patch('/admin/sessions/{session}', [SessionController::class, 'update'])->name('sessions.update');
-    Route::delete('/admin/sessions/{session}/destroy', [SessionController::class, 'destroy'])->name('sessions.destroy');
 });
 
 
