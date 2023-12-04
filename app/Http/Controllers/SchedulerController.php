@@ -23,63 +23,49 @@ class SchedulerController extends Controller
     public function index(): View
     { 
         $user = auth()->user();
-        $srdd_date= date("Y-m-d", strtotime(config('constants.srdd_date')));
-        $my_events = new Collection();
-
-        // Events string for pseudo-JSON
-        $out = "events: [ "; 
-
-        // are there any events to add for this user?
-        if($user->schedules->count() > 0) {
-            foreach($user->schedules as $schedule) {
-                $my_events->push([
-                    'id' => $schedule->id,
-            'start_time' => ($schedule->session->slot->id == 1)?$schedule->session->start_time:$schedule->session->slot->start_time,
-              'end_time' => ($schedule->session->slot->id == 1)?$schedule->session->end_time:$schedule->session->slot->end_time,
-              'location' => $schedule->session->venue->location,
-            'instructor' => $schedule->session->event->instructor->name ?? ' --- ',
-                 'title' => $schedule->session->event->title,
-           'description' => $schedule->session->event->description,
-                 'color' => $schedule->session->event->track->color,
-                ]);
-            };
-                // insert dummy row so that the form will actuallly render for the list of schedules when there is only 1 schedule
-                // since this starts at 1 AM, it will always sort to the top.  The index file hides all divs with id #0
-                // it is not associated with any user, so after the last 'legit' row is deleted, the index file will show no sessions
-                $my_events->push([
-                    'id' => 0,
-            'start_time' => '01:00:00',
-              'end_time' => '12:00:00',
-              'location' => '-',
-            'instructor' => '-',
-                 'title' => '-',
-           'description' => '-',
-                 'color' => 1,
-                ]);
-
-            // now that we have good start times, iterate and sort by start times
-            foreach($my_events as $event) {
-                 // add to event array     
-                 $out .= "{ "           
-                 .  "id: \""    . $event['id'] . "\", "
-                 .  "title: \"" . $event['title'] ."\", "
-                 .  "start: \"" . $srdd_date . 'T' . $event['start_time'] . "\", "
-                 .  "end: \""   . $srdd_date . 'T' . $event['end_time'] . "\", "
-                 . "}, ";
-
-                 
-            }
-        }
-
-        $out .= "], ";
+        
+        // build a collection of events for this user
+        $my_events = $this->_get_schedule($user);
 
         return view('schedule.user.index', [
-            'events' => $out, 
             'event_collection' => $my_events,
             ]
         );
     }
 
+    /**
+     * Returns the events for this user in a JSON format
+     */
+    public function print(): View
+    {
+        $user = auth()->user();
+        $srdd_date= date("Y-m-d", strtotime(config('constants.srdd_date')));
+        
+        // build a collection of events for this user
+        $my_events = $this->_get_schedule($user);
+
+        // Events string for pseudo-JSON
+        $out = "events: [ "; 
+        // now that we have good start times, iterate and sort by start times
+        foreach($my_events as $event) {
+            if($event['id'] != 0) { // skip the dummy row
+                // add to event array     
+                $out .= "{ "           
+                .  "id: \""    . $event['id'] . "\", "
+                .  "title: \"" . $event['title'] ."\", "
+                .  "start: \"" . $srdd_date . 'T' . $event['start_time'] . "\", "
+                .  "end: \""   . $srdd_date . 'T' . $event['end_time'] . "\", "
+                . "}, ";
+            }
+             
+        }
+        $out .= "], ";
+
+        return view('schedule.user.print', [
+            'events' => $out,
+            ]
+        );
+    }
     /**
      * Validates and adds sessions to a schedule for the logged in user
      */
@@ -121,5 +107,45 @@ class SchedulerController extends Controller
         $schedule->delete();
 
         return redirect(route('schedule'));
+    }
+
+    /**
+     * Helper function to get a collection of the users scheduled sessions
+     */
+    protected function _get_schedule(User $user): Collection
+    {
+        // create a new collection
+        $events = new Collection();
+
+        // are there any events to add for this user?
+        if($user->schedules->count() > 0) {
+            foreach($user->schedules as $schedule) {
+                $events->push([
+                    'id' => $schedule->id,
+            'start_time' => ($schedule->session->slot->id == 1)?$schedule->session->start_time:$schedule->session->slot->start_time,
+              'end_time' => ($schedule->session->slot->id == 1)?$schedule->session->end_time:$schedule->session->slot->end_time,
+              'location' => $schedule->session->venue->location,
+            'instructor' => $schedule->session->event->instructor->name ?? ' --- ',
+                 'title' => $schedule->session->event->title,
+           'description' => $schedule->session->event->description,
+                 'color' => $schedule->session->event->track->color,
+                ]);
+            };
+                // insert dummy row so that the form will actuallly render for the list of schedules when there is only 1 schedule
+                // since this starts at 1 AM, it will always sort to the top.  The index file hides all divs with id #0
+                // it is not associated with any user, so after the last 'legit' row is deleted, the index file will show no sessions
+                $events->push([
+                    'id' => 0,
+            'start_time' => '01:00:00',
+              'end_time' => '12:00:00',
+              'location' => '-',
+            'instructor' => '-',
+                 'title' => '-',
+           'description' => '-',
+                 'color' => 1,
+                ]);
+        }
+
+        return $events;
     }
 }

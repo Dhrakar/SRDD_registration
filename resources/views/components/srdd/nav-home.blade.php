@@ -25,14 +25,15 @@
         </a>
     </li>
     <li class="mx-6">
-        <a  class="text-md {{ (strpos(url()->current(), 'schedule') !== false)?$m_text_sel:$m_text_def }}" 
+        <a  class="text-md {{ (url()->current() == route('schedule'))?$m_text_sel:$m_text_def }}" 
             href="{{route('schedule')}}">
             <i class="bi bi-eyeglasses"></i>
             {{__('Review')}}
         </a>
     </li>
     <li class="mx-6">
-        <a  class="text-md text-slate-100 hover:text-teal-200" href="#">
+        <a  class="text-md {{ (strpos(url()->current(), 'print') !== false)?$m_text_sel:$m_text_def }}" 
+            href="{{route('schedule.print')}}">
             <i class="bi bi-printer"></i>
             {{__('Print')}}
         </a>

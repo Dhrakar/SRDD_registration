@@ -56,8 +56,10 @@ Route::middleware('auth')->group(function () {
      */
     // Main calendar index
     Route::get('/calendar', CalendarController::class)->name('calendar');
-    // User calendar index
+    // User calendar table
     Route::get('/schedule', [SchedulerController::class, 'index'])->name('schedule');
+    // User calendar print
+    Route::get('/schedule/print', [SchedulerController::class, 'print'])->name('schedule.print');
     // add sessions
     Route::get('/schedule/{session}/add', [SchedulerController::class, 'store'])->name('schedule.add');
     // delete sessions
