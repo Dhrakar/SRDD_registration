@@ -125,7 +125,7 @@
                     </select>
                 </div>
                 <div class="col-span-1 text-xs text-red-600 italic pl-2">
-                     Setting this also automatically adds these sessions to new schedules.
+                     Events that don't need registration will be added as a 'default' set for new schedules.
                 </div>
                 <div class="col-span-1">&nbsp;</div>
                 <a class="inline-flex items-center mt-4 mx-2 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150"

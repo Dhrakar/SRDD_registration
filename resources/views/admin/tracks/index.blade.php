@@ -61,7 +61,7 @@ the types of event sessions that they are interested in.  Events that belong to 
 This way, events like the Longevity Awards are always included.
   </x-srdd.callout>
   {{-- Create a new Track --}}
-  <x-srdd.title-box :title="__('Add a New Track')"  :state="0">
+  <x-srdd.title-box :title="__('Add a New Track')"  :state="1">
     <form method="POST" action="{{ route('tracks.store') }}">
       @csrf
       <x-input-error :messages="$errors->get('title')" class="mt-2" />
@@ -129,13 +129,13 @@ This way, events like the Longevity Awards are always included.
       <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
           <div class="px-2 table-header col-span-1">Id</div>
           <div class="px-2 table-header col-span-3">Title</div>
-          <div class="px-2 table-header col-span-4">Description</div>
+          <div class="px-2 table-header col-span-5">Description</div>
           <div class="px-2 table-header col-span-2">Color</div>
-          <div class="px-2 table-header col-span-2">Edit/Delete</div>
+          <div class="px-2 table-header col-span-1">Edit/Delete</div>
           @foreach(Track::all() as $track) {{-- iterate thru the defined tracks --}}
               <div class="table-row col-span-1">{{ $track->id }}</div>
               <div class="table-row col-span-3">{{ $track->title }}</div>
-              <div class="table-row col-span-4">{{ $track->description}}</div>
+              <div class="table-row col-span-5">{{ $track->description}}</div>
               <div class="table-row col-span-2">
                   @php 
                       $bgc = config('constants.colors.tracks.' . $track->color);
@@ -143,8 +143,9 @@ This way, events like the Longevity Awards are always included.
                       echo "<span class=\"block w-4/5 m-2 px-4 rounded-md $bgc\">$cn</span>";
                   @endphp
               </div>
-              <div class="table-row col-span-2">
+              <div class="table-row col-span-1">
                   @if($track->id != 1 ) {{-- don't allow track 1 to be edited or deleted --}}
+                  <div class="flex justify-center">
                     <a href="{{ route('tracks.edit', $track) }}">
                         <i class="bi bi-pencil-square mx-2"></i>
                     </a>
@@ -154,6 +155,7 @@ This way, events like the Longevity Awards are always included.
                             <i class="text-red-500 bi bi-trash mx-2"></i>
                         </button>
                     </form>
+                  </div>
                   @else
                     <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
                     <i class="text-slate-400 bi bi-trash mx-2"></i>

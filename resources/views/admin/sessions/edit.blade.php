@@ -161,7 +161,11 @@
                      Used to lock session registrations once SRDD is done
                 </div>
                 <div class="col-span-1">&nbsp;</div>
-                <x-primary-button class="col-span-1 mt-4 mx-2 justify-center">
+                <a class="inline-flex items-center mt-4 mx-2 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150"
+                    href="{{ route('sessions.index') }}">           
+                    {{__('ui.button.cancel') }}
+                </a>
+                <x-primary-button class="col-span-1 mt-4 mx-2">
                     {{ __('ui.button.update') }}
                 </x-primary-button>
             </div>

@@ -29,9 +29,6 @@ class CalendarController extends Controller
 
         // build out teh array of currently defined track colors
         $this->colors = config('constants.colors.tracks');
-
-        // get all the currently defined sessions for this SRDD
-        $this->sessions = Session::where('date_held', $this->srdd_date)->get();
     }
 
     /**
@@ -39,6 +36,10 @@ class CalendarController extends Controller
      */
     public function __invoke(Request $request)
     {
+
+        // get all the currently defined sessions for this SRDD
+        $this->sessions = Session::where('date_held', $this->srdd_date)->get();
+
         // Events string for pseudo-JSON
         $this->out = "events: [ "; 
 
@@ -58,7 +59,7 @@ class CalendarController extends Controller
                  . "}, ";
         }
         $this->out .= "], ";
-
+        
         // this returns the views/schedule/index.blade.php directly without the SchedulerController::index()
         return view('schedule.main.index', [
             'events' => $this->out, 

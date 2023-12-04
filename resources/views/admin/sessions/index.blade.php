@@ -33,11 +33,12 @@
     <b>Warning!</b> Are you sure that you want to delete Session # {{ $session->id }}?
     <div class="pl-4 max-h-32">
         @if ($session->schedules->count() > 0) {{-- Any associated user schedules? --}}
+        
             This Session has been added to these {{ $session->schedules->count() }} User Schedules:<br/>
             @foreach ($session->schedules->all() as $schedule )
                 <span class="pl-4">
                     <i class="bi bi-dot"></i>
-                    ID: {{ $schedule->id }} &dash; Event: {{ $schedule->event->title }} , User: {{ $schedule->user->name }}
+                    ID: {{ $schedule->id }} &dash; Event: {{ $schedule->session->event->title }} , User: {{ $schedule->user->name }}
                     <br/>
                 </span>
             @endforeach
@@ -213,6 +214,16 @@
             <div class="px-2 table-header col-span-1">End Time</div>
             <div class="px-2 table-header col-span-1">Open?</div>
             <div class="px-2 table-header col-span-1">Edit/Delete</div>
+            {{-- create a dummy row since the first row returns null --}}
+            <div class="px-2 hidden col-span-1">-</div>
+            <div class="px-2 hidden col-span-2">-</div>
+            <div class="px-2 hidden col-span-2">-</div>
+            <div class="px-2 hidden col-span-1">-</div>
+            <div class="px-2 hidden col-span-2">-</div>
+            <div class="px-2 hidden col-span-1">-</div>
+            <div class="px-2 hidden col-span-1">-</div>
+            <div class="px-2 hidden col-span-1">-</div>
+            <div class="px-2 hidden col-span-1">-</div>
             @foreach(Session::all() as $session) {{-- iterate thru the defined sessions --}}
                 <div class="table-row col-span-1">{{ $session->id }}</div>
                 <div class="table-row col-span-2">{{ $session->event->title }}</div>
