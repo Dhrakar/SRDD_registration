@@ -32,7 +32,7 @@
                     href="{{ route('logout') }}"
                 >
                     <i class="bi bi-box-arrow-right"></i>
-                    {{ __('Log Out') }}
+                    {{ __('ui.menu.nav-home.logout') }}
                 </a>
         </li>
         @endauth

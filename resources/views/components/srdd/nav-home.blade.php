@@ -21,27 +21,27 @@
         <a  class="text-md {{ (strpos(url()->current(), 'profile') !== false)?$m_text_sel:$m_text_def }}" 
             href="{{route('profile.edit')}}">
             <i class="bi bi-person-gear "></i>
-            {{__('Profile')}}
+            {{__('ui.menu.nav-home.profile')}}
         </a>
     </li>
     <li class="mx-6">
         <a  class="text-md {{ (url()->current() == route('schedule'))?$m_text_sel:$m_text_def }}" 
             href="{{route('schedule')}}">
             <i class="bi bi-eyeglasses"></i>
-            {{__('Review')}}
+            {{__('ui.menu.nav-home.review')}}
         </a>
     </li>
     <li class="mx-6">
         <a  class="text-md {{ (strpos(url()->current(), 'print') !== false)?$m_text_sel:$m_text_def }}" 
             href="{{route('schedule.print')}}">
             <i class="bi bi-printer"></i>
-            {{__('Print')}}
+            {{__('ui.menu.nav-home.print')}}
         </a>
     </li>
     <li class="mx-6">
         <a  class="text-md text-slate-100 hover:text-teal-200" href="#">
             <i class="bi bi-envelope-at"></i>
-            {{__('Email')}}
+            {{__('ui.menu.nav-home.email')}}
         </a>
     </li>
 @endauth

@@ -18,7 +18,7 @@
             <a  class="text-md text-slate-100 hover:text-teal-200"" 
                 href="{{route('schedule')}}">
                 <i class="bi bi-eyeglasses"></i>
-                {{__('Review')}}
+                {{__('ui.menu.nav-home.review')}}
             </a>
         </li>
     </x-global.toolbar>

@@ -12,13 +12,28 @@ return [
     */
 
     'menu' => [
+           'home' => 'Home',
           'about' => 'About SRDD',
           'admin' => 'Admin/Config',
        'schedule' => 'Add Sessions',
         'reports' => 'Reports',
          'define' => 'Field Definitions',
            'help' => 'Application Help',
-           'home' => 'Home',
+       'nav-home' => [
+              'profile' => 'My Account',
+               'review' => 'My Schedule',
+                'print' => 'Print',
+                'email' => 'Email',
+               'logout' => 'Log Out',
+           ],
+      'nav-admin' => [
+                'tracks' =>'Tracks',
+                'venues' => 'Locations',
+                'slots' => 'Time Slots',
+                'events' => 'Events',
+                'sessions' => 'Sessions',
+                'users' => 'User Accounts',
+      ],
             'lib' => 'Included Packages',
           'login' => 'Please Login or Register',
     ],
