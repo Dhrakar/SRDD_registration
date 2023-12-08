@@ -10,11 +10,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
-<!-- CSS for flatpickr --> 
+<!-- CSS for flatpickr -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 <!-- compiled css and js -->
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-<!-- set the base URL for javascript. Uses a 'var' to be global -->
-<script>var baseurl = '{{ env('APP_URL'); }}';</script>

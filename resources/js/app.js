@@ -1,15 +1,13 @@
+// pull in the libraries
 import './bootstrap';
 
-import Alpine from 'alpinejs';
+/**
+ * JS setup for the SRDD application
+ */
+export var my_app = {
 
-window.Alpine = Alpine;
+    // base URL address
+    baseurl: '{{ env("APP_URL"); }}',
+    // main date string
 
-Alpine.start();
-
-import { Calendar } from '@fullcalendar/core';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
-
-window.Calendar = Calendar;
-window.timeGridPlugin = timeGridPlugin;
-window.listPlugin = listPlugin;
+};

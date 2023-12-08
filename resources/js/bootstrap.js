@@ -1,4 +1,25 @@
 /**
+ *  Import the various JS libraries needed
+ */
+
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+Alpine.start();
+
+import { Calendar } from '@fullcalendar/core';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+
+window.Calendar = Calendar;
+window.timeGridPlugin = timeGridPlugin;
+window.listPlugin = listPlugin;
+
+import flatpickr from 'flatpickr';
+window.flatpickr = flatpickr;
+
+/**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
