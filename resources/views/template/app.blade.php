@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+      class="relative min-h-full pb-24"
+>
     <head>
 
         <title>{{ config('app.name', 'Application') }}</title>
@@ -23,7 +25,7 @@
         </main>
 
         {{-- page footer --}}
-        <footer class="fixed bottom-0 left-0 w-full bg-slate-50 dark:bg-slate-900">
+        <footer class="fixed bottom-0 left-0 w-full h-28 bg-slate-50 dark:bg-slate-900 overflow-auto">
             <x-global.footer/>
         </footer>
 

@@ -1,3 +1,5 @@
-<div class="text-slate-700 dark:text-slate-50 text-xs leading-5 mt-4">
 
+<div class="border-2 border-sky-600">
+    <span class="text-xs text-std bg-slate-100 dark:bg-slate-900">Laravel Session Debug</span></br>
+        {{ dd( session()->all() ) }}
 </div>
