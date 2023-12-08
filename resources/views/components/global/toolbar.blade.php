@@ -34,6 +34,7 @@
                     <i class="bi bi-box-arrow-right"></i>
                     {{ __('ui.menu.nav-home.logout') }}
                 </a>
+            </form>
         </li>
         @endauth
     </ul>
