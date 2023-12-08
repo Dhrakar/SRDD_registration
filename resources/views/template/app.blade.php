@@ -28,7 +28,5 @@
         <footer class="fixed bottom-0 left-0 w-full h-28 bg-slate-50 dark:bg-slate-900 overflow-auto">
             <x-global.footer/>
         </footer>
-
-        <x-global.scripts/>
     </body>
 </html>
