@@ -131,19 +131,6 @@ class SchedulerController extends Controller
                  'color' => $schedule->session->event->track->color,
                 ]);
             };
-                // insert dummy row so that the form will actuallly render for the list of schedules when there is only 1 schedule
-                // since this starts at 1 AM, it will always sort to the top.  The index file hides all divs with id #0
-                // it is not associated with any user, so after the last 'legit' row is deleted, the index file will show no sessions
-                $events->push([
-                    'id' => 0,
-            'start_time' => '01:00:00',
-              'end_time' => '12:00:00',
-              'location' => '-',
-            'instructor' => '-',
-                 'title' => '-',
-           'description' => '-',
-                 'color' => 1,
-                ]);
         }
 
         return $events;
