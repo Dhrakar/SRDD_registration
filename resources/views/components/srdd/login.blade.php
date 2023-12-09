@@ -57,7 +57,7 @@
 
 
 <!-- script to process the UA auth -->
-{{--
+<!--
 -- <script>
 --     function handleCredentialResponse(response) {
 --       // get the JWT credential blob
@@ -81,4 +81,4 @@
 --       );
 --     }
 -- </script>
---}}
+-->

@@ -22,8 +22,7 @@ return [
        'nav-home' => [
               'profile' => 'My Account',
                'review' => 'My Schedule',
-                'print' => 'Print',
-                'email' => 'Email',
+                'print' => 'Print or Email',
                'logout' => 'Log Out',
            ],
       'nav-admin' => [
