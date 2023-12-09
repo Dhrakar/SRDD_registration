@@ -2,6 +2,10 @@
     /*
      *  Administrative access landing page
      */
+    use Illuminate\Support\Carbon;
+
+    // reformat the SRDD date
+    $_date = Carbon::parse(env('SRD_DAY', now()))->toFormattedDateString();
 
      $min = App\Models\Venue::all()->keys();
 
@@ -20,7 +24,7 @@
     </x-srdd.calloutx>
     <x-srdd.title-box :title="__('Current Application Settings')">
         <div class="p-4 text-std">
-        Event Date: {{config('constants.srdd_date')}}
+        Event Date: {{ $_date }}
         </div>
     </x-srdd.title-box>
 </div>

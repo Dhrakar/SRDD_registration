@@ -25,7 +25,7 @@ class CalendarController extends Controller
     public function __construct() {
 
         // build sql version of the SRDD date constant
-        $this->srdd_date= date("Y-m-d", strtotime(config('constants.srdd_date')));
+        $this->srdd_date = config('constants.db_srdd_date');
 
         // build out teh array of currently defined track colors
         $this->colors = config('constants.colors.tracks');

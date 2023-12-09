@@ -13,8 +13,8 @@
      $venues = Venue::all()->sortBy('location');
       $slots = Slot::all()->sortBy('start_time');
 
-    // format the srdd date for use with teh DATE field
-    $srdd_date = date("Y-m-d", strtotime(config('constants.srdd_date'))); 
+    // format the srdd date for use with the DATE field
+    $srdd_date = config('constants.db_srdd_date'); 
 ?>
 @extends('template.app')
 
@@ -176,7 +176,7 @@
         window.onload = function () {
             flatpickr("#date_held", {
                 enableTime: false,
-                defaultDate: Date.parse('{{ config('constants.srdd_date') }}'),
+                defaultDate: Date.parse('{{ env("SRD_DAY", now()) }}'),
             });
             flatpickr("#start_time", {
                 enableTime: true,

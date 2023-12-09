@@ -1,9 +1,12 @@
-{{-- 
-  -- Standard Banner that clones the UAF Banner 
-  -- UAF Blue:   #236192
-  -- UAF Yellow: #FFC000
-  --}}
+ <?php
+    /**
+     *  Header file for getting a current-look UAF header block
+     */
+    use Illuminate\Support\Carbon;
 
+    // reformat the SRDD date for the header
+    $_date = Carbon::parse(env('SRD_DAY', now()))->toFormattedDateString();
+?>
 <div class="bg-[#236192] flex justify-between pt-1 pl-2">
     <div class="flex-none py-2">
         <a href="https://uaf.edu" title="UAF">
@@ -12,7 +15,7 @@
         </a>
     </div>
     <div class="inline-flex items-center mr-5 px-1 pt-1 text-md text-white">
-        Staff Recognition &amp; Development Day {{ config('constants.srdd_year') }}
+        Staff Recognition &amp; Development Day: {{ $_date }}
     </div>
 </div>
 <div class="w-screen h-1 bg-gradient-to-r from-cyan-200 to-[#FFC000]"></div>

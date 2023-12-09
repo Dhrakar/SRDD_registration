@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Carbon; // date object
+
 return [
 
     /*
@@ -10,9 +12,10 @@ return [
     | 
     */
     
+
     // date of SRDD
-    'srdd_date' => '10 April 2024',
-    'srdd_year' => 2024,
+    'db_srdd_date' => Carbon::parse(env("SRD_DAY", now()))->format('Y-m-d'),
+    'srdd_year' => Carbon::parse(env("SRD_DAY", now()))->format('Y'),
 
     // User authorizatio levels
     'auth_level' => [

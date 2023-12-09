@@ -6,13 +6,13 @@
      */
  
     use App\Models\Schedule;
-    use App\Models\User;
-    use Illuminate\Support\Collection;
+    use Illuminate\Support\Facades\Auth;
 
     // current user
     $user = Auth::user();
-    // format the srdd date for use with teh DATE field
-    $srdd_date = date("Y-m-d", strtotime(config('constants.srdd_date'))); 
+
+    // format the srdd date for use with the DATE field
+    $srdd_date = config('constants.db_srdd_date'); 
 
     // did we get a deletion request? Did the last one get deleted? 
     if( isset($_GET['CONFIRM']) && Schedule::all()->count() > 0) {

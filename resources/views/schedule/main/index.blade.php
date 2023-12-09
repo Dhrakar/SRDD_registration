@@ -7,7 +7,7 @@
      use App\Http\Controllers\CalendarController;
 
     // format the srdd date for use with teh DATE field
-    $srdd_date = date("Y-m-d", strtotime(config('constants.srdd_date'))); 
+    $srdd_date = config('constants.db_srdd_date'); 
  ?>
 @extends('template.app')
 

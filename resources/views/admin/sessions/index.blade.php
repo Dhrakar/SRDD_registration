@@ -14,7 +14,7 @@
       $slots = Slot::all()->sortBy('start_time');
 
     // format the srdd date for use with teh DATE field
-    $srdd_date = date("Y-m-d", strtotime(config('constants.srdd_date'))); 
+    $srdd_date = config('constants.db_srdd_date'); 
 
     // did we get a deletion request? 
     if( isset($_GET['CONFIRM']) ) {

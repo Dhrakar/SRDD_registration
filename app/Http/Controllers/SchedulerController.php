@@ -39,7 +39,7 @@ class SchedulerController extends Controller
     public function print(): View
     {
         $user = auth()->user();
-        $srdd_date= date("Y-m-d", strtotime(config('constants.srdd_date')));
+        $srdd_date = config('constants.db_srdd_date');
         
         // build a collection of events for this user
         $my_events = $this->_get_schedule($user);
