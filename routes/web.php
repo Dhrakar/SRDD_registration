@@ -6,6 +6,7 @@ use App\Http\Controllers\SlotController;
 use App\Http\Controllers\VenueController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CalendarController;  
 use App\Http\Controllers\SchedulerController; 
 use App\Http\Controllers\Auth\UALoginController;
@@ -109,6 +110,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/admin/sessions/{session}', [SessionController::class, 'update'])->name('sessions.update');
     Route::delete('/admin/sessions/{session}/destroy', [SessionController::class, 'destroy'])->name('sessions.destroy');
     // users
+    Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 });
 
 

@@ -41,7 +41,7 @@
         </li>
         <li class="mr-6">
             <a  class="{{ (strpos(url()->current(), 'users') !== false )?$m_text_sel:$m_text_def }}" 
-                href="#">
+                href="{{ route('users.index') }}">
                 <i class="bi bi-pencil-square"></i>
                 {{__('ui.menu.nav-admin.users')}}</a>
         </li>
