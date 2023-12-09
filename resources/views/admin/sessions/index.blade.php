@@ -9,7 +9,7 @@
     use App\Models\Session;
 
     // build collections for the dropdown selectors
-     $events = Event::where('year', 2024)->get()->sortBy('title');
+     $events = Event::where('year', config('constants.srdd_year'))->get()->sortBy('title');
      $venues = Venue::all()->sortBy('location');
       $slots = Slot::all()->sortBy('start_time');
 
@@ -89,7 +89,9 @@
 
                 {{-- pick a related Event (from just this year's events)--}}
                 <div class="col-span-1 table-header text-right pr-4">
-                    <label for="event_id">Event</label>
+                    <label for="event_id">
+                        {{ config('constants.srdd_year') }} Event
+                    </label>
                 </div>
                 <div class="col-span-4 border border-indigo-800">
                     <select id="event_id" name="event_id"  class="ml-1 mr-8">
@@ -98,10 +100,9 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-span-1 text-xs text-red-600 italic pl-2">
-                    Select the Event for this Session (note, events filtered to just those for
-                    the current year: {{ config('constants.srdd_year') }})
-                </div>
+                <x-srdd.row-comment class="col-span-1">
+                    Select the Event for this Session
+                </x-srdd.row-comment>
 
                 {{-- pick a related Venue --}}
                 <div class="col-span-1 table-header text-right pr-4">
@@ -114,9 +115,9 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-span-1 text-xs text-red-600 italic pl-2">
+                <x-srdd.row-comment class="col-span-1">
                     Select the location for this session
-                </div>
+                </x-srdd.row-comment>
 
                 {{-- Pick a time slot --}}
                 <div class="col-span-1 table-header text-right pr-4">
@@ -131,9 +132,9 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-span-1 text-xs text-red-600 italic pl-2">
+                <x-srdd.row-comment class="col-span-1">
                     Select the time slot (Set to Custom if you need to use the Session start/end times)
-                </div>
+                </x-srdd.row-comment>
     
                 {{-- set the date for this session --}}
                 <div class="col-span-1 table-header text-right pr-4">
@@ -148,9 +149,9 @@
                         width="10"
                     />
                 </div>
-                <div class="col-span-1 text-xs text-red-600 italic pl-2">
+                <x-srdd.row-comment class="col-span-1">
                     Defaults to current SRDD date.
-                </div>
+                </x-srdd.row-comment>
                 <div class="col-span-1 table-header text-right pr-4">
                   <label for="start_time">Starting Time</label>
                 </div>
@@ -162,9 +163,9 @@
                     maxlength="10"
                     width="10"/>
                 </div>
-                <div class="col-span-1 text-xs text-red-600 italic pl-2">
+                <x-srdd.row-comment class="col-span-1">
                   24hr, only used if Time Slot is 'Custom'
-                </div>
+                </x-srdd.row-comment>
                 <div class="col-span-1 table-header text-right pr-4">
                   <label for="end_time">Ending Time</label>
                 </div>
@@ -177,9 +178,9 @@
                         width="10"
                     />
                 </div>
-                <div class="col-span-1 text-xs text-red-600 italic pl-2">
+                <x-srdd.row-comment class="col-span-1">
                     24hr, only used if Time Slot is 'Custom'
-                </div>
+                </x-srdd.row-comment>
 
                 {{-- dropdown for closed session  --}}
                 <div class="col-span-1 table-header text-right pr-4">
@@ -191,9 +192,9 @@
                         <option value="1">Closed</option>
                     </select>
                 </div>
-                <div class="col-span-1 text-xs text-red-600 italic pl-2">
+                <x-srdd.row-comment class="col-span-1">
                      Used to lock session registrations once SRDD is done
-                </div>
+                </x-srdd.row-comment>
                 <div class="col-span-1">&nbsp;</div>
                 <x-primary-button class="col-span-1 mt-4 mx-2 justify-center">
                     {{ __('ui.button.new-session') }}
@@ -214,16 +215,6 @@
             <div class="px-2 table-header col-span-1">End Time</div>
             <div class="px-2 table-header col-span-1">Open?</div>
             <div class="px-2 table-header col-span-1">Edit/Delete</div>
-            {{-- create a dummy row since the first row returns null --}}
-            <div class="px-2 hidden col-span-1">-</div>
-            <div class="px-2 hidden col-span-2">-</div>
-            <div class="px-2 hidden col-span-2">-</div>
-            <div class="px-2 hidden col-span-1">-</div>
-            <div class="px-2 hidden col-span-2">-</div>
-            <div class="px-2 hidden col-span-1">-</div>
-            <div class="px-2 hidden col-span-1">-</div>
-            <div class="px-2 hidden col-span-1">-</div>
-            <div class="px-2 hidden col-span-1">-</div>
             @foreach(Session::all() as $session) {{-- iterate thru the defined sessions --}}
                 <div class="table-row col-span-1">{{ $session->id }}</div>
                 <div class="table-row col-span-2">{{ $session->event->title }}</div>

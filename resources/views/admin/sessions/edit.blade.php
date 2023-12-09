@@ -9,7 +9,7 @@
     use App\Models\Session;
 
     // build collections for the dropdown selectors
-     $events = Event::where('year', 2024)->get()->sortBy('title');
+     $events = Event::where('year', config('constants.srdd_year'))->get()->sortBy('title');
      $venues = Venue::all()->sortBy('location');
       $slots = Slot::all()->sortBy('start_time');
 
@@ -38,7 +38,9 @@
             <div class="mx-1 grid grid-cols-6 auto-col-max-6 gap-0">
             {{-- pick a related Event (from just this year's events)--}}
                 <div class="col-span-1 table-header text-right pr-4">
-                    <label for="event_id">Event</label>
+                    <label for="event_id">
+                        {{ config('constants.srdd_year') }} Event
+                    </label>
                 </div>
                 <div class="col-span-4 border border-indigo-800">
                     <select id="event_id" name="event_id"  class="ml-1 mr-8">
@@ -51,9 +53,8 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-span-1 text-xs text-red-600 italic pl-2">
-                    Select the Event for this Session (note, events filtered to just those for
-                    the current year: {{ config('constants.srdd_year') }})
+                <div class="col-span-1 text-xs text-red-600 dark:text-red-200 italic pl-2">
+                    Select the Event for this Session 
                 </div>
 
                 {{-- pick a related Venue --}}

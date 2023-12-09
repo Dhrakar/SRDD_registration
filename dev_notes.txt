@@ -30,8 +30,6 @@
   via get. If the index sees that value, it pops up a validation div that also has a from.  that form then submits to 
   the destroy method or cancels back (it also unsets the CONFIRMED)
 
--- conversion of srdd date const to a date field: date("Y-m-d", strtotime(config('constants.srdd_date')));
-
 - 2 dec
  -- added listeners for login/Logout so that the login count and last login can be updated
  -- created new helpers.php file for custom functions (and added to composer.json)
@@ -40,4 +38,18 @@
 
  - 7 Dec 
   -- prob fixed the logout problem... the form tag in the nav toolbar was not closed
-  
+
+- 8 Dec 
+ -- date placed in .env as a mysql string.  to convert: 
+
+   use Illuminate\Support\Carbon;
+   Carbon::parse(env('SRD_DAY', now()))->toFormattedDateString();
+
+   Change config to use mysql format date: 
+    constant.php 'db_srdd_date' = Carbon::parse(env("SRD_DAY", now()))->format('Y-m-d')
+    constant.php 'srdd_year' = Carbon::parse(env("SRD_DAY", now()))->format('Y')
+-   config('constants.db_srdd_date')
+
+
+
+
