@@ -27,7 +27,7 @@ class SchedulerController extends Controller
         // build a collection of events for this user
         $my_events = $this->_get_schedule($user);
 
-        return view('schedule.user.index', [
+        return view('schedule.attendee.index', [
             'event_collection' => $my_events,
             ]
         );
@@ -61,7 +61,7 @@ class SchedulerController extends Controller
         }
         $out .= "], ";
 
-        return view('schedule.user.print', [
+        return view('schedule.attendee.print', [
             'events' => $out,
             ]
         );
