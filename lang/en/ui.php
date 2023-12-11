@@ -15,7 +15,7 @@ return [
            'home' => 'Home',
           'about' => 'About SRDD',
           'admin' => 'Admin/Config',
-       'schedule' => 'Add Sessions',
+       'schedule' => 'Add/View Sessions',
         'reports' => 'Reports',
          'define' => 'Field Definitions',
            'help' => 'Application Help',

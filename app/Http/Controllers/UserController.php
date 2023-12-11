@@ -23,4 +23,17 @@ class UserController extends Controller
             'account' => $user,
         ]);
     }
+    
+    public function update(Request $request, User $user): RedirectResponse
+    { 
+        // validate the data from the form
+        $validated = $request->validate([
+                  'name' => 'required|string|max:40',
+                 'level' => 'required|numeric|in:' . implode(",", array_keys(config('constants.auth_level'))),
+        ]);
+        
+        $user->update($validated);
+
+        return redirect(route('users.index'));
+    }
 }

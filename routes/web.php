@@ -112,6 +112,7 @@ Route::middleware('auth')->group(function () {
     // users
     Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::patch('/admin/users/{user}', [UserController::class, 'update'])->name('users.update');
 });
 
 
