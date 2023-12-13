@@ -16,7 +16,7 @@
         edit them, assign admin privs, or lock these accounts.  For new accounts, use the Register page.
     </x-srdd.callout>
     {{-- List existing users --}}
-    <x-srdd.title-box :title="__('Currently Configured Tracks')">
+    <x-srdd.title-box :title="__('Currently Configured Users')">
         <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
             <div class="px-2 table-header col-span-1">Id</div>
             <div class="px-2 table-header col-span-2">Name</div>
