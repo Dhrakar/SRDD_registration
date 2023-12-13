@@ -47,11 +47,17 @@ class CalendarController extends Controller
         foreach ($this->sessions as $session) {
             $this->out .= "{ "
                  .  "id: \""    . $session->id . "\", "
-                 .  "title: \"" . $session->event->title 
-                 .   " " . (($session->is_closed)?'🔓':'')
-                 .   " " . (($session->event->needs_reg)?'📋':'') 
-                 .   "\", "
-                 .  "description: \"" . $session->event->description . "\", "
+                 .  "title: \""
+                 .    $session->event->title 
+                 .    " " . (($session->event->needs_reg)?'📋':'') 
+                 .    "\", "
+                 .  "description: \""
+                 .   'Presenter -- ' 
+                 .   ($session->event->instructor->name??'None') . '<br/>'
+                 .   'Location -- '
+                 .   $session->venue->location
+                 .   ' (seats: ' . (($session->venue->max_seats < 0)?'Unlimited':$session->venue->max_seats) . ') <br/>'
+                 .   $session->event->description . "\", "
                 // if the time slot id is 1, then use custom times in the session
                  .  "start: \"" . $this->srdd_date . 'T' . (($session->slot->id == 1)?$session->start_time:$session->slot->start_time) . "\", "
                  .  "end: \""   . $this->srdd_date . 'T' . (($session->slot->id == 1)?$session->end_time:$session->slot->end_time) . "\", "

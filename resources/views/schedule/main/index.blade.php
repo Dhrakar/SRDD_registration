@@ -25,10 +25,17 @@
     <x-srdd.callout :title="__('Event Calendar')">
         This is the main calendar of events for this year's SRDD.  Each session will show the location and the number
         seats remaining (for venues that have limited seating).  Events with a 📋 require registration, while those 
-        with a 🔓 are closed for registration.  Sessions for <i>core</i> events will be automatically added to new
-        schedules.  Go to <i>My Schedule</i> to see a calendar of your registered sessions.
+        with a 🔓 are closed for registration. Go to <a href="{{route('schedule')}}">{{__('ui.menu.nav-home.review')}}</a> 
+        to see a calendar of your registered sessions.
+        <x-srdd.notice :title="__('Adding Sessions')">
+            To add an unlocked session to your own calendar, just click on that session.  Hovering over sissions 
+            will show the description of the event.  <b>Note</b>: <br/>
+             - you will be asked for confirmaiton if you try to add a session that overlaps with one you already signed up for.<br/>
+             - if there are no more seats available for a session, you will not be able to sign up for it<br/>
+             - Sessions for <i>core</i> events can be automatically added to new schedules  
+        </x-srdd.notice>
         <div class="ml-4 mt-2 ">
-            <x-srdd.title-box :title="__('Track Colors')">
+            <x-srdd.title-box :title="__('Event Track Colors')">
                 @foreach(Track::all() as $track) {{-- iterate thru the defined tracks --}}
                     @php 
                         $bgc = config('constants.colors.tracks.' . $track->color);
@@ -72,6 +79,7 @@
                     content: info.event.extendedProps.description,
                     placement: "top-start",
                     aria: "describedby",
+                    allowHTML: true,
                 });
             },
         });
