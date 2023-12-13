@@ -22,6 +22,13 @@ class TrackSeeder extends Seeder
              'updated_at' => now(),
         ]);
         DB::Table('tracks')->insert([
+                  'title' => 'Live Stream',
+            'description' => 'Indicates a session event is online',
+                  'color' => 4,
+             'created_at' => now(),
+             'updated_at' => now(),
+        ]);
+        DB::Table('tracks')->insert([
                   'title' => 'Professional Development',
             'description' => 'Events to help your current career skills -- or to introduce new ones',
                   'color' => 2,
