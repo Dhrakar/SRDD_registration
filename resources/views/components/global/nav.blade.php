@@ -20,7 +20,7 @@
                             )?$m_text_sel:$m_text_def 
                         }}"
                     >
-                        <i class="bi {{ config('constants.icon.home') }} mx-2"></i>
+                        <i id="_HOME" class="bi {{ config('constants.icon.home') }} mx-2"></i>
                         {{ __('ui.menu.home')}}
                     </a>
                 </div>

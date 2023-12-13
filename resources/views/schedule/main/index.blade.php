@@ -41,10 +41,12 @@
     <div id="calendar" class="text-std mx-4 mb-8 mt-2 p-4"></div>
 </div>
 {{-- Add all the current sessions --}}
+
 <script> 
     window.onload = function () {
         var calendarEl = document.getElementById('calendar');
         var calendar = new Calendar(calendarEl, {
+            contentHeight: 700,
             customButtons: {
                 srddButton: {
                     text: 'Return to SRDD',
@@ -64,6 +66,14 @@
             slotMinTime: '6:00:00',
             slotMaxTime: '21:00:00',
             {!! $events !!}
+            eventDidMount: function(info) {
+                //console.log(info.event.extendedProps.description);
+                var tooltip = tippy(info.el, {
+                    content: info.event.extendedProps.description,
+                    placement: "top-start",
+                    aria: "describedby",
+                });
+            },
         });
         calendar.render();
     }

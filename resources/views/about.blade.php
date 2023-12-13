@@ -11,6 +11,12 @@
 
     // current fullcalendar version
     $fc_ver = json_decode(file_get_contents( base_path('node_modules/@fullcalendar/core/package.json')), true );
+    
+    // current jQuery version
+    $jq_ver = json_decode(file_get_contents( base_path('node_modules/jquery/package.json')), true );
+    
+    // current Tippy version
+    $tippy_ver = json_decode(file_get_contents( base_path('node_modules/tippy.js/package.json')), true );
 
     //current git commit info
     $git = rtrim('Latest git hash: ' . shell_exec("git log --oneline -1 | cut -f1 -d' '")); 
@@ -90,11 +96,23 @@
             <div class="px-2 table-row col-span-2">{!! $lic_mit !!}</div>
             <div class="px-2 table-row col-span-2"><a href="https://flatpickr.js.org" target="_blank">FlatpickrJS</a></div>
 
-            <div class="px-2 table-row col-span-3"></div>
-            <div class="px-2 table-row col-span-1"></div>
-            <div class="px-2 table-row col-span-4"></div>
-            <div class="px-2 table-row col-span-2"></div>
-            <div class="px-2 table-row col-span-2"></div>
+            <div class="px-2 table-row col-span-3">jQuery</div>
+            <div class="px-2 table-row col-span-1">{{ $jq_ver['version'] }}</div>
+            <div class="px-2 table-row col-span-4">Javascript DOM library</div>
+            <div class="px-2 table-row col-span-2">{!! $lic_mit !!}</div>
+            <div class="px-2 table-row col-span-2"><a href="https://jquery.com" target="_blank">jQuery</a></div>
+
+            <div class="px-2 table-row col-span-3">Tippy.js</div>
+            <div class="px-2 table-row col-span-1">{{ $tippy_ver['version'] }}</div>
+            <div class="px-2 table-row col-span-4">Javascript Tooltip Engine</div>
+            <div class="px-2 table-row col-span-2">{!! $lic_mit !!}</div>
+            <div class="px-2 table-row col-span-2"><a href="https://tippyjs.bootcss.com" target="_blank">Tippy.js</a></div>
+
+<div class="px-2 table-row col-span-3"></div>
+<div class="px-2 table-row col-span-1"></div>
+<div class="px-2 table-row col-span-4"></div>
+<div class="px-2 table-row col-span-2"></div>
+<div class="px-2 table-row col-span-2"></div>
         </div>
     </x-srdd.title-box>
 </div>

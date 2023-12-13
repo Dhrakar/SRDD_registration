@@ -48,9 +48,9 @@ class CalendarController extends Controller
             $this->out .= "{ "
                  .  "id: \""    . $session->id . "\", "
                  .  "title: \"" . $session->event->title 
-                 . " " . (($session->is_closed)?'🔓':'')
-                 . " " . (($session->event->needs_reg)?'📋':'') 
-                 . "\", "
+                 .   " " . (($session->is_closed)?'🔓':'')
+                 .   " " . (($session->event->needs_reg)?'📋':'') 
+                 .   "\", "
                  .  "description: \"" . $session->event->description . "\", "
                 // if the time slot id is 1, then use custom times in the session
                  .  "start: \"" . $this->srdd_date . 'T' . (($session->slot->id == 1)?$session->start_time:$session->slot->start_time) . "\", "
@@ -58,7 +58,8 @@ class CalendarController extends Controller
                  .  "classNames: \"" . $this->colors[$session->event->track->color] . "\", "
                  .  "textColor: \"" . '#334155' . "\", " 
                  .  "borderColor: \"" . '#c084fc' . "\", "
-                 .  "url: \"" . route('schedule.add', $session) . "\", "
+                 .  "url: \"" 
+                 . ((! $session->is_closed)?route('schedule.add', $session):'') . "\", "
                  . "}, ";
         }
         $this->out .= "], ";

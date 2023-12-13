@@ -19,6 +19,13 @@ window.listPlugin = listPlugin;
 import flatpickr from 'flatpickr';
 window.flatpickr = flatpickr;
 
+import $ from 'jquery';
+window.$ = $;
+
+import tippy from 'tippy.js';
+window.tippy = tippy;
+import 'tippy.js/dist/tippy.css';
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
