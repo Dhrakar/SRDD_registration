@@ -3,7 +3,7 @@
      *  Main SRDD registration page
      */
 
-     use Illuminate\Support\Js;
+     use App\Models\Track;
      use App\Http\Controllers\CalendarController;
 
     // format the srdd date for use with teh DATE field
@@ -23,8 +23,20 @@
         </li>
     </x-global.toolbar>
     <x-srdd.callout :title="__('Event Calendar')">
-        This is the main calendar of events for this year's SRDD.  Events that are outlined in green are automatically
-        added when you sign up for the day.
+        This is the main calendar of events for this year's SRDD.  Each session will show the location and the number
+        seats remaining (for venues that have limited seating).  Events with a 📋 require registration, while those 
+        with a 🔓 are closed for registration.  Sessions for <i>core</i> events will be automatically added to new
+        schedules.  Go to <i>My Schedule</i> to see a calendar of your registered sessions.
+        <div class="ml-4 mt-2 ">
+            <x-srdd.title-box :title="__('Track Colors')">
+                @foreach(Track::all() as $track) {{-- iterate thru the defined tracks --}}
+                    @php 
+                        $bgc = config('constants.colors.tracks.' . $track->color);
+                        echo "<span class=\"font-bold text-slate-900 block w-1/2 mx-8 m-2 px-4 rounded-sm $bgc\">$track->title</span>";
+                    @endphp
+                @endforeach
+            </x-srdd.title-box>
+        </div>
     </x-srdd.callout>
     <div id="calendar" class="text-std mx-4 mb-8 mt-2 p-4"></div>
 </div>
