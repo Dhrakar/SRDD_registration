@@ -12,6 +12,9 @@
     // current fullcalendar version
     $fc_ver = json_decode(file_get_contents( base_path('node_modules/@fullcalendar/core/package.json')), true );
     
+    // current flatpickr version
+    $fp_ver = json_decode(file_get_contents( base_path('node_modules/flatpickr/package.json')), true );
+    
     // current jQuery version
     $jq_ver = json_decode(file_get_contents( base_path('node_modules/jquery/package.json')), true );
     
@@ -91,7 +94,7 @@
             <div class="px-2 table-row col-span-2"><a href="https://fullcalendar.io" target="_blank">FullCalendar JS</a></div>
 
             <div class="px-2 table-row col-span-3">Flatpickr</div>
-            <div class="px-2 table-row col-span-1">v4</div>
+            <div class="px-2 table-row col-span-1">{{ $fp_ver['version'] }}</div>
             <div class="px-2 table-row col-span-4">Date/Time JS input widget</div>
             <div class="px-2 table-row col-span-2">{!! $lic_mit !!}</div>
             <div class="px-2 table-row col-span-2"><a href="https://flatpickr.js.org" target="_blank">FlatpickrJS</a></div>
