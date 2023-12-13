@@ -11,7 +11,7 @@
             bg-sky-200 dark:bg-sky-700 
             shadow-md rounded-md
             text-sky-700 dark:text-sky-50">
-    <i class="font-bold text-3xl bi bi-bell"></i>
+    <i class="font-bold text-3xl bi bi-journal-text"></i>
     <span class="pl-4 font-semibold text-lg">
         {{ $title }}
     </span>
