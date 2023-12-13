@@ -45,7 +45,7 @@
                     <a href="{{ route('admin.index') }}"
                         class="inline-flex items-center px-1 pt-1 
                         {{-- Check to see if this route is for any admin uri --}}
-                        {{ (strpos(url()->current(), 'admin') !== false )?$m_text_sel:$m_text_def }}"
+                        {{ (strpos(url()->current(), '/admin') !== false )?$m_text_sel:$m_text_def }}"
                     >
                         {{ __('ui.menu.admin') }}
                     </a>

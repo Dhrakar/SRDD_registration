@@ -47,13 +47,16 @@ class CalendarController extends Controller
         foreach ($this->sessions as $session) {
             $this->out .= "{ "
                  .  "id: \""    . $session->id . "\", "
-                 .  "title: \"" . $session->event->title . " " . (($session->event->needs_reg)?'📋':'') ."\", "
+                 .  "title: \"" . $session->event->title 
+                 . " " . (($session->is_closed)?'🔓':'')
+                 . " " . (($session->event->needs_reg)?'📋':'') 
+                 . "\", "
                  .  "description: \"" . $session->event->description . "\", "
                 // if the time slot id is 1, then use custom times in the session
                  .  "start: \"" . $this->srdd_date . 'T' . (($session->slot->id == 1)?$session->start_time:$session->slot->start_time) . "\", "
                  .  "end: \""   . $this->srdd_date . 'T' . (($session->slot->id == 1)?$session->end_time:$session->slot->end_time) . "\", "
                  .  "classNames: \"" . $this->colors[$session->event->track->color] . "\", "
-                 .  "textColor: \"" . (($session->is_closed)?'#b91c1c':'#334155') . "\", " 
+                 .  "textColor: \"" . '#334155' . "\", " 
                  .  "borderColor: \"" . '#c084fc' . "\", "
                  .  "url: \"" . route('schedule.add', $session) . "\", "
                  . "}, ";
