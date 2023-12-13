@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-      class="relative min-h-full pb-24"
+      class="{{ (env('APP_DEBUG', false) === true)?'relative min-h-full pb-24':'' }}"
 >
     <head>
 
@@ -25,7 +25,7 @@
         </main>
 
         {{-- page footer --}}
-        <footer class="fixed bottom-0 left-0 w-full h-28 bg-slate-50 dark:bg-slate-900 overflow-auto">
+        <footer class="{{ (env('APP_DEBUG', false) === true)?'fixed bottom-0 left-0 w-full h-28 bg-slate-50 dark:bg-slate-900 overflow-auto':''}}">
             <x-global.footer/>
         </footer>
     </body>
