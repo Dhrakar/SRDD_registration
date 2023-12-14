@@ -15,3 +15,12 @@
 
 <!-- compiled css and js -->
 @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+<!-- load in local jQuery objects/vars as a module so they load at teh right time -->
+<script type="module">
+    
+    $(function () {
+        // set up global tooltips
+        tippy('[data-tippy-content]'); 
+   });
+</script>
