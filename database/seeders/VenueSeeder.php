@@ -18,7 +18,7 @@ class VenueSeeder extends Seeder
             'max_seats' => -1,
         ]);
         DB::Table('venues')->insert([
-            'location'  => 'Online Session',
+            'location'  => 'Online Live Stream',
             'max_seats' => -1,
         ]);
         DB::Table('venues')->insert([
