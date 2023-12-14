@@ -121,7 +121,7 @@
                   @endif
                 </div>
                 <div class="table-row col-span-2">
-                @if($venue->id != 1 ) {{-- don't allow venue 1 to be edited or deleted --}}
+                @if($venue->id > 2 ) {{-- don't allow venues 1 or 2 to be edited or deleted --}}
                   <div class="flex justify-center">
                     <a href="{{ route('venues.edit', $venue) }}">
                         <i class="bi bi-pencil-square mx-2"></i>
