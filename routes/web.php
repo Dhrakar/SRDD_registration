@@ -23,6 +23,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// widget test page
+Route::get('/test', function () { return view('pages/test'); });
+
 // main landing page (with or without login )
 Route::get('/', function () {
     return view('home');
