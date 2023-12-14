@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+        {{-- Set to relative position if in debug mode --}}
       class="{{ (env('APP_DEBUG', false) === true)?'relative min-h-full pb-24':'' }}"
 >
     <head>
@@ -24,7 +25,7 @@
             @yield('content')
         </main>
 
-        {{-- page footer --}}
+        {{-- page footer.  Fix to bottom in debug mode --}}
         <footer class="{{ (env('APP_DEBUG', false) === true)?'fixed bottom-0 left-0 w-full h-28 bg-slate-50 dark:bg-slate-900 overflow-auto':''}}">
             <x-global.footer/>
         </footer>
