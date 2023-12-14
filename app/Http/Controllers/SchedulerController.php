@@ -52,7 +52,11 @@ class SchedulerController extends Controller
                 // add to event array     
                 $out .= "{ "           
                 .  "id: \""    . $event['id'] . "\", "
-                .  "title: \"" . $event['title'] ."\", "
+                .  "title: \"" 
+                .      ' [ ' . $event['location'] . ' ] ' 
+                .      '\'' . $event['title'] . '\''
+                .      ' (' . $event['track'] . ') '
+                .      "\", "
                 .  "start: \"" . $srdd_date . 'T' . $event['start_time'] . "\", "
                 .  "end: \""   . $srdd_date . 'T' . $event['end_time'] . "\", "
                 . "}, ";
@@ -128,6 +132,7 @@ class SchedulerController extends Controller
             'instructor' => $schedule->session->event->instructor->name ?? ' --- ',
                  'title' => $schedule->session->event->title,
            'description' => $schedule->session->event->description,
+                 'track' => $schedule->session->event->track->title,
                  'color' => $schedule->session->event->track->color,
                 ]);
             };
