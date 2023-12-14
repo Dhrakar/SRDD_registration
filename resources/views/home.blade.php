@@ -3,6 +3,15 @@
      *  This is the main landing page for the registration applicaiton
      */
 
+    use Illuminate\Support\Carbon;
+    use Illuminate\Support\Facades\Auth;
+
+    // if one exists, massage the last login date to a better format
+    if(isset(Auth::user()->last_login)) {
+        $_ldate = Carbon::parse(Auth::user()->last_login)->toDayDateTimeString();
+    } else {
+        $_ldate = "N/A";
+    }
 ?>
 @extends('template.app')
 
@@ -22,17 +31,19 @@
         </x-srdd.callout>
         
         {{-- Add in the Login form or logged in user info --}}
-        <x-srdd.title-box :title="__('ui.menu.login')">
-            @guest 
+        @guest 
+            <x-srdd.dialog :title="__('Please Login or Create a new Account')">
                 <x-srdd.login/>
-            @endguest
-            @auth
-                <x-srdd.success :title="__('Logged In')">
-                    Welcome back <span class="font-bold text-greem-700">{{ Auth::user()->name }}</span>! This is your
-                    {{ ordinal(Auth::user()->login_count) }} login and your last login was on {{ Auth::user()->last_login }}.
-                </x-srdd.success>
-            @endauth
-        </x-srdd.title-box>
+            </x-srdd.dialog>
+        @endguest
+        @auth
+            <x-srdd.success :title="__('Logged In')">
+                Welcome {{ (Auth::user()->login_count > 1)?'back':'' }} 
+                <span class="font-bold text-indigo-700">{{ Auth::user()->name }}</span>! 
+                This is your {{ ordinal(Auth::user()->login_count) }} login 
+                {{ (Auth::user()->login_count > 1)?'and your last login was on: ' . $_ldate:'' }}
+            </x-srdd.success>
+        @endauth
         
     </div>
 
