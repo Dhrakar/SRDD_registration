@@ -97,7 +97,7 @@
                 </div>
                 <div class="col-span-1">&nbsp;</div>
                 <x-primary-button class="col-span-2 mt-4 mx-2">
-                    {{ __('ui.button.new-slot') }}
+                    {{ __('ui.button.new-venue') }}
                 </x-primary-button>
             </div>
         </form>
