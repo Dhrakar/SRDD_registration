@@ -12,13 +12,15 @@ return [
     */
 
     'menu' => [
-           'home' => 'Home',
           'about' => 'About SRDD',
           'admin' => 'Admin/Config',
-       'schedule' => 'Add/View Sessions',
-        'reports' => 'Reports',
          'define' => 'Field Definitions',
            'help' => 'Application Help',
+           'home' => 'Home',
+            'lib' => 'Included Packages',
+          'login' => 'Not Logged In',
+        'reports' => 'Reports',
+       'schedule' => 'Add/View Sessions',
        'nav-home' => [
               'profile' => 'My Account',
                'review' => 'My Schedule',
@@ -26,29 +28,27 @@ return [
                'logout' => 'Log Out',
            ],
       'nav-admin' => [
-                'tracks' =>'Tracks',
-                'venues' => 'Locations',
+               'events' => 'Events',
+             'sessions' => 'Sessions',
                 'slots' => 'Time Slots',
-                'events' => 'Events',
-                'sessions' => 'Sessions',
+               'tracks' => 'Tracks',
                 'users' => 'User Accounts',
+               'venues' => 'Locations',
       ],
-            'lib' => 'Included Packages',
-          'login' => 'Please Login or Register',
     ],
     'link' => [
        'register' => 'Create New Non-UA Account',
     ], 
     'button' => [
-           'save' => 'Save',
          'cancel' => 'Cancel',
          'delete' => 'Delete!',
-         'update' => 'Save Changes',
-      'new-track' => "Save New Track",
-       'new-slot' => "Save New Time Slot",
       'new-event' => "Save New Event",
     'new-session' => "Save New Session",
+       'new-slot' => "Save New Time Slot",
+      'new-track' => "Save New Track",
       'new-venue' => "Save New Location",
+           'save' => 'Save',
+         'update' => 'Save Changes',
     ],
     'markdown' => [
         // As these are rather longer, they pull in markdown text from files in 
