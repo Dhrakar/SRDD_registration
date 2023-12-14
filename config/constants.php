@@ -46,6 +46,17 @@ return [
             'bg-orange-400',
             'bg-teal-400',
          ],
+         'tracks_css' => [ // CSS color values for default track colors from the TW classes
+            '',
+            '#38bdf8',
+            '#34d399',
+            '#fbbf24',
+            '#818cf8',
+            '#94a3b8',
+            '#f87171',
+            '#fb923c',
+            '#2dd4bf',
+         ],
     ],
     // default botstrap icons
     'icon' => [
