@@ -23,10 +23,12 @@
         </li>
     </x-global.toolbar>
     <x-srdd.callout :title="__('Event Calendar')">
-        This is the main calendar of events for this year's SRDD.  Each session will show the location and the number
-        seats remaining (for venues that have limited seating).  Events with a 📋 require registration, while those 
-        with a 🔓 are closed for registration. Go to <a href="{{route('schedule')}}">{{__('ui.menu.nav-home.review')}}</a> 
-        to see a calendar of your registered sessions.
+        <p class="w-3/4 ml-4 text-justify">
+            This is the main calendar of events for this year's SRDD.  Each session will show the location and the number
+        seats remaining (for venues that have limited seating).  Events with a '📋' require registration, while those 
+        with a '🔓' are closed for registration and those with '🚫' have no more seating. Go to 
+        <a href="{{route('schedule')}}">{{__('ui.menu.nav-home.review')}}</a> to see a calendar of your registered sessions.
+        </p>
         <x-srdd.notice :title="__('Adding Sessions')">
             To add an unlocked session to your own calendar, just click on that session.  Hovering over sissions 
             will show the description of the event.  <b>Note</b>: <br/>
@@ -34,16 +36,14 @@
              - if there are no more seats available for a session, you will not be able to sign up for it<br/>
              - Sessions for <i>core</i> events can be automatically added to new schedules  
         </x-srdd.notice>
-        <div class="ml-4 mt-2 ">
-            <x-srdd.title-box :title="__('Event Track Colors')">
-                @foreach(Track::all() as $track) {{-- iterate thru the defined tracks --}}
-                    @php 
-                        $bgc = config('constants.colors.tracks.' . $track->color);
-                        echo "<span class=\"font-bold text-slate-900 block w-1/2 mx-8 m-2 px-4 rounded-sm $bgc\">$track->title</span>";
-                    @endphp
-                @endforeach
-            </x-srdd.title-box>
-        </div>
+        <x-srdd.title-box :title="__('Event Track Colors')">
+            @foreach(Track::all() as $track) {{-- iterate thru the defined tracks --}}
+                @php 
+                    $bgc = config('constants.colors.tracks.' . $track->color);
+                    echo "<span class=\"font-bold text-slate-900 block w-1/2 mx-8 m-2 px-4 rounded-sm $bgc\">$track->title</span>";
+                @endphp
+            @endforeach
+        </x-srdd.title-box>
     </x-srdd.callout>
     <div id="calendar" class="text-std mx-4 mb-8 mt-2 p-4"></div>
 </div>

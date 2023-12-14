@@ -45,25 +45,38 @@ class CalendarController extends Controller
 
         // Build the main calendar from the current sessions for this SRDD
         foreach ($this->sessions as $session) {
+            // how many folks are registered for this session?
+            $_reg = $session->schedules->count();
             $this->out .= "{ "
                  .  "id: \""    . $session->id . "\", "
                  .  "title: \""
                  .    $session->event->title 
                  .    " " . (($session->event->needs_reg)?'📋':'') 
+                 .    " " . ( // show the lock icon for closed or, if needed, the no-entry icon for full
+                             ($session->is_closed)?'🔓': 
+                             " " . (((($session->venue->max_seats - $_reg) < 1 ) && ($session->venue->max_seats > 0))?'🚫':'')
+                            )
                  .    "\", "
                  .  "description: \""
                  .   'Presenter -- ' 
                  .   ($session->event->instructor->name??'None') . '<br/>'
                  .   'Location -- '
                  .   $session->venue->location
-                 .   ' (seats: ' . (($session->venue->max_seats < 0)?'Unlimited':$session->venue->max_seats) . ') <br/>'
+                 .   ' (' . (($session->venue->max_seats < 0)?'Unlimited':( $session->venue->max_seats - $_reg)) . ' seats ) <br/>'
                  .   $session->event->description . "\", "
                 // if the time slot id is 1, then use custom times in the session
                  .  "start: \"" . $this->srdd_date . 'T' . (($session->slot->id == 1)?$session->start_time:$session->slot->start_time) . "\", "
                  .  "end: \""   . $this->srdd_date . 'T' . (($session->slot->id == 1)?$session->end_time:$session->slot->end_time) . "\", "
-                 .  "classNames: \"" . $this->colors[$session->event->track->color] . "\", "
-                 .  "textColor: \"" . '#334155' . "\", " 
-                 .  "borderColor: \"" . '#c084fc' . "\", "
+                 .   (($session->venue->id == 2 )? 
+                         // if this an online session, use distinctive colors
+                          "backgroundColor: \"" . config('constants.colors.tracks_css.0') . "\","
+                        . "textColor: \"" . config('constants.colors.tracks_css.' . $session->event->track->id) . " \","
+                        . "borderColor: \"" . '#292524' . "\", "
+                      :  // no, so use normal colors 
+                          "backgroundColor: \"" . config('constants.colors.tracks_css.' . $session->event->track->id) .  "\", "
+                        . "textColor: \"" . config('constants.colors.tracks_css.0') . "\", " 
+                        . "borderColor: \"" . '#292524' . "\", "
+                     )
                  .  "url: \"" 
                  . ((! $session->is_closed)?route('schedule.add', $session):'') . "\", "
                  . "}, ";
