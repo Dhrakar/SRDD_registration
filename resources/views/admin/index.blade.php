@@ -27,5 +27,6 @@
         Event Date: {{ $_date }}
         </div>
     </x-srdd.title-box>
+    <a href="{{ url('/test') }}">Widget Test Page</a>
 </div>
 @endsection

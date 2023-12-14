@@ -1,7 +1,6 @@
 @extends('template.app')
 @section('content')
 <div class="container h-view w-view">
-    <x-srdd.nav-admin/>
     <button class="bg-emerald-400 border border-emerald-950 rounded-md m-8 px-2 text-std" data-tippy-content="Tooltip">
         Test of tooltip widget ...
     </button>
@@ -11,6 +10,9 @@
     <x-srdd.callout>
         Test of the Callout widget ... 
     </x-srdd.callout>
+    <x-srdd.dialog>
+        Test of the Dialog widget ... 
+    </x-srdd.dialog>
     <x-srdd.notice>
         Test of the Notice widget ... 
     </x-srdd.notice>
