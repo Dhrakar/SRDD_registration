@@ -9,6 +9,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CalendarController;  
 use App\Http\Controllers\SchedulerController; 
+use App\Http\Controllers\SendMailController; 
 use App\Http\Controllers\Auth\UALoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,25 +56,6 @@ Route::middleware('auth')->group(function () {
     /* admin */
     Route::get('/admin', function () { return view('admin.index'); })->name('admin.index');
 
-    /**
-     * Schedules
-     */
-    // Main calendar index
-    Route::get('/calendar', CalendarController::class)->name('calendar');
-    // User calendar table
-    Route::get('/schedule', [SchedulerController::class, 'index'])->name('schedule');
-    // User calendar print
-    Route::get('/schedule/print', [SchedulerController::class, 'print'])->name('schedule.print');
-    // add sessions
-    Route::get('/schedule/{session}/add', [SchedulerController::class, 'store'])->name('schedule.add');
-    // delete sessions
-    Route::delete('/schedule/{schedule}/destroy', [SchedulerController::class, 'destroy'])->name('schedule.destroy');
-    // create initial schedule
-    Route::get('/schedule/init', [SchedulerController::class, 'init'])->name('schedule.init');
-
-    /* Reports */
-    Route::get('/reports', function () { return view('reports.index'); })->name('reports.index');
-
     /** 
      * Admin config pages 
      */
@@ -116,6 +98,27 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::patch('/admin/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+    /**
+     * Schedules
+     */
+    // Main calendar index
+    Route::get('/calendar', CalendarController::class)->name('calendar');
+    // User calendar table
+    Route::get('/schedule', [SchedulerController::class, 'index'])->name('schedule');
+    // add sessions
+    Route::get('/schedule/{session}/add', [SchedulerController::class, 'store'])->name('schedule.add');
+    // delete sessions
+    Route::delete('/schedule/{schedule}/destroy', [SchedulerController::class, 'destroy'])->name('schedule.destroy');
+    // create initial schedule
+    Route::get('/schedule/{user}', [SchedulerController::class, 'init'])->name('schedule.init');
+    // User calendar print
+    Route::get('/schedule/attendee/print', [SchedulerController::class, 'print'])->name('schedule.print');
+    // User calendar email
+    Route::get('/email', [SendMailController::class, 'index']);
+
+    /* Reports */
+    Route::get('/reports', function () { return view('reports.index'); })->name('reports');
 });
 
 

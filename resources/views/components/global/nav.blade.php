@@ -34,9 +34,9 @@
                     </span>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <a href="{{ route('reports.index') }}"  
+                    <a href="{{ route('reports') }}"  
                         class="inline-flex items-center px-1 pt-1 
-                         {{ (url()->current() == route('reports.index'))?$m_text_sel:$m_text_def }}"
+                         {{ (url()->current() == route('reports'))?$m_text_sel:$m_text_def }}"
                     >
                         {{ __('ui.menu.reports') }}
                     </span>
