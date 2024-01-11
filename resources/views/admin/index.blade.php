@@ -28,5 +28,6 @@
         </div>
     </x-srdd.title-box>
     <a href="{{ url('/test') }}">Widget Test Page</a>
+    <a href="{{ url('/mailable') }}">Email Test Page</a>
 </div>
 @endsection
