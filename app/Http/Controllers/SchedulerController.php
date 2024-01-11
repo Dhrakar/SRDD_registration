@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AttendeeSchedule;
 use App\Mail\Test;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -105,14 +106,12 @@ class SchedulerController extends Controller
     public function email(User $user)
     {
         // build a collection of events for this user
-        $my_events = $this->get_schedule($user);
+        $events = $this->get_schedule($user);
 
-        return view('schedule.attendee.email', [
-            'events' => $my_events,
-            ]
-        );
-
-        // Mail::to('dlbastille@alaska.edu')->send(new Test());
+            Mail::to('dlbastille@alaska.edu')
+                ->send(new AttendeeSchedule($events));
+                
+        return view('schedule.attendee.email');
     }
     /**
      * Helper function to get a collection of the users scheduled sessions
