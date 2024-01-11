@@ -115,7 +115,8 @@ Route::middleware('auth')->group(function () {
     // User calendar print
     Route::get('/schedule/attendee/print', [SchedulerController::class, 'print'])->name('schedule.print');
     // User calendar email
-    Route::get('/email', [SendMailController::class, 'index']);
+    Route::get('/schedule/attendee/email', [SchedulerController::class, 'email'])->name('schedule.email');
+    // Route::get('/email', [SendMailController::class, 'index']);
 
     /* Reports */
     Route::get('/reports', function () { return view('reports.index'); })->name('reports');

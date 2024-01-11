@@ -62,7 +62,10 @@ class CalendarController extends Controller
                  .   ($session->event->instructor->name??'None') . '<br/>'
                  .   'Location -- '
                  .   $session->venue->location
-                 .   ' (' . (($session->venue->max_seats < 0)?'Unlimited':( $session->venue->max_seats - $_reg)) . ' seats ) <br/>'
+                 .   ( 
+                       ($session->is_closed)?' (CLOSED)<br/>':
+                       ' (' . (($session->venue->max_seats < 0)?'Unlimited':( $session->venue->max_seats - $_reg)) . ' seats ) <br/>'
+                     )
                  .   $session->event->description . "\", "
                 // if the time slot id is 1, then use custom times in the session
                  .  "start: \"" . $this->srdd_date . 'T' . (($session->slot->id == 1)?$session->start_time:$session->slot->start_time) . "\", "
@@ -77,8 +80,7 @@ class CalendarController extends Controller
                         . "textColor: \"" . config('constants.colors.tracks_css.0') . "\", " 
                         . "borderColor: \"" . '#292524' . "\", "
                      )
-                 .  "url: \"" 
-                 . ((! $session->is_closed)?route('schedule.add', $session):'') . "\", "
+                 .  "url: \"" . route('schedule.add', $session) . "\", "
                  . "}, ";
         }
         $this->out .= "], ";

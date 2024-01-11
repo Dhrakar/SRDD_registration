@@ -34,8 +34,15 @@
     <li class="mx-6">
         <a  class="text-md {{ (strpos(url()->current(), 'print') !== false)?$m_text_sel:$m_text_def }}" 
             href="{{route('schedule.print')}}">
-            <i class="bi bi-box-arrow-up-right"></i>
+            <i class="bi bi-printer"></i>
             {{__('ui.menu.nav-home.print')}}
+        </a>
+    </li>
+    <li class="mx-6">
+        <a  class="text-md {{ (strpos(url()->current(), 'print') !== false)?$m_text_sel:$m_text_def }}" 
+            href="{{route('schedule.email')}}">
+            <i class="bi bi-envelope"></i>
+            {{__('ui.menu.nav-home.email')}}
         </a>
     </li>
 @endauth

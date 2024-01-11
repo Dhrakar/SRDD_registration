@@ -7,12 +7,17 @@
  
     use App\Models\Schedule;
     use Illuminate\Support\Facades\Auth;
+    use App\Http\Controllers\SchedulerController; 
 
     // current user
     $user = Auth::user();
 
     // format the srdd date for use with the DATE field
     $srdd_date = config('constants.db_srdd_date'); 
+
+    // Get the schedule for this person
+    $_sched = new SchedulerController();
+    $event_collection = $_sched->get_schedule($user);
 
     // did we get a deletion request? Did the last one get deleted? 
     if( isset($_GET['CONFIRM']) && Schedule::all()->count() > 0) {
@@ -62,7 +67,7 @@
                     font-semibold text-xs text-slate-200 uppercase tracking-widest 
                     shadow-sm hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
                     disabled:opacity-25 transition ease-in-out duration-150"
-                href="{{ route('schedule.init') }}">Add Default Sessions</a>
+                href="{{ route('schedule.init', $user) }}">Add Default Sessions</a>
             <a  class="px-4 py-2 
                     bg-sky-500 border border-sky-300 rounded-md 
                     font-semibold text-xs text-slate-200 uppercase tracking-widest 
