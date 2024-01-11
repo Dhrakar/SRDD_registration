@@ -50,6 +50,9 @@
     constant.php 'srdd_year' = Carbon::parse(env("SRD_DAY", now()))->format('Y')
 -   config('constants.db_srdd_date')
 
+- 10 Jan
+ -- working on the print/email 
+  -- created 2 files: sched and sched-text 
 
 
 
