@@ -120,6 +120,12 @@ Route::middleware('auth')->group(function () {
 
     /* Reports */
     Route::get('/reports', function () { return view('reports.index'); })->name('reports');
+
+    /* test email */
+    Route::get('/mailable', function() {
+        $usr = App\Models\User::find(2);
+        return new App\Mail\AttendeeSchedule($usr);
+    });
 });
 
 
