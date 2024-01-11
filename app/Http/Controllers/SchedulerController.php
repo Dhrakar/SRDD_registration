@@ -108,7 +108,7 @@ class SchedulerController extends Controller
         // build a collection of events for this user
         $events = $this->get_schedule($user);
 
-            Mail::to($user->email)
+            Mail::to($user)
                 ->send(new AttendeeSchedule($events));
                 
         return view('schedule.attendee.email');
