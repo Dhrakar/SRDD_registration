@@ -15,6 +15,12 @@
                 border: 1px solid #ddd;
                 width: 80%;
             }
+            th {
+                background-color: lightgray;
+            }
+            td {
+                border: 1px solid #ddd;
+            }
         </style>
     </head>
     <body>
@@ -25,18 +31,18 @@
             </div>
             <br/>
             <table>
-                <thead >
-                    <tr class="bg-slate-400">
-                        <th class="border border-slate-700">Start</th>
-                        <th class="border border-slate-700">End</th>
-                        <th class="border border-slate-700">Location</th>
-                        <th class="border border-slate-700">Track</th>
-                        <th class="border border-slate-700">Event</th>
+                <thead>
+                    <tr>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Location</th>
+                        <th>Track</th>
+                        <th>Event</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($events->sortBy('start_time') as $event)
-                        <tr class="">
+                        <tr>
                             <td class="border border-slate-700 px-2">
                                 {{ substr($event['start_time'],0,5) }}
                             </td>
