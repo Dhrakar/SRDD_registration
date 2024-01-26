@@ -47,7 +47,7 @@ return [
             'bg-teal-400',
          ],
          'tracks_css' => [ // CSS color values for default track colors from the TW classes
-            '#020617', // this corresponds to slate-950. not a track color, ut a backgrnd for online
+            '#0f172a', // this corresponds to slate-400. not a track color, ut a backgrnd for online
             '#38bdf8',
             '#34d399',
             '#fbbf24',
