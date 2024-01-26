@@ -27,5 +27,18 @@ class UserSeeder extends Seeder
             'level'             => 9, // root level
             'login_count'       => 1, 
         ]);
+        // create the test account
+        DB::Table('users')->insert([
+            'name'              => env('TESTER_NAME'),
+            'email'             => env('TESTER_EMAIL'),
+            'email_verified_at' => now(),
+            'password'          => env('TESTER_HASH'), 
+            'remember_token'    => Str::random(10),
+            'created_at'        => now(),
+            'updated_at'        => now(),
+            'last_login'        => now(),
+            'level'             => 1, // attendee level
+            'login_count'       => 1, 
+        ]);
     }
 }
