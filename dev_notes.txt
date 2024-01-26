@@ -59,4 +59,15 @@
  -- Create new UserAuth middleware file
   -- already had the auth levels in constants.php
   -- add UserAUth to the Kernel.php aliases
- ? adding auth.level gives a 500 error ?
+ ? adding auth.level gives a 500 error ? 
+ 
+- 26 Jan
+ -> the 500 error was because I had the level array in constants defined wrong
+-- user auth updates 
+  - updted level constant to be string => int 
+  - updated the user.php file to return isAdmin correctly
+  - added the middleware calls to web.php so taht the admin pages require 'admin' and the logged in stuff requires 'attendee'
+  - wrapped the admin menu (nav.blade) with an @if(Auth::user()->isAdmin())
+-- Added Tester acct to user seeder
+--  
+

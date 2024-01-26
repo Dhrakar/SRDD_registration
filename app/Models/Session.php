@@ -24,6 +24,7 @@ class Session extends Model
         'start_time',
         'end_time',
         'is_closed',
+        'url',
     ];
 
     /*

@@ -11,6 +11,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\SchedulerController; 
 use App\Http\Controllers\SendMailController; 
 use App\Http\Controllers\Auth\UALoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,8 +50,8 @@ Route::get('/dashboard', function () {
 Route::post('/ualogin', [UALoginController::class, 'uaLogin'])->name('ualogin');
 
 // authenticated pages
-Route::middleware('auth')->group(function () {
-//Route::middleware(['auth', 'auth.level:admin'])->group(function () {
+// Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'auth.level:admin'])->group(function () {
     // --------------------------------
     //  Main index pages for sections
     // --------------------------------
@@ -99,7 +100,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::patch('/admin/users/{user}', [UserController::class, 'update'])->name('users.update');
+});
 
+// be sure a user is logged in to get to these pages
+Route::middleware(['auth', 'auth.level:attendee'])->group(function () {
     /**
      * Schedules
      */
