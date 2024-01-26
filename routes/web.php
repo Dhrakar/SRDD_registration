@@ -50,6 +50,7 @@ Route::post('/ualogin', [UALoginController::class, 'uaLogin'])->name('ualogin');
 
 // authenticated pages
 Route::middleware('auth')->group(function () {
+//Route::middleware(['auth', 'auth.level:admin'])->group(function () {
     // --------------------------------
     //  Main index pages for sections
     // --------------------------------
