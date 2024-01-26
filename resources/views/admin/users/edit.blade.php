@@ -17,6 +17,7 @@
 <div class="container">
     <x-srdd.title-box :title="__('Editing User #' . $account->id)">
         <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        <x-input-error :messages="$errors->get('level')" class="mt-2" />
         <form method="POST" action="{{ route('users.update', $account) }}">
             @csrf
             @method ('patch')
@@ -42,8 +43,10 @@
                         <?php
                             $levels = config('constants.auth_level');
                             foreach( $levels as $key => $val) {
-                                if($val != 'root') { // do not allow setting another user to root
-                                    echo "<option value='$key'>$val</option> \n";
+                                if($key != 'root') { // do not allow setting another user to root
+                                    echo "<option value='$val' "
+                                       . (($val == $account->level)?"selected='selected'":'') 
+                                       . ">$key</option> \n";
                                 }
                             }
                         ?>

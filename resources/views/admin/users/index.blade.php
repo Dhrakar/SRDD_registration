@@ -32,7 +32,7 @@
                 <div class="px-2 table-row col-span-3">{{$user->email}}</div>
                 <div class="px-2 table-row col-span-2">{{$user->last_login}}</div>
                 <div class="px-2 table-row col-span-1">
-                    {{ config('constants.auth_level.'. $user->level) }}
+                    {{ array_search($user->level, config('constants.auth_level')) }}
                 </div>
                 <div class="px-2 table-row col-span-1">
                     <i class=" bi bi-unlock mx-2"></i>

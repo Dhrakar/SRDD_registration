@@ -29,7 +29,7 @@ class UserController extends Controller
         // validate the data from the form
         $validated = $request->validate([
                   'name' => 'required|string|max:40',
-                 'level' => 'required|numeric|in:' . implode(",", array_keys(config('constants.auth_level'))),
+                 'level' => 'required|numeric|in:' . implode(",", array_values(config('constants.auth_level'))),
         ]);
         
         $user->update($validated);
