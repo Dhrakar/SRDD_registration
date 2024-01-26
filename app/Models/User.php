@@ -54,8 +54,8 @@ class User extends Authenticatable
      * Return true if this user has admin privs
      */
     public function isAdmin() {
-        // for now, just return yes
-        return true;
+        // if level is >= admin
+        return ($this->level >= config('constants.auth_level')['admin'])?1:0;
     }
 
     /*
