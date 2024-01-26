@@ -1,7 +1,14 @@
 <?php
-  // page variables for text color, etc
-  $m_text_def  = "text-md text-slate-50 hover:text-teal-200";  // default menu text attributes 
-  $m_text_sel  = "text-md font-semibold text-[#FFC000] ";  // test color when on that route
+    /**
+     * The main navigation menu for SRDD
+     */
+    
+    use Illuminate\Support\Facades\Auth;
+
+    // page variables for text color, etc
+    $m_text_def  = "text-md text-slate-50 hover:text-teal-200";  // default menu text attributes 
+    $m_text_sel  = "text-md font-semibold text-[#FFC000] ";  // test color when on that route
+
 ?>
 
 <nav x-data="{ open: false }" class="bg-blue-900">
@@ -41,15 +48,17 @@
                         {{ __('ui.menu.reports') }}
                     </span>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <a href="{{ route('admin.index') }}"
-                        class="inline-flex items-center px-1 pt-1 
-                        {{-- Check to see if this route is for any admin uri --}}
-                        {{ (strpos(url()->current(), '/admin') !== false )?$m_text_sel:$m_text_def }}"
-                    >
-                        {{ __('ui.menu.admin') }}
-                    </a>
-                </div>
+                @if(Auth::user()->isAdmin()) {{-- Include admin menu if user has admin or higher --}}
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <a href="{{ route('admin.index') }}"
+                            class="inline-flex items-center px-1 pt-1 
+                            {{-- Check to see if this route is for any admin uri --}}
+                            {{ (strpos(url()->current(), '/admin') !== false )?$m_text_sel:$m_text_def }}"
+                        >
+                            {{ __('ui.menu.admin') }}
+                        </a>
+                    </div>
+                @endif
                 @endauth
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <a href="{{ route('about') }}"
