@@ -54,5 +54,9 @@
  -- working on the print/email 
   -- created 2 files: sched and sched-text 
 
-
-
+- 25 Jan 
+ -- restart work on Auth ** GAUTH WILL ONLY WORK ON ONCILLA COPY
+ -- Create new UserAuth middleware file
+  -- already had the auth levels in constants.php
+  -- add UserAUth to the Kernel.php aliases
+ ? adding auth.level gives a 500 error ?
