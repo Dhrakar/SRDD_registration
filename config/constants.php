@@ -19,10 +19,10 @@ return [
 
     // User authorizatio levels
     'auth_level' => [
-        0 => 'guest',
-        1 => 'attendee',
-        5 => 'admin',
-        9 => 'root'
+           'guest' => 0,
+        'attendee' => 1,
+           'admin' => 5,
+            'root' => 9,
     ],
 
     // default colors
