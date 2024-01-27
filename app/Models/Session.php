@@ -20,11 +20,11 @@ class Session extends Model
         'event_id',
         'venue_id',
         'slot_id',
+        'url',
         'date_held',
         'start_time',
         'end_time',
         'is_closed',
-        'url',
     ];
 
     /*

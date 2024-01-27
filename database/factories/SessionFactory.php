@@ -24,6 +24,7 @@ class SessionFactory extends Factory
             'slot_id'    => fake()->numberBetween(1, 7),
             'date_held'  => fake()->date(),
             'is_closed'  => fake()->boolean(),
+            'url'        => fake()->url(),
             'created_at' => now(),
             'updated_at' => now(),
         ];

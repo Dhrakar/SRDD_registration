@@ -18,6 +18,7 @@ class SessionSeeder extends Seeder
             'event_id'   => 1, // longevity awards
             'venue_id'   => 3, // Wood Center Ballroom
             'slot_id'    => 3, // 10 - 11 am
+            'url'        => 'https://uaf.edu/',
             'date_held'  => config('constants.db_srdd_date'),
             'start_time' => null,
             'end_time'   => null,
@@ -29,6 +30,7 @@ class SessionSeeder extends Seeder
             'event_id'   => 3, // Lunch
             'venue_id'   => 3, // Wood Center Ballroom
             'slot_id'    => 5, // 12 - 1 pm
+            'url'        => 'https://uaf.edu/',
             'date_held'  => config('constants.db_srdd_date'),
             'start_time' => null,
             'end_time'   => null,
@@ -40,6 +42,7 @@ class SessionSeeder extends Seeder
             'event_id'   => 2, // Chancellor
             'venue_id'   => 3, // Wood Center Ballroom
             'slot_id'    => 2, // 9 - 10 am
+            'url'        => 'https://uaf.edu/',
             'date_held'  => config('constants.db_srdd_date'),
             'start_time' => null,
             'end_time'   => null,
@@ -51,6 +54,7 @@ class SessionSeeder extends Seeder
             'event_id'   => 5, // Keynote
             'venue_id'   => 3, // Wood Center Ballroom
             'slot_id'    => 4, // 11 - 12 am
+            'url'        => 'https://uaf.edu/',
             'date_held'  => config('constants.db_srdd_date'),
             'start_time' => null,
             'end_time'   => null,
