@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('event_id');
             $table->foreignId('venue_id');
             $table->foreignId('slot_id');
-            $table->string('url', 2000);
+            $table->string('url', 500)->nullable();
             $table->date('date_held');
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();

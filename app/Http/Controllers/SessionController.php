@@ -35,6 +35,7 @@ class SessionController extends Controller
               'event_id' => 'required|numeric',      // limit to valid events
               'venue_id' => 'required|numeric',      // limit to valid locations
                'slot_id' => 'required|numeric',        // limit to valid time slots (can be 'custom' which is ID #1)
+                   'url' => 'nullable|url',         // optional, but if included must be a valid URL 
              'date_held' => 'required|date',                                     // 
             'start_time' => 'sometimes|required_if:slot_id,1',      // if the slot is custom, then this is required
               'end_time' => 'sometimes|required_if:slot_id,1',                   // if the slot is custom, then this is required
@@ -79,6 +80,7 @@ class SessionController extends Controller
               'event_id' => 'required|numeric',      // limit to valid events
               'venue_id' => 'required|numeric',      // limit to valid locations
                'slot_id' => 'required|numeric',        // limit to valid time slots (can be 'custom' which is ID #1)
+                   'url' => 'nullable|url',         // optional, but if included must be a valid URL 
              'date_held' => 'required|date',                                     // 
             'start_time' => 'sometimes|required_if:slot_id,1',      // if the slot is custom, then this is required
               'end_time' => 'sometimes|required_if:slot_id,1',                   // if the slot is custom, then this is required

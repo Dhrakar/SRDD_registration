@@ -34,6 +34,7 @@
             <x-input-error :messages="$errors->get('start_time')" class="mt-2" />
             <x-input-error :messages="$errors->get('end_time')" class="mt-2" />
             <x-input-error :messages="$errors->get('is_closed')" class="mt-2" />
+            <x-input-error :messages="$errors->get('url')" class="mt-2" />
 
             <div class="mx-1 grid grid-cols-6 auto-col-max-6 gap-0">
             {{-- pick a related Event (from just this year's events)--}}
@@ -161,6 +162,22 @@
                 <div class="col-span-1 text-xs text-red-600 italic pl-2">
                      Used to lock session registrations once SRDD is done
                 </div>
+                {{-- edit/add the description URL --}}
+                <div class="col-span-1 table-header text-right pr-4">
+                    <label for="is_closed">Session Desc. Link</label>
+                </div>
+                <div class="col-span-4 border border-indigo-800 flex">
+                    <input class="text-slate-900 w-4/5 "
+                           type="input" name="url" 
+                           value="{{ $session->url }}" 
+                           maxlength="500"
+                           width="50"/>
+                </div>
+                <div class="col-span-1 text-xs text-red-600 italic pl-2">
+                     Optional link to the session description at the SRDD website
+                </div>
+
+                {{-- action buttons --}}
                 <div class="col-span-1">&nbsp;</div>
                 <a class="inline-flex items-center mt-4 mx-2 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150"
                     href="{{ route('sessions.index') }}">           

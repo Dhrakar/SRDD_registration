@@ -38,6 +38,7 @@
                         <th>Location</th>
                         <th>Track</th>
                         <th>Event</th>
+                        <th>Link</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,6 +53,13 @@
                             <td class="border border-slate-700 px-2">{{ $event['location'] }}</td>
                             <td class="border border-slate-700 px-2">{{ $event['track'] }}</td>
                             <td class="border border-slate-700 px-2">{{ $event['title'] }}</td>
+                            <td class="border border-slate-700 px-2">
+                                @if($event['url'] === null)
+                                &nbsp;-&nbsp;
+                                @else
+                                <a href="{{ $event['url'] }}">Description</a>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

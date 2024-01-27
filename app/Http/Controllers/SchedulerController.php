@@ -128,6 +128,7 @@ class SchedulerController extends Controller
                     'id' => $schedule->id,
             'start_time' => ($schedule->session->slot->id == 1)?$schedule->session->start_time:$schedule->session->slot->start_time,
               'end_time' => ($schedule->session->slot->id == 1)?$schedule->session->end_time:$schedule->session->slot->end_time,
+                   'url' => $schedule->session->url,
               'location' => $schedule->session->venue->location,
             'instructor' => $schedule->session->event->instructor->name ?? ' --- ',
                  'title' => $schedule->session->event->title,

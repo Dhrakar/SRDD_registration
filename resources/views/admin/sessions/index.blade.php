@@ -84,6 +84,7 @@
                 <x-input-error :messages="$errors->get('start_time')" class="mt-2" />
                 <x-input-error :messages="$errors->get('end_time')" class="mt-2" />
                 <x-input-error :messages="$errors->get('is_closed')" class="mt-2" />
+                <x-input-error :messages="$errors->get('url')" class="mt-2" />
 
             <div class="mx-1 grid grid-cols-6 auto-col-max-6 gap-0">
 
@@ -195,6 +196,23 @@
                 <x-srdd.row-comment class="col-span-1">
                      Used to lock session registrations once SRDD is done
                 </x-srdd.row-comment>
+
+                {{-- Optional link to the SRDD website for each session --}}
+                <div class="col-span-1 table-header text-right pr-4">
+                    <label for="url">Session Desc. Link</label>
+                </div>
+                <div class="col-span-4 border border-indigo-800 flex">
+                    <input class="text-slate-900 w-4/5 "
+                           type="input" name="url" 
+                           value="" 
+                           maxlength="500"
+                           width="50"/>
+                </div>
+                <x-srdd.row-comment class="col-span-1">
+                     Optional link out to the SRDD website
+                </x-srdd.row-comment>
+
+                {{-- action button --}}
                 <div class="col-span-1">&nbsp;</div>
                 <x-primary-button class="col-span-1 mt-4 mx-2 justify-center">
                     {{ __('ui.button.new-session') }}
@@ -207,7 +225,8 @@
     <x-srdd.title-box :title="__('Currently Configured Sessions')">
         <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
             <div class="px-2 table-header col-span-1">Id</div>
-            <div class="px-2 table-header col-span-2">Event</div>
+            <div class="px-2 table-header col-span-1">Link</div>
+            <div class="px-2 table-header col-span-1">Event</div>
             <div class="px-2 table-header col-span-2">Location</div>
             <div class="px-2 table-header col-span-1">Date Held</div>
             <div class="px-2 table-header col-span-2">Time Slot</div>
@@ -217,7 +236,22 @@
             <div class="px-2 table-header col-span-1">Edit/Delete</div>
             @foreach(Session::all() as $session) {{-- iterate thru the defined sessions --}}
                 <div class="table-row col-span-1">{{ $session->id }}</div>
-                <div class="table-row col-span-2">{{ $session->event->title }}</div>
+                <div class="table-row col-span-1 py-2">
+                    @if($session->url === null)
+                        ---
+                    @else
+                    <a href="{{ $session->url }}"
+                       class="px-2 py-1 rounded-md bg-sky-700 text-slate-50 uppercase text-xs"
+                       id="SESS_{{ $session->id }}_URL"
+                       target="_blank"><i class="bi bi-link-45deg"></i>&nbsp;Link</a>
+                    <script type="module"> 
+                        tippy('#SESS_{{ $session->id }}_URL', { 
+                            content: "{{ $session->url }}",
+                        }); 
+                    </script>
+                    @endif
+                </div>
+                <div class="table-row col-span-1">{{ $session->event->title }}</div>
                 <div class="table-row col-span-2">{{ $session->venue->location}}</div>
                 <div class="table-row col-span-1">{{ $session->date_held}}</div>
                 <div class="table-row col-span-2">
