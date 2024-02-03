@@ -51,7 +51,6 @@ class UALoginController extends Controller
     public function ualogin(Request $request)
     {
         Log::debug("UALoginController::ualogin()");
-
         $data = $request->all();
 
         // validate that the user supplied an @alaska.edu address and redirect back
@@ -71,17 +70,18 @@ class UALoginController extends Controller
 
         // now look to see if this person is already a user & get their obj from database
         $user = User::where('email',$data['email'])->first();
+
         // they are not already a user, so create a new user obj
         if(!$user){
             $user = User::create([
                 'name' => $data['name'], 
                 'email' => $data['email'],
                 'password' => Hash::make(env('UA_DEF_PASSWD')),
-                'level' => config('constants.fb_auth_level')['ua'],
+                'level' => config('constants.auth_level')['attendee'],
                 'login_count' => 0,
                 'email_verified_at'  => now(),
             ]);
-        }
+        } 
 
         // set the previous login date
         session(['prevLogin' => Str::substr($user->last_login, 0, 10)]);
