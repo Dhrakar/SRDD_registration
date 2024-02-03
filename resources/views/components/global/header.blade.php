@@ -16,6 +16,11 @@
 <!-- compiled css and js -->
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+<!-- Other JS libraries -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.20/jsrsasign-all-min.js"></script>
+
+
 <!-- load in local jQuery objects/vars as a module so they load at teh right time -->
 <script type="module">
     
