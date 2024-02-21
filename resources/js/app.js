@@ -8,6 +8,4 @@ export var my_app = {
 
     // base URL address
     baseurl: '{{ env("APP_URL"); }}',
-    // main date string
-
 };
