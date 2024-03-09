@@ -9,15 +9,19 @@
     // if one exists, massage the last login date to a better format
     if(isset(Auth::user()->last_login)) {
         $_ldate = Carbon::parse(Auth::user()->last_login)->toDayDateTimeString();
+        $_usr = Auth::user()->name;
     } else {
         $_ldate = "N/A";
+        $_usr = "Not logged in";
     }
+    Log::debug("Home view called. User: " . $_usr . ", CSRF: " . csrf_token());
 ?>
 @extends('template.app')
 
 @section('content')
     <div class="container">
         <x-srdd.nav-home/>
+        <x-auth-session-status class="mb-4" :status="session('status')" />
         <x-srdd.callout :title="__('Welcome to the Staff Recognition and Development Day registration tool!')" >
             <p>
                 This registration tool will allow you to register for sessions presented by your fellow UAF 

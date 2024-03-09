@@ -7,7 +7,7 @@
     $m_text_def  = "text-md text-slate-100 hover:text-teal-200";  // default menu text attributes 
     $m_text_sel  = "text-md font-semibold text-[#FFC000] ";  // test color when on that route
 ?>
-<x-global.toolbar :target="__('/home')" :icon="__('bi-person-plus')">
+<x-global.toolbar :target="__('#')" :icon="__('')">
 @guest 
     <li class="mx-6">
         <a  class="text-md text-slate-100 hover:text-teal-200" 

@@ -1,7 +1,8 @@
 {{-- 
   -- Login form component 
   --}}
-
+{{-- log --}}
+{{ Log::debug("Opened Blade: login  - " . session('status') ); }}
 {{-- Get Session Info --}}
 <x-auth-session-status class="mb-4" :status="session('status')" />
 <x-srdd.notice :title="__('Custom Login (not UA Single Sign-On)')">
@@ -43,14 +44,12 @@
 <x-srdd.divider />
 <x-srdd.notice :title="__('University of Alaska Google SSO')">
     <span>
-        To login, first click the **Signin with Google** button and sign in to (or select) your UA account. 
-    Please note that the only data used from your account is your UA username@alaska.edu email. This is 
-    because we use your UA email to generate an account for you automatically. When using the UA 
-    SSO authentication, a dummy password is used to ensure that your account can't be signed in to via the non-SSO
-    option. Once you have finished getting your UA authentication, the **Continue** button will be activated.
-    Click that button to finish logging in.
+        {!! Str::inlineMarkdown(__('ui.markdown.gsuite')); !!}
     </span>
+    
     <x-srdd.divider />
+    
+    <x-input-error :messages="$errors->get('email')" class="mt-2" />
     <div class="flex justify-between">
         <div id="buttonDiv" class="flex w-auto px-4"></div>
         <div class="flex px-4">
@@ -60,9 +59,12 @@
             <input type='hidden' id="gs_login_email" name='email' value='unset'/>
             <input type='hidden' id="gs_login_id" name='name' value='unset'/>
             <input type='hidden' id="gs_login_token" name='token' value='unset'/>
-            <x-primary-button id="gs_login_submit" class='mt-2 px-4' disabled>
-                Continue
-            </x-primary-button>
+            <button 
+                type='submit' id="gs_login_submit" 
+                class='mt-2 px-4 bg-slate-600 border border-slate-800 rounded-md font-semibold text-xs text-slate-200 uppercase tracking-widest' 
+                disabled>
+                Need Google Sign-in
+            </button>
         </form>
         </div>
     </div>
@@ -71,18 +73,7 @@
 <!-- script to process the UA auth -->
 
 <script  type="module">
-    function handleCredentialResponse(response) {
-      // get the JWT credential blob
-      var myCred = response.credential;
-      // get the payload object
-      var credPayload = KJUR.jws.JWS.readSafeJSONString(b64utoutf8(myCred.split(".")[1]));
-        // now that we have a google login, append hidden data to form and also turn on the submit button
-        $('#gs_login_email').val(credPayload.email);
-        $('#gs_login_id').val(credPayload.name);
-        $('#gs_login_token').val(myCred);
-        $("#gs_login_submit").removeAttr("disabled");
-    }
-    window.onload = function () {
+    $(document).ready( function () {
       google.accounts.id.initialize({
         client_id: "{{ env('UA_CLIENT_ID') }}",
         callback: handleCredentialResponse
@@ -91,5 +82,18 @@
         document.getElementById("buttonDiv"),
         { theme: "outline", size: "large" }  // customization attributes
       );
-    }
+    });
+    function handleCredentialResponse(response) {
+        // get the JWT credential blob
+        var myCred = response.credential;
+        // get the payload object
+        var credPayload = KJUR.jws.JWS.readSafeJSONString(b64utoutf8(myCred.split(".")[1]));
+        // now that we have a google login, append hidden data to form and also turn on the submit button
+        $('#gs_login_email').val(credPayload.email);
+        $('#gs_login_id').val(credPayload.name);
+        $('#gs_login_token').val(myCred);
+        $("#gs_login_submit").removeAttr("disabled");
+        $("#gs_login_submit").html("Continue");
+        $("#gs_login_submit").attr('class','mt-2 px-4 py-2 bg-green-500 border border-green-800 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest');
+    };
 </script>

@@ -10,7 +10,7 @@
         {{-- Meta tags, CSS and JS libraries --}}
         <x-global.header/>
     </head>
-    <body>
+    <body class="bg-slate-50 dark:bg-slate-800 ">
         {{-- Hidden items for pre-conditioning tailwinds and modals --}}
         <x-global.tw-hidden/>
 
@@ -21,7 +21,7 @@
         </header>
 
         {{-- pull in body content --}}
-        <main  class="bg-slate-50 dark:bg-slate-900 min-h-screen">
+        <main  class="min-h-screen">
             @yield('content')
         </main>
 

@@ -6,15 +6,15 @@
     use Illuminate\Support\Facades\Auth;
 
     // page variables for text color, etc
-    $m_text_def  = "text-md text-slate-50 hover:text-teal-200";  // default menu text attributes 
-    $m_text_sel  = "text-md font-semibold text-[#FFC000] ";  // test color when on that route
+    $m_text_def  = "text-md text-slate-50 dark:text-rose-50 ";  // default menu text attributes 
+    $m_text_sel  = "text-md font-semibold text-[#FFC000] dark:text-amber-300";  // test color when on that route
 
 ?>
 
 <nav x-data="{ open: false }" class="bg-blue-900">
     {{-- Main Navigation Menu --}}
     <div class="max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-16 text-slate-200 hover:text-teal-200 dark:text-rose-300 dark:hover:text-rose-300">
             <div class="flex">
                 {{-- Home Icon/Link --}}
                 <div class="shrink-0 flex items-center">

@@ -38,7 +38,7 @@ return [
       ],
     ],
     'link' => [
-       'register' => 'Create New Non-UA Account',
+       'register' => 'Create New Local Account',
     ], 
     'button' => [
          'cancel' => 'Cancel',

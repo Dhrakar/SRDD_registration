@@ -41,7 +41,6 @@ class UALoginController extends Controller
      */
     public function __construct()
     {
-        Log::debug("UALoginController::__construct()");
         $this->middleware('guest');
     }
 
@@ -66,13 +65,14 @@ class UALoginController extends Controller
             ]
         )->validateWithBag('domain');
 
-        Log::debug(" -> validated ... checking user");
+        Log::debug(" -> validated form ... checking user");
 
         // now look to see if this person is already a user & get their obj from database
         $user = User::where('email',$data['email'])->first();
 
         // they are not already a user, so create a new user obj
         if(!$user){
+            Log::debug(" -> Creating new user account for " . $data['email']);
             $user = User::create([
                 'name' => $data['name'], 
                 'email' => $data['email'],
@@ -81,13 +81,18 @@ class UALoginController extends Controller
                 'login_count' => 0,
                 'email_verified_at'  => now(),
             ]);
-        } 
+        } else {
+            Log::debug(" -> Account " . $data['email'] . " already exists");
+        }
 
         // set the previous login date
         session(['prevLogin' => Str::substr($user->last_login, 0, 10)]);
 
         // set the google token session var (to ensure that @alaska.edu logins are only done via the gsuite widget)
         session(['uaToken' => $data['token']]);
+
+        // regenerate the session ID
+        $request->session()->regenerate();
 
         // with the user object, log them in
         Auth::login($user);
@@ -101,7 +106,7 @@ class UALoginController extends Controller
         session()->forget('uaToken');
 
         // zip back over to the main home view
-        return view('home');
+        return redirect()->intended('login');
     }
 
 }
