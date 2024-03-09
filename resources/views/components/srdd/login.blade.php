@@ -1,10 +1,12 @@
-{{-- 
-  -- Login form component 
-  --}}
+
+
 {{-- log --}}
 {{ Log::debug("Opened Blade: login  - " . session('status') ); }}
+
 {{-- Get Session Info --}}
 <x-auth-session-status class="mb-4" :status="session('status')" />
+
+<x-input-error :messages="$errors->domain->get('email')" class="mt-2" />
 
 <x-srdd.notice :title="__('University of Alaska Google SSO')">
     <span>
@@ -13,7 +15,6 @@
     
     <x-srdd.divider />
     
-    <x-input-error :messages="$errors->get('email')" class="mt-2" />
     <div class="flex justify-between">
         <div id="buttonDiv" class="flex w-auto px-4"></div>
         <div class="flex px-4">
@@ -36,6 +37,9 @@
 
 <x-srdd.divider />
 
+<x-input-error :messages="$errors->get('email')" class="mt-2" />
+<x-input-error :messages="$errors->get('password')" class="mt-2" />
+
 <x-srdd.notice :title="__('Login Without a UA Single Sign-On Account')">
     <span>
         {!! Str::inlineMarkdown(__('ui.markdown.nonUALogin')); !!}
@@ -43,8 +47,6 @@
 
     <form name="std_login" method="POST" action="{{ route('login') }}">
         @csrf
-        <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        <x-input-error :messages="$errors->get('password')" class="mt-2" />
         <div class="mx-2 grid grid-cols-6 auto-col-max-6 gap-1">
             {{-- email address --}}
             <x-srdd.form-label class="col-span-1" for="email" :value="__('Email')" />
@@ -65,7 +67,11 @@
             <div class="col-span-1">&nbsp;</div>
             @if (Route::has('password.request'))
                 <div class="col-span-3 mt-2">
-                    <a class="inline-flex items-center mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150"
+                    <a class="inline-flex items-center mt-2 px-4 py-2 
+                            bg-white border border-gray-300 rounded-md 
+                              font-semibold text-xs text-gray-700 uppercase tracking-widest 
+                              shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
+                              disabled:opacity-25 transition ease-in-out duration-150"
                         href="{{ route('password.request') }}">           
                         {{__('Forgot your Password?') }}
                     </a>

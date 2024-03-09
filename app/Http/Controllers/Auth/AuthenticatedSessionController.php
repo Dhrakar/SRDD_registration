@@ -9,6 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -25,6 +27,18 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        Log::debug("AuthenticatedSessionController::store()");
+        // since this is for the normal login, we do not let folks use alska.edu
+        Validator::make(
+            $request->all(), 
+            [
+                'email' => ['required', 'string', 'email', 'max:255', 'doesnt_end_with:alaska.edu'],
+            ],
+            [
+                'email.doesnt_end_with' => 'Please use the University of Alaska Google SSO option to login with an @alaska.edu account',
+            ]
+        )->validate();
+
         $request->authenticate();
 
         $request->session()->regenerate();
@@ -37,6 +51,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        Log::debug("AuthenticatedSessionController::destroy()");
+        
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
