@@ -13,7 +13,7 @@
 
 @section('content')
 <div class="container">
-    <x-global.toolbar >
+    <x-global.toolbar :icon="__('bi-calendar-range')">
         <li class="mx-6">
             <a  class="text-md text-slate-100 hover:text-teal-200"" 
                 href="{{route('schedule')}}">
