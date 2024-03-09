@@ -10,7 +10,11 @@ $return_status = session('status');
 <div class="container">
 <x-srdd.nav-home/>
 <x-srdd.callout :title="__('User Account Profile')">
-    <p>Here is where you can edit your preferences, update your account or delete it.</P>
+    <span>
+        Here is where you can edit avaialble user preferences and settings. If you
+        are logged in with a non-UA account, you can also update your email address 
+        and password.  Lastly, you can delete your account completely.
+    </span>
 </x-srdd.callout>
 @isset($return_status)
     @if(session('status') == 'password-updated')
@@ -29,19 +33,30 @@ $return_status = session('status');
 @endisset
 <x-srdd.title-box :title="__('Preferences')" :state="0">
     <div class="m-2 p-4 bg-slate-200 rounded-sm">
-        Stuff go here
+        This area is for future Preference settings and updates &nbsp;
+        <i class="bi bi-cone-striped"></i>
     </div>
 </x-srdd.title-box>
-<x-srdd.title-box :title="__('Update Account')" :state="0">
-    <div class="m-2 p-4 bg-slate-200 rounded-sm">
-        @include('profile.partials.update-account')
-    </div>
-</x-srdd.title-box>
-<x-srdd.title-box :title="__('Reset Password')" :state="1">
-    <div class="m-2 p-4 bg-slate-200 rounded-sm">
-        @include('profile.partials.reset-password')
-    </div>
-</x-srdd.title-box>
+@if(isset(Auth::user()->email) && Str::endsWith(Auth::user()->email, 'alaska.edu')) 
+    <x-srdd.title-box :title="__('Update Account')" :state="0">
+        <x-srdd.notice :title="__('UA Account')">
+            <i class="bi bi-person-fill-slash"></i>&nbsp; Your <i>{{ Auth::user()->email }} </i> account
+        was automatically created from your UA Google login along with a special random password.  Thus,
+        they cannot be updated in this application.
+        </x-srdd.notice>
+    </x-srdd.title-box>
+@else
+    <x-srdd.title-box :title="__('Update Account')" :state="0">
+        <div class="m-2 p-4 bg-slate-200 rounded-sm">
+            @include('profile.partials.update-account')
+        </div>
+    </x-srdd.title-box>
+    <x-srdd.title-box :title="__('Reset Password')" :state="1">
+        <div class="m-2 p-4 bg-slate-200 rounded-sm">
+            @include('profile.partials.reset-password')
+        </div>
+    </x-srdd.title-box>
+@endif
 <x-srdd.title-box :title="__('Delete Account')" :state="0">
     <x-srdd.warning>
         <p>
