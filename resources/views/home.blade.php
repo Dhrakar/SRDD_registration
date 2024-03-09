@@ -36,7 +36,7 @@
         
         {{-- Add in the Login form or logged in user info --}}
         @guest 
-            <x-srdd.dialog :title="__('Please Login')">
+            <x-srdd.dialog :title="__('Please Login or Register')">
                 <x-srdd.login/>
             </x-srdd.dialog>
         @endguest

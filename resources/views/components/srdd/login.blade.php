@@ -5,43 +5,7 @@
 {{ Log::debug("Opened Blade: login  - " . session('status') ); }}
 {{-- Get Session Info --}}
 <x-auth-session-status class="mb-4" :status="session('status')" />
-<x-srdd.notice :title="__('Custom Login (not UA Single Sign-On)')">
-    <form name="std_login" method="POST" action="{{ route('login') }}">
-        @csrf
-        <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        <div class="mx-2 grid grid-cols-6 auto-col-max-6 gap-1">
-            {{-- email address --}}
-            <x-srdd.form-label class="col-span-1" for="email" :value="__('Email')" />
-            <x-srdd.form-txt-input class="col-span-4" id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <div class="col-span-1">&nbsp;</div>
-            {{-- password --}}
-            <x-srdd.form-label class="col-span-1" for="password" :value="__('Password')" />
-            <x-srdd.form-txt-input class="col-span-4" type="password" name="password" required autocomplete="current-password" />
-            <div class="col-span-1">&nbsp;</div>
-            {{-- Store in session --}}
-            <div class="col-span-1">&nbsp;</div>
-            <div class="col-span-1 mt-2">
-                <input id="remember_me" type="checkbox" class="text-right rounded border-indigo-900 text-slate-600" name="remember">
-                <span class="text-slate-700 text-sm text-left">{{ __('Remember me')}}</span> 
-            </div> 
-            <div class="col-span-2 mt-2">
-                @if (Route::has('password.request'))
-                <a class="inline-flex items-center mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150"
-                    href="{{ route('password.request') }}">           
-                    {{__('Forgot your Password?') }}
-                </a>
-                @else
-                    &nbsp;
-                @endif
-            </div>
-            <x-primary-button class="col-span-1 mt-2 px-4">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-srdd.notice>
-<x-srdd.divider />
+
 <x-srdd.notice :title="__('University of Alaska Google SSO')">
     <span>
         {!! Str::inlineMarkdown(__('ui.markdown.gsuite')); !!}
@@ -69,6 +33,78 @@
         </div>
     </div>
 </x-srdd.notice>
+
+<x-srdd.divider />
+
+<x-srdd.notice :title="__('Login Without a UA Single Sign-On Account')">
+    <span>
+        {!! Str::inlineMarkdown(__('ui.markdown.nonUALogin')); !!}
+    </span>
+
+    <form name="std_login" method="POST" action="{{ route('login') }}">
+        @csrf
+        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div class="mx-2 grid grid-cols-6 auto-col-max-6 gap-1">
+            {{-- email address --}}
+            <x-srdd.form-label class="col-span-1" for="email" :value="__('Email')" />
+            <x-srdd.form-txt-input class="col-span-4" id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <div class="col-span-1">&nbsp;</div>
+            {{-- password --}}
+            <x-srdd.form-label class="col-span-1" for="password" :value="__('Password')" />
+            <x-srdd.form-txt-input class="col-span-4" type="password" name="password" required autocomplete="current-password" />
+            <div class="col-span-1">&nbsp;</div>
+            {{-- Store in session --}}
+            <div class="col-span-1">&nbsp;</div>
+            <div class="col-span-2 mt-1">
+                <input id="remember_me" type="checkbox" class="text-right rounded border-indigo-900 text-slate-600" name="remember">
+                <x-srdd.form-label class="col-span-1" for="remember_me" :value="__('Remember me')" />
+            </div> 
+            <div class="col-span-3">&nbsp;</div>
+            {{-- Buttons --}}
+            <div class="col-span-1">&nbsp;</div>
+            @if (Route::has('password.request'))
+                <div class="col-span-3 mt-2">
+                    <a class="inline-flex items-center mt-2 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150"
+                        href="{{ route('password.request') }}">           
+                        {{__('Forgot your Password?') }}
+                    </a>
+                </div>
+            @else
+                <div class="col-span-3">&nbsp;</div>
+            @endif
+            <x-primary-button class="col-span-1 mt-2 px-4">
+                {{ __('Log in') }}
+            </x-primary-button>
+            <div class="col-span-1">&nbsp;</div>
+        </div>
+    </form>
+</x-srdd.notice>
+
+<x-srdd.divider />
+
+<x-srdd.notice :title="__('Register for a Non-UA Account')">
+    <span>
+        This link will allow you to register for a non-UA account that can be used to build a calendar or (if you are leading a session)
+        get reports on session attendees.
+    </span>
+
+    <div class="mx-2 grid grid-cols-6 auto-col-max-6 gap-1">
+        <div class="col-span-3 mt-2">
+            <a class="inline-flex items-center mt-2 px-4 py-2 
+                    bg-white border border-gray-300 rounded-md 
+                    font-semibold text-xs text-gray-700 uppercase 
+                    tracking-widest shadow-sm hover:bg-gray-50 
+                    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
+                    disabled:opacity-25 transition ease-in-out duration-150"
+                href="{{ route('register') }}">           
+                {{__('ui.link.register') }}
+            </a>
+        </div>
+    </div>
+
+</x-srdd.notice>
+
 
 <!-- script to process the UA auth -->
 

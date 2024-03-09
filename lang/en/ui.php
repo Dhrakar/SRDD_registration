@@ -57,6 +57,7 @@ return [
           'about' => file_get_contents(resource_path('md/about.md')),
     'boilerplate' => file_get_contents(resource_path('md/uaf_legal.md')),
          'gsuite' => file_get_contents(resource_path('md/gsuite_dialog.md')),
+     'nonUALogin' => file_get_contents(resource_path('md/nonUA_dialog.md')),
         'welcome' => file_get_contents(resource_path('md/welcome_txt.md')),
       'libraries' => file_get_contents(resource_path('md/app_packages.md')),
         
