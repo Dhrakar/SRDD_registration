@@ -111,8 +111,9 @@
 <script  type="module">
     $(document).ready( function () {
       google.accounts.id.initialize({
+         callback: handleCredentialResponse,
         client_id: "{{ env('UA_CLIENT_ID') }}",
-        callback: handleCredentialResponse
+               hd: 'alaska.edu', // limit to just the UA domain
       });
       google.accounts.id.renderButton(
         document.getElementById("buttonDiv"),
@@ -131,5 +132,8 @@
         $("#gs_login_submit").removeAttr("disabled");
         $("#gs_login_submit").html("Continue");
         $("#gs_login_submit").attr('class','mt-2 px-4 py-2 bg-green-500 border border-green-800 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest');
+        // finally, revoke the google id to reset teh button for next time
+        google.accounts.id.revoke(credPayload.email, done => { console.log(done.error); });
+        $("#buttonDiv").hide();
     };
 </script>
