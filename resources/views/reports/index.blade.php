@@ -9,15 +9,17 @@
     use App\Models\Session;
     use App\Models\Schedule;
     use App\Models\User;
+    use App\Models\Event;
     
 
-    $res = DB::table('schedules')
-        ->select(DB::raw('count(user_id) as reg, session_id'))
-        ->where('schedules.year', 2024)
+    $reg = DB::table('schedules')
+        ->select(DB::raw('session_id as id, count(user_id) as cnt '))
+        ->where('schedules.year', config('constants.srdd_year'))
         ->groupBy('session_id')
         ->get()
     ;
-    // dd(User::all()->whereNotIn('id',[1])->random()->name);
+    $regArray = $reg->values()->toArray();
+    $my_events = Auth::user()->events();
  ?>
 @extends('template.app')
 
@@ -66,7 +68,12 @@
                             @endif
                         </td>
                         <td class="border border-indigo-500">
-                            {{ $res->where('session_id', $session->id)->first()->reg }}
+                            @foreach($regArray as $reg)
+                                {{-- Only grab a total if this session has any schedule entries --}}
+                                @if($reg->id == $session->id) 
+                                    {{ $reg->cnt }} 
+                                @endif
+                            @endforeach
                         </td>
                     </tr>
                     @endforeach
@@ -74,5 +81,45 @@
             </table>
         </x-srdd.dialog>
     @endif
+
+    <x-srdd.dialog :title="__('Registrations for events I am leading')">
+        @if($my_events->count() == 0) 
+            <x-srdd.notice>
+                You are not the lead for any events.  If you should be, please contact the SRDD committee.
+            </x-srdd.notice>
+        @else
+            @foreach($my_events->get() as $event) 
+
+                <x-srdd.notice :title="__('Event # ' . $event->id . ' - ' . $event->title )">
+                    @if($event->sessions()->count() == 0)
+                        Your event has not been added to any sessions.
+                    @else
+                        @foreach($event->sessions()->get() as $my_sess)
+                            Session # {{ $my_sess->id }} </br>
+                            @if($my_sess->schedules()->count() == 0 )
+                                Your Session has noone registered yet
+                            @else 
+                                @php
+                                    // build an array of all the registered user IDs
+                                    $usrArray = DB::table('schedules')
+                                        ->select('user_id')
+                                        ->where('year', config('constants.srdd_year'))
+                                        ->where('session_id', $my_sess->id)
+                                        ->get()
+                                        ->toArray();
+                                foreach($usrArray as $usr) {
+                                    $userObj = User::where('id',$usr->user_id)->first()->toArray();
+                                    echo $userObj['name'] . '&nbsp;' . $userObj['email'] . '</br>';
+                                }
+                                @endphp
+                            @endif
+                        @endforeach
+                        <x-srdd.divider/>
+                    @endif
+                </x-srdd.notice>
+            @endforeach
+        @endif
+    </x-srdd.dialog>
+    
 </div>
 @endsection
