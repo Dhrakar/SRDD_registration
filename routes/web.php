@@ -18,7 +18,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CalendarController;  
 use App\Http\Controllers\SchedulerController; 
-use App\Http\Controllers\SendMailController; 
+use App\Http\Controllers\ReportController; 
 use App\Http\Controllers\Auth\UALoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -102,7 +102,7 @@ Route::middleware(['auth', 'auth.level:attendee'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    /* Schedulng */
+    /* Schedulng phpa */
     // Main calendar index
     Route::get('/calendar', CalendarController::class)->name('calendar');
     // User calendar table
@@ -120,7 +120,7 @@ Route::middleware(['auth', 'auth.level:attendee'])->group(function () {
     // Route::get('/email', [SendMailController::class, 'index']);
 
     /* Reports */
-    Route::get('/reports', function () { return view('reports.index'); })->name('reports');
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports');
 
     
 });
