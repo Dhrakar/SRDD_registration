@@ -45,6 +45,7 @@ class SchedulerController extends Controller
         // ok, good to go for adding
         } else {
             DB::table('schedules')->insert([
+                'year' => config('constants.srdd_year'),
                 'user_id' => auth()->user()->id,
                 'session_id' => $session->id
             ]);
@@ -74,7 +75,8 @@ class SchedulerController extends Controller
             if($session->event->needs_reg == 0) {
                 // add to the schedule
                 DB::table('schedules')->insert([
-                    'user_id' => $user->id,
+                    'year'       => config('constants.srdd_year'),
+                    'user_id'    => $user->id,
                     'session_id' => $session->id
                 ]);
             }
@@ -122,8 +124,8 @@ class SchedulerController extends Controller
         $events = new Collection();
 
         // are there any events to add for this user?
-        if($user->schedules->count() > 0) {
-            foreach($user->schedules as $schedule) {
+        if($user->schedules->where('year', config('constants.srdd_year'))->count() > 0) {
+            foreach($user->schedules->where('year', config('constants.srdd_year')) as $schedule) {
                 $events->push([
                     'id' => $schedule->id,
             'start_time' => ($schedule->session->slot->id == 1)?$schedule->session->start_time:$schedule->session->slot->start_time,

@@ -17,6 +17,7 @@ class Schedule extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'year',
         'user_id',
         'session_id',
     ];
