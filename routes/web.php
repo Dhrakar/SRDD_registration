@@ -102,7 +102,7 @@ Route::middleware(['auth', 'auth.level:attendee'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    /* Schedulng phpa */
+    /* Schedulng */
     // Main calendar index
     Route::get('/calendar', CalendarController::class)->name('calendar');
     // User calendar table
