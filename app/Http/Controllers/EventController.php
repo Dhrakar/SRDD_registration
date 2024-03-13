@@ -35,7 +35,7 @@ class EventController extends Controller
             'track_id'    => 'required|numeric',             // limit to current, valid tracks
             'user_id'     => 'required|numeric',              // limit to current, valid users 
             'year'        => 'nullable|numeric|gte:' . config('constants.srdd_year'), // limit to the curr SRDD year+
-            'title'       => 'required|string|max:40', 
+            'title'       => 'required|string|max:80', 
             'description' => 'required|string|max:150',
             'needs_reg'   => 'boolean',
         ]);
@@ -77,7 +77,7 @@ class EventController extends Controller
             'track_id'    => 'required|numeric',             // limit to current, valid tracks
             'user_id'     => 'required|numeric',              // limit to current, valid users 
             'year'        => 'nullable|numeric|gte:' . config('constants.srdd_year'), // limit to the curr SRDD year+
-            'title'       => 'required|string|max:40', 
+            'title'       => 'required|string|max:80', 
             'description' => 'required|string|max:150',
             'needs_reg'   => 'boolean',
         ]);
