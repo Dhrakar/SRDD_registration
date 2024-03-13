@@ -82,10 +82,10 @@ $return_status = session('status');
         </h2>
 
         <p class="mt-1 text-sm text-rose-700 dark:text-rose-300">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+            {{ __('Once your account is deleted, you will be de-registered for any sessions you signed up for (in all SRDD years).') }}
         </p>
 
-        <div class="mt-6">
+        <div class="mt-6 hidden">
             <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
 
             <x-text-input
