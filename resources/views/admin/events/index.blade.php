@@ -128,11 +128,11 @@
                     <input class="text-slate-900 w-4/5 "
                         type="input" name="title" 
                         value="" 
-                        maxlength="50"
-                        width="50"/>
+                        maxlength="80"
+                        width="80"/>
                 </div>
                 <div class="col-span-1 text-xs text-red-600 italic pl-2">
-                     40 chars max length
+                     80 chars max length
                 </div>
                 {{-- set the description --}}
                 <div class="col-span-1 table-header text-right pr-4">
