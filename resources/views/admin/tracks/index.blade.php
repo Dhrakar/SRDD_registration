@@ -74,7 +74,7 @@ This way, events like the Longevity Awards are always included.
           <div class="col-span-4 border border-indigo-800">
             <input class="text-slate-900 w-4/5 "
               type="input" name="title" 
-              value="" 
+              value="{{ old('title') }}" 
               maxlength="50"
               width="50"/>
           </div>
@@ -87,7 +87,7 @@ This way, events like the Longevity Awards are always included.
           <div class="col-span-4 border border-indigo-800">
             <input class="text-slate-900 w-4/5 "
               type="input" name="description" 
-              value="" 
+              value="{{ old('description') }}" 
               maxlength="50"
               width="50"/>
           </div>

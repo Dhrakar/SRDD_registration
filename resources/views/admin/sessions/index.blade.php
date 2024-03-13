@@ -160,7 +160,7 @@
                     <i class="bi bi-clock px-2 text-std"></i>
                   <input class="text-slate-900"
                     type="time" name="start_time" id="start_time"
-                    value="" 
+                    value="{{ old('start_time') }}" 
                     maxlength="10"
                     width="10"/>
                 </div>
@@ -174,7 +174,7 @@
                     <i class="bi bi-clock px-2 text-std"></i>
                     <input class="text-slate-900"
                         type="time" name="end_time" id="end_time"
-                        value="" 
+                        value="{{ old('end_time') }}" 
                         maxlength="10"
                         width="10"
                     />
@@ -204,7 +204,7 @@
                 <div class="col-span-4 border border-indigo-800 flex">
                     <input class="text-slate-900 w-4/5 "
                            type="input" name="url" 
-                           value="" 
+                           value="{{ old('url') }}" 
                            maxlength="500"
                            width="50"/>
                 </div>

@@ -75,7 +75,7 @@
                 <div class="col-span-3 border border-indigo-800">
                   <input class="text-slate-900 w-4/5 pl-1"
                     type="input" name="location" 
-                    value="" 
+                    value="{{ old('location') }}" 
                     maxlength="50"
                     width="50"/>
                 </div>

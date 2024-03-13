@@ -127,7 +127,7 @@
                 <div class="col-span-4 border border-indigo-800">
                     <input class="text-slate-900 w-4/5 "
                         type="input" name="title" 
-                        value="" 
+                        value="{{ old('title') }}" 
                         maxlength="80"
                         width="80"/>
                 </div>
@@ -141,7 +141,7 @@
                 <div class="col-span-4 border border-indigo-800">
                     <input class="text-slate-900 w-4/5 "
                         type="input" name="description" 
-                        value="" 
+                        value="{{ old('description') }}" 
                         maxlength="150"
                         width="80"/>
                 </div>
