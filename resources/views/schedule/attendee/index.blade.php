@@ -73,13 +73,21 @@
                     font-semibold text-xs text-slate-200 uppercase tracking-widest 
                     shadow-sm hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
                     disabled:opacity-25 transition ease-in-out duration-150"
-                href="{{ route('calendar') }}">Goto Registration Page</a>
+                href="{{ route('calendar') }}">Goto Session Registration Page</a>
         </div>
         
     </x-srdd.notice>
     @else
     <x-srdd.callout :title="__('My Event Calendar')">
-        This is the overall schedule of the sessions that you have signed up for.
+        <div class="mb-2">
+            This is the overall schedule of the sessions that you have signed up for.
+        </div>
+        <a  class="ml-4 px-4 py-2 
+                bg-sky-500 border border-sky-300 rounded-md 
+                font-semibold text-xs text-slate-200 uppercase tracking-widest 
+                shadow-sm hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
+                disabled:opacity-25 transition ease-in-out duration-150"
+            href="{{ route('calendar') }}">Goto Session Registration Page</a>
     </x-srdd.callout>
     <x-srdd.title-box :title="__('SRDD Schedule')">
         <div class="mx-2 grid grid-cols-11 gap-0 auto-cols-max-11">
