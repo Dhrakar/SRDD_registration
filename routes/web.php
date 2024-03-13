@@ -168,6 +168,7 @@ Route::middleware(['auth', 'auth.level:admin'])->group(function () {
     Route::delete('/admin/sessions/{session}/destroy', [SessionController::class, 'destroy'])->name('sessions.destroy');
     // users
     Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
+    Route::post('/admin/users/store', [UserController::class, 'store'])->name('users.store');
     Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::patch('/admin/users/{user}', [UserController::class, 'update'])->name('users.update');
 });

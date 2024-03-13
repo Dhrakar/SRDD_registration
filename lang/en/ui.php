@@ -48,6 +48,7 @@ return [
        'new-slot' => "Save New Time Slot",
       'new-track' => "Save New Track",
       'new-venue' => "Save New Location",
+       'new-user' => "Save New User Account",
            'save' => 'Save',
          'update' => 'Save Changes',
     ],
