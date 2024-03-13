@@ -59,6 +59,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
+        Log::debug(" -> Deleted Laravel session ... ");
+
+        // check if the Google one-touch login cookie is set and remove if it is (try to prevent 419 error)
+        if(isset($_COOKIE['g_state'])) { 
+            unset($_COOKIE['g_state']);
+            setcookie('g_state', '', time()-3600);
+         }
+         Log::debug(" -> Deleted Google state cookie ... ");
+
         return redirect('/');
     }
 }

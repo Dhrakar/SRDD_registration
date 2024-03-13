@@ -14,7 +14,7 @@
         $_ldate = "N/A";
         $_usr = "Not logged in";
     }
-    Log::debug("Home view called. User: " . $_usr . ", CSRF: " . csrf_token());
+    Log::debug("Home view called. User: " . $_usr . ", CSRF: " . csrf_token(). ", Google OT cookie? " . ( isset($_COOKIE['g_state'])?'YES':'NO' ) );
 ?>
 @extends('template.app')
 
