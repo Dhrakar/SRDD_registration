@@ -23,7 +23,7 @@
 
     //current git commit info
     $git = rtrim('Version Info: ' . shell_exec("git show --no-patch --format=%cd --date=short ") . " / " . shell_exec("git log --oneline -1 | cut -f1 -d' '")); 
-    $tag = shell_exec("git tag");
+    $tag = shell_exec("git describe --abbrev=0 --tags");
 
     // Common license references
     $lic_mit = "<a href=\"https://github.com/twbs/bootstrap/blob/main/LICENSE\" target=\"_blank\">MIT</a>";
