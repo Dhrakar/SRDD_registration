@@ -25,9 +25,9 @@
             </a>
         </li>
     </x-global.toolbar>
-    <x-srdd.notice :title="__('Schedule Sent')">
+    <x-srdd.success :title="__('Schedule Sent')">
   Your schedule of events has been emailed to {{ $user->email }}
-    </x-srdd.notice>
+    </x-srdd.success>
     <a  class="m-4 px-4 py-2 bg-sky-500 border border-sky-950 rounded-sm 
             font-semibold text-xs text-gray-700 uppercase tracking-widest
             shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 
