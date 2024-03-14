@@ -35,6 +35,7 @@
             number of attendees as well as pull a random attendee record for any door-prize giveaways.
         </span>
     </x-srdd.callout>
+
     <x-srdd.notice :title="__('Registration Totals')">
         <span>
             <i class="bi bi-check2-circle text-emerald-800 dark:text-emerald-300"></i> &nbsp;
@@ -42,84 +43,82 @@
             for sessions in the {{ config('constants.srdd_year') }} SRDD.  
         </span>
     </x-srdd.notice>
+
     @if(Auth::user()->level >= config('constants.auth_level')['admin'])
+        
         <x-srdd.dialog :title="__('Registration For All Sessions on ' . Carbon::parse(env('SRD_DAY', now()))->toFormattedDateString())">
-            <table class="border-collapse border border-slate-800">
-                <thead>
-                    <tr>
-                        <th class="table-header">ID</th>
-                        <th class="table-header">Event Title</th>
-                        <th class="table-header">Description</th>
-                        <th class="table-header">Leader</th>
-                        <th class="table-header">Attendees</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach(Session::all()->where('date_held', config('constants.db_srdd_date')) as $session) {{-- iterate thru the defined sessions for this year --}}
-                    <tr class="hover:bg-slate-400">
-                        <td class="border border-indigo-500">{{ $session->id }}</td>
-                        <td class="border border-indigo-500">{{ $session->event->title }}</td>
-                        <td class="border border-indigo-500">{{ $session->event->description }}</td>
-                        <td class="border border-indigo-500">
-                            @if($session->event->user_id > 0) 
+            <x-srdd.success :title="__('User Selection')">
+                Get a random user ...
+            </x-srdd.success>
+
+            <div class="mx-2 grid grid-cols-10 gap-0 auto-cols-max-10">
+                <div class="px-2 table-header col-span-1">Id</div>
+                <div class="px-2 table-header col-span-2">Event Title</div>
+                <div class="px-2 table-header col-span-4">Description</div>
+                <div class="px-2 table-header col-span-2">Presenter</div>
+                <div class="px-2 table-header col-span-1">Attendees</div>
+                @foreach(Session::all()->where('date_held', config('constants.db_srdd_date')) as $session) {{-- iterate thru the defined sessions for this year --}}
+                    <div class="table-row col-span-1">{{ $session->id }}</div>
+                    <div class="table-row col-span-2">{{ $session->event->title }}</div>
+                    <div class="table-row col-span-4">{{ $session->event->description }}</div>
+                    <div class="table-row col-span-2">
+                        @if($session->event->user_id > 0) 
                                 {{ $session->event->instructor->name }}
                             @else
                                 &dash;
                             @endif
-                        </td>
-                        <td class="border border-indigo-500">
-                            @foreach($regArray as $reg)
-                                {{-- Only grab a total if this session has any schedule entries --}}
-                                @if($reg->id == $session->id) 
-                                    {{ $reg->cnt }} 
-                                @endif
-                            @endforeach
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </div>
+                    <div class="table-row col-span-1">
+                        @foreach($regArray as $reg)
+                            {{-- Only grab a total if this session has any schedule entries --}}
+                            @if($reg->id == $session->id) 
+                                {{ $reg->cnt }} 
+                            @endif
+                        @endforeach
+                    </div>
+                @endforeach
+            </div>
         </x-srdd.dialog>
     @endif
 
-    <x-srdd.dialog :title="__('Registrations for events I am leading')">
-        @if($my_events->count() == 0) 
-            <x-srdd.notice>
-                You are not the lead for any events.  If you should be, please contact the SRDD committee.
-            </x-srdd.notice>
-        @else
-            @foreach($my_events->get() as $event) 
+    @if($my_events->count() == 0) 
+        <x-srdd.notice>
+            You are not the lead for any events.  If you should be, please contact the SRDD committee.
+        </x-srdd.notice>
+    @else
+        <x-srdd.dialog :title="__('Registrations for events I am leading')">
 
-                <x-srdd.notice :title="__('Event # ' . $event->id . ' - ' . $event->title )">
-                    @if($event->sessions()->count() == 0)
-                        Your event has not been added to any sessions.
-                    @else
-                        @foreach($event->sessions()->get() as $my_sess)
-                            Session # {{ $my_sess->id }} </br>
-                            @if($my_sess->schedules()->count() == 0 )
-                                Your Session has noone registered yet
-                            @else 
-                                @php
-                                    // build an array of all the registered user IDs
-                                    $usrArray = DB::table('schedules')
-                                        ->select('user_id')
-                                        ->where('year', config('constants.srdd_year'))
-                                        ->where('session_id', $my_sess->id)
-                                        ->get()
-                                        ->toArray();
-                                foreach($usrArray as $usr) {
-                                    $userObj = User::where('id',$usr->user_id)->first()->toArray();
-                                    echo $userObj['name'] . '&nbsp;' . $userObj['email'] . '</br>';
-                                }
-                                @endphp
-                            @endif
-                        @endforeach
-                        <x-srdd.divider/>
-                    @endif
-                </x-srdd.notice>
-            @endforeach
-        @endif
-    </x-srdd.dialog>
-    
+                @foreach($my_events->get() as $event) 
+
+                    <x-srdd.notice :title="__('Event # ' . $event->id . ' - ' . $event->title )">
+                        @if($event->sessions()->count() == 0)
+                            Your event has not been added to any sessions.
+                        @else
+                            @foreach($event->sessions()->get() as $my_sess)
+                                Session # {{ $my_sess->id }} </br>
+                                @if($my_sess->schedules()->count() == 0 )
+                                    Your Session has noone registered yet
+                                @else 
+                                    @php
+                                        // build an array of all the registered user IDs
+                                        $usrArray = DB::table('schedules')
+                                            ->select('user_id')
+                                            ->where('year', config('constants.srdd_year'))
+                                            ->where('session_id', $my_sess->id)
+                                            ->get()
+                                            ->toArray();
+                                    foreach($usrArray as $usr) {
+                                        $userObj = User::where('id',$usr->user_id)->first()->toArray();
+                                        echo $userObj['name'] . '&nbsp;' . $userObj['email'] . '</br>';
+                                    }
+                                    @endphp
+                                @endif
+                            @endforeach
+                            <x-srdd.divider/>
+                        @endif
+                    </x-srdd.notice>
+                @endforeach
+        </x-srdd.dialog>
+    @endif
 </div>
 @endsection
