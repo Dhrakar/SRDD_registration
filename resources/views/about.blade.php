@@ -49,15 +49,6 @@
         </div>
     </div>
     </x-srdd.callout>
-    <x-srdd.notice :title="__('')">
-        <div class="mx-auto w-9/10 p-2 text-center text-sm">
-            The <a class="dark:text-amber-400 underline" href="http://www.uaf.edu" > University of Alaska Fairbanks </a> is an affirmative action/equal 
-            opportunity employer and educational institution and is a part of the 
-            <a class="dark:text-amber-400 underline" href="http://www.alaska.edu" > University of Alaska </a> system. For questions or suggestions 
-            about this web application, please contact the  
-            <a class="dark:text-amber-400 underline" href="https://www.uaf.edu/uafgov/staff-council/index.php" > UAF Staff Council </a>
-        </div>
-    </x-srdd.notice>
 
     {{-- List out the libraries and licenses used --}}
     <x-srdd.title-box :title="__('Libraries and Licenses')">
@@ -114,13 +105,26 @@
             <div class="px-2 table-row col-span-2">{!! $lic_mit !!}</div>
             <div class="px-2 table-row col-span-2"><a href="https://tippyjs.bootcss.com" target="_blank">Tippy.js</a></div>
 
-<div class="px-2 table-row col-span-3"></div>
-<div class="px-2 table-row col-span-1"></div>
-<div class="px-2 table-row col-span-4"></div>
-<div class="px-2 table-row col-span-2"></div>
-<div class="px-2 table-row col-span-2"></div>
+            {{-- 
+              -- empty row divs for other library copy/paste
+              -- 
+            <div class="px-2 table-row col-span-3"></div>
+            <div class="px-2 table-row col-span-1"></div>
+            <div class="px-2 table-row col-span-4"></div>
+            <div class="px-2 table-row col-span-2">{!! $lic_mit !!}</div>
+            <div class="px-2 table-row col-span-2"><a href="" target="_blank"></a><</div>
+              --}}
         </div>
     </x-srdd.title-box>
+
+    {{-- Legal boilerplate --}}
+    <x-srdd.notice :title="__('Notice of Nondiscrimination')">
+        <div class="mx-auto w-9/10 p-2 text-center text-sm">
+            <span>
+                {!! Str::inlineMarkdown(__('ui.markdown.boilerplate')); !!}
+            </span>
+        </div>
+    </x-srdd.notice>
 </div>
 
 @endsection
