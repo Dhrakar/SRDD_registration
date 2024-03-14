@@ -73,7 +73,7 @@
                         <?php 
                           $levels = config('constants.auth_level');
                           foreach( $levels as $key => $val) {
-                                if($key != 'root' && $val > 0) { // don't show guest or root for this dropdown
+                                if($key != 'root') { // don't show root for this dropdown
                                     echo "<option value='$val' >$key</option> \n";
                                 }
                             }
