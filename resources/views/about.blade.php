@@ -34,7 +34,7 @@
 @section('content')
 <div class="container w-full">
     <x-global.toolbar :icon="__('bi-info-circle')">
-        <span data-tippy-content="{{ $git }}">Ver: {{ $tag }}</span>
+        <li class="mx-6" data-tippy-content="{{ $git }}"><i class="bi bi-github mr-1"></i>{{ $tag }}</li>
     </x-global.toolbar>
     <x-srdd.callout :title="__('SRDD Registration Tool')">
         <em>Staff Recognition &amp; Development Day</em> is a time for us to recognize and thank the hard work done by UAF staff throughout the year.
