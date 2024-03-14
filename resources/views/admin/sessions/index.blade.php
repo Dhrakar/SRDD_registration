@@ -251,7 +251,12 @@
                     </script>
                     @endif
                 </div>
-                <div class="table-row col-span-1">{{ $session->event->title }}</div>
+                <div class="table-row col-span-1"
+                    @if($session->event->user_id > 0) 
+                        data-tippy-content="{{ $session->event->instructor->name }}"
+                        @endif
+                >
+                    {{ $session->event->title }}</div>
                 <div class="table-row col-span-2">{{ $session->venue->location}}</div>
                 <div class="table-row col-span-1">{{ $session->date_held}}</div>
                 <div class="table-row col-span-2">
