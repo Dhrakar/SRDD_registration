@@ -37,6 +37,7 @@
              - Sessions for <i>core</i> events can be automatically added to new schedules  
         </x-srdd.notice>
         <x-srdd.title-box :title="__('Event Track Colors')">
+                <span class="font-bold block w-1/2 mx-8 m-2 px-4 rounded-sm text-slate-200" style="background-color: {{ config('constants.colors.tracks_css.0') }}">Online Zoom Session</span>
             @foreach(Track::all() as $track) {{-- iterate thru the defined tracks --}}
                 @php 
                     $bgc = config('constants.colors.tracks.' . $track->color);
@@ -53,7 +54,8 @@
     window.onload = function () {
         var calendarEl = document.getElementById('calendar');
         var calendar = new Calendar(calendarEl, {
-            contentHeight: 700,
+            contentHeight: 950,
+            expandRows: true,
             customButtons: {
                 srddButton: {
                     text: 'Return to SRDD',
@@ -70,8 +72,8 @@
             },
             initialView: 'timeGridDay',
             initialDate: '{{ $srdd_date }}',
-            slotMinTime: '6:00:00',
-            slotMaxTime: '21:00:00',
+            slotMinTime: '08:00:00',
+            slotMaxTime: '18:00:00',
             {!! $events !!}
             eventDidMount: function(info) {
                 //console.log(info.event.extendedProps.description);

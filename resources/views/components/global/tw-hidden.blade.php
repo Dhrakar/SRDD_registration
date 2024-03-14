@@ -7,6 +7,7 @@
 ?>
 
 <!-- add some hidden color swatches  -->
+<span class="hidden w-32 rounded-md bg-slate-950">0</span>
 <span class="hidden w-32 rounded-md bg-sky-400">1</span>
 <span class="hidden w-32 rounded-md bg-emerald-400">2</span>
 <span class="hidden w-32 rounded-md bg-amber-400">3</span>
