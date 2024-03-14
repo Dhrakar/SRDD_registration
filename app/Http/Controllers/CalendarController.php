@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\LOG;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
 use App\Models\Track;
 use App\Models\User;
@@ -17,18 +20,26 @@ class CalendarController extends Controller
     /**
      * Class variables
      */
+    
     protected string $srdd_date;
     protected array $colors;
     protected Collection $sessions;
     public string $out;
 
     public function __construct() {
-
         // build sql version of the SRDD date constant
         $this->srdd_date = config('constants.db_srdd_date');
 
         // build out teh array of currently defined track colors
         $this->colors = config('constants.colors.tracks');
+
+        // build an array of the schedules for this year
+        // $reg = DB::table('schedules')
+        // ->where('schedules.year', config('constants.srdd_year'))
+        // ->where('user_id', $this->userid)
+        // ->get()
+        // ;
+        // $this->regArray = $reg->values()->toArray(); 
     }
 
     /**
@@ -36,6 +47,12 @@ class CalendarController extends Controller
      */
     public function __invoke(Request $request)
     {
+        Log::debug("CalendarController::__invoke()");
+
+        // get the id for the current user
+        $userid = Auth::user()->id;
+        // use that to filter to a collection of the sessions this user is registered for (the values are the session ids)
+        $sched = Schedule::where('year', config('constants.srdd_year'))->where('user_id', $userid)->get('session_id')->toArray();  
 
         // get all the currently defined sessions for this SRDD
         $this->sessions = Session::where('date_held', $this->srdd_date)->get();
@@ -47,11 +64,25 @@ class CalendarController extends Controller
         foreach ($this->sessions as $session) {
             // how many folks are registered for this session?
             $_reg = $session->schedules->count();
+
+            // is the curent user one of those registered already?
+            $_isReg = false;
+            foreach( $sched as $_sch ) { 
+                if($_sch['session_id'] == $session->id) {
+                    $_isReg = true;
+                    break;
+                }
+            }
             $this->out .= "{ "
                  .  "id: \""    . $session->id . "\", "
                  .  "title: \""
                  .    $session->event->title 
-                 .    " " . (($session->event->needs_reg)?'📋':'') 
+                 .    " " . (   // show the check icon if already registered
+                             ($_isReg)?'✅':''
+                            )        
+                 .    " " . ( // show the calendar icon if this session needs registration
+                             ($session->event->needs_reg)?'📋':''
+                            ) 
                  .    " " . ( // show the lock icon for closed or, if needed, the no-entry icon for full
                              ($session->is_closed)?'🔓': 
                              " " . (((($session->venue->max_seats - $_reg) < 1 ) && ($session->venue->max_seats > 0))?'🚫':'')
@@ -80,7 +111,8 @@ class CalendarController extends Controller
                         . "textColor: \"" . config('constants.colors.tracks_css.0') . "\", " 
                         . "borderColor: \"" . '#292524' . "\", "
                      )
-                 .  "url: \"" . route('schedule.add', $session) . "\", "
+                    // only have a valid URL if the user is not already registered
+                 .  "url: \"" . (($_isReg)?'#':route('schedule.add', $session)) . "\", "
                  . "}, ";
         }
         $this->out .= "], ";

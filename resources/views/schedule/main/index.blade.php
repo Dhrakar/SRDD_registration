@@ -26,7 +26,8 @@
         <p class="w-3/4 ml-4 text-justify">
             This is the main calendar of events for this year's SRDD.  Each session will show the location and the number
         seats remaining (for venues that have limited seating).  Events with a '📋' require registration, while those 
-        with a '🔓' are closed for registration and those with '🚫' have no more seating. Go to 
+        with a '🔓' are closed for registration and those with '🚫' have no more seating. Sessions that you are already 
+        registered for will have a '✅'. Go to 
         <a href="{{route('schedule')}}">{{__('ui.menu.nav-home.review')}}</a> to see a calendar of your registered sessions.
         </p>
         <x-srdd.notice :title="__('Adding Sessions')">
