@@ -22,7 +22,8 @@
     $tippy_ver = json_decode(file_get_contents( base_path('node_modules/tippy.js/package.json')), true );
 
     //current git commit info
-    $git = rtrim('Latest git hash: ' . shell_exec("git log --oneline -1 | cut -f1 -d' '")); 
+    $git = rtrim('Version Info: ' . shell_exec("git show --no-patch --format=%cd --date=short ") . " / " . shell_exec("git log --oneline -1 | cut -f1 -d' '")); 
+    $tag = shell_exec("git tag");
 
     // Common license references
     $lic_mit = "<a href=\"https://github.com/twbs/bootstrap/blob/main/LICENSE\" target=\"_blank\">MIT</a>";
@@ -32,18 +33,20 @@
 
 @section('content')
 <div class="container w-full">
-    <x-global.toolbar :icon="__('bi-info-circle')"/>
+    <x-global.toolbar :icon="__('bi-info-circle')">
+        <span data-tippy-content="{{ $git }}">Ver: {{ $tag }}</span>
+    </x-global.toolbar>
     <x-srdd.callout :title="__('SRDD Registration Tool')">
         <em>Staff Recognition &amp; Development Day</em> is a time for us to recognize and thank the hard work done by UAF staff throughout the year.
 	    It is also an opportunity to celebrate some longevity milestones for our staff.  Lastly, it is a day for staff to be able
 	    to participate in fun training and informational sessions that can help in their personal and professional development.
 	    <br/>
 	    This web application was created to enable UAF employees to easily view and register for those training and event sessions. It
-	    consists of 3 modules
+	    consists of 3 modules: Registration, Reports and Administration. 
         <br/>
-	    <div class="ml-8 text-md">Registration</div>
-	    <div class="ml-8 text-md">Reports</div>
-	    <div class="ml-8 text-md">Administration</div>
+	    <div class="text-sm text-indigo-600 ml-24 mt-4">
+            <i class="text-yellow-400 bi bi-cone">Module descriptions are upcoming </i>
+        </div>
     </div>
     </x-srdd.callout>
     <x-srdd.notice :title="__('')">
