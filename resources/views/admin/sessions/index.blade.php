@@ -49,7 +49,7 @@
     <form method="post" action="{{ route('sessions.destroy', $session) }}" class="inline-block">
         @csrf 
         @method('delete')
-        <div class="mt-6 mb-4 flex justify-end">
+        <div class="mt-4 mb-4 flex justify-end">
             <a class="px-4 py-2 
                     bg-white border border-gray-300 rounded-md 
                     font-semibold text-xs text-gray-700 uppercase tracking-widest 
@@ -223,6 +223,24 @@
 
     {{-- List existing sessions --}}
     <x-srdd.title-box :title="__('Currently Configured Sessions')">
+        <div class="mt-2 mb-4 ml-4 flex gap-1">
+            <a class="px-4 py-2 
+                    bg-green-500 border border-green-300 rounded-md 
+                    font-semibold text-xs text-std uppercase tracking-widest 
+                    shadow-sm hover:green-50
+                    disabled:opacity-25 transition ease-in-out duration-150"
+                href="{{route('sessions.open')}}">
+                <i class="bi bi-calendar-check"></i>&nbsp;{{__('Mark All Sessions OPEN')}}
+            </a>
+            <a class="px-4 py-2 
+                    bg-red-500 border border-red-300 rounded-md 
+                    font-semibold text-xs text-std uppercase tracking-widest 
+                    shadow-sm hover:red-50
+                    disabled:opacity-25 transition ease-in-out duration-150"
+                href="{{route('sessions.close')}}">
+                <i class="bi bi-calendar-x"></i>&nbsp;{{__('Mark All Sessions CLOSED')}}
+            </a>
+        </div>
         <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
             <div class="px-2 table-header col-span-1">Id</div>
             <div class="px-2 table-header col-span-1">Link</div>
