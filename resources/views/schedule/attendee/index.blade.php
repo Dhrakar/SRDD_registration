@@ -6,6 +6,7 @@
      */
  
     use App\Models\Schedule;
+    use App\Models\Session;
     use Illuminate\Support\Facades\Auth;
     use App\Http\Controllers\SchedulerController; 
 
@@ -62,16 +63,21 @@
         </span>
         <br/><br/>
         <div lass="mt-6 mb-4 flex justify-end">
-            <a  class="px-4 py-2 
+            {{-- check to see if this user has any registations.  Only show default sessions button if some are open --}}
+            @if( Session::where('date_held', config('constants.db_srdd_date'))->where('is_closed', 0)->count() > 0)
+                <a  class="px-4 py-2 
                     bg-green-500 border border-green-300 rounded-md 
-                    font-semibold text-xs text-slate-200 uppercase tracking-widest 
-                    shadow-sm hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
+                    font-semibold text-xs text-std uppercase tracking-widest 
+                    shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
                     disabled:opacity-25 transition ease-in-out duration-150"
-                href="{{ route('schedule.init', $user) }}">Add Default Sessions</a>
+                    href="{{ route('schedule.init', $user) }}">Add Open Default Sessions</a>
+            @else
+                <span class="px-4 py-2 bg-slate-500 dark:bg-slate-300 text-std uppercase tracking-widest rounded-md">All sessions are currently closed</span>
+            @endif
             <a  class="px-4 py-2 
                     bg-sky-500 border border-sky-300 rounded-md 
-                    font-semibold text-xs text-slate-200 uppercase tracking-widest 
-                    shadow-sm hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
+                    font-semibold text-xs text-std uppercase tracking-widest 
+                    shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
                     disabled:opacity-25 transition ease-in-out duration-150"
                 href="{{ route('calendar') }}">Goto Session Registration Page</a>
         </div>
@@ -84,7 +90,7 @@
         </div>
         <a  class="ml-4 px-4 py-2 
                 bg-sky-500 border border-sky-300 rounded-md 
-                font-semibold text-xs text-slate-200 uppercase tracking-widest 
+                font-semibold text-xs text-std uppercase tracking-widest 
                 shadow-sm hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
                 disabled:opacity-25 transition ease-in-out duration-150"
             href="{{ route('calendar') }}">Goto Session Registration Page</a>

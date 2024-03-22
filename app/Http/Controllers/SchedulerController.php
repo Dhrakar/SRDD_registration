@@ -77,9 +77,9 @@ class SchedulerController extends Controller
      */
     public function init(Request $request, User $user): RedirectResponse
     {
-        // iterate to grab just sessions with events that do not need registration
+        // iterate to grab just sessions with events that do not need registration and are open
         foreach( Session::all() as $session) {
-            if($session->event->needs_reg == 0) {
+            if($session->event->needs_reg == 0 && ! $session->is_closed ) {
                 // add to the schedule
                 DB::table('schedules')->insert([
                     'year'       => config('constants.srdd_year'),
