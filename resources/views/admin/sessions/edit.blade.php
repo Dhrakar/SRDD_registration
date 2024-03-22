@@ -150,7 +150,7 @@
                 </div>
                 <div class="col-span-4 border border-indigo-800 flex">
                     <select class="ml-1 mr-8 text-sm" id="is_closed" name="is_closed">
-                        @if($event->is_closed == 0)
+                        @if($session->is_closed == 0)
                             <option value="0" selected="selected">Open</option>
                             <option value="1">Closed</option>
                         @else
