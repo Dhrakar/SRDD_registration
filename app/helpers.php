@@ -1,6 +1,7 @@
-<?php
+<?php     
+
     /**
-     * Custom helper functions 
+     * Custom helper functions for this app 
      */
 
     // emits the ordinal version of a number
