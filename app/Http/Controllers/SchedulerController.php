@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\LOG;
 use Illuminate\Support\Collection;
 use Illuminate\Session\Store;
 use App\Models\User;
@@ -34,16 +35,20 @@ class SchedulerController extends Controller
     public function store(Request $request, Session $session): RedirectResponse
     { 
         
-        // First, unset the flash var
-        $request->session()->flash('status','OK');
+        Log::debug("ScheduleController::__store()");
+
         // check to see if we can add this event session
         if($session->is_closed) {
-            $request->session()->flash('status','This session is not open for registration and has not been added to your calendar.');
+            session()->flash('status','This session is not open for registration and has not been added to your calendar.');
         // now check to see if there are any available seats
         } elseif ( ($session->venue->max_seats - $session->schedules->count()) == 0 ) {
-            $request->session()->flash('status','This session has no more room and has not been added to your calendar.');
+            session()->flash('status','This session has no more room and has not been added to your calendar.');
+        // lastly, check to see if this person is already registered
+        } elseif ( Schedule::where('session_id', $session->id)->where('user_id', auth()->user()->id)->count() > 0 ) {
+            session()->flash('status','You are already registered for "' . $session->event->title . '"');
         // ok, good to go for adding
         } else {
+            session()->flash('status','OK');
             DB::table('schedules')->insert([
                 'year' => config('constants.srdd_year'),
                 'user_id' => auth()->user()->id,
@@ -51,6 +56,8 @@ class SchedulerController extends Controller
             ]);
         }
         
+        Log::debug(" -> Status: " . session('status'));
+
         return redirect(route('calendar'));
     }
     

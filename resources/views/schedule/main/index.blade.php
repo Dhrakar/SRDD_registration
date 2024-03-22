@@ -47,6 +47,20 @@
             @endforeach
         </x-srdd.title-box>
     </x-srdd.callout>
+    {{-- Do we have a return status from the schedulecontroller? --}}
+    @if (session('status') == 'OK')
+        {{-- Yes, and the session add was successful --}}
+        <x-srdd.success :title="__('')">
+            This session has been added to your calendar.
+        </x-srdd.success>
+        {{-- yes, and it was an error of some sort --}}
+    @elseif (session('status'))
+        <x-srdd.error :title="__('Session not added')">
+            <span class="italic">
+                {{ session('status') }}
+            </span>
+        </x-srdd.error>
+    @endif    
     <div id="calendar" class="text-std mx-4 mb-8 mt-2 p-4"></div>
 </div>
 {{-- Add all the current sessions --}}
