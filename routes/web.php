@@ -171,6 +171,9 @@ Route::middleware(['auth', 'auth.level:admin'])->group(function () {
     Route::post('/admin/users/store', [UserController::class, 'store'])->name('users.store');
     Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::patch('/admin/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+    // Reports
+    Route::get('/reports/{session}/show', [ReportController::class, 'show'])->name('reports.session');
 });
 
 /**

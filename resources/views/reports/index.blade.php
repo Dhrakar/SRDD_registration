@@ -58,7 +58,11 @@
                 <div class="px-2 table-header col-span-2">Presenter</div>
                 <div class="px-2 table-header col-span-1">Attendees</div>
                 @foreach(Session::all()->where('date_held', config('constants.db_srdd_date')) as $session) {{-- iterate thru the defined sessions for this year --}}
-                    <div class="table-row col-span-1">{{ $session->id }}</div>
+                    <div class="table-row col-span-1">
+                        <A href="{{ route('reports.session', $session) }}"
+                            {{ $session->id }}
+                        </a>
+                    </div>
                     <div class="table-row col-span-2">{{ $session->event->title }}</div>
                     <div class="table-row col-span-4">{{ $session->event->description }}</div>
                     <div class="table-row col-span-2">
