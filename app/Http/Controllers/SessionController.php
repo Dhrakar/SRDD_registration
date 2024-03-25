@@ -9,6 +9,7 @@ use App\Models\Slot;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\LOG;
 
 class SessionController extends Controller
 {
@@ -17,6 +18,7 @@ class SessionController extends Controller
      */
     public function index()
     {
+        Log::debug("SessionController::index()");
         return view('admin.sessions.index');
     }
 
@@ -48,11 +50,27 @@ class SessionController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * close all of the current sessions for this SRDD 
      */
-    public function show(Session $session)
+    public function close(Request $request)
     {
-        //
+        Log::debug("SessionController::close()");
+
+        Session::where('date_held', config('constants.db_srdd_date'))->update(['is_closed' => 1]);
+
+        return redirect(route('sessions.index'));
+    }
+
+    /**
+     * open all of the current sessions for this SRDD 
+     */
+    public function open(Request $request)
+    {
+        Log::debug("SessionController::open()");
+
+        Session::where('date_held', config('constants.db_srdd_date'))->update(['is_closed' => 0]);
+
+        return redirect(route('sessions.index'));
     }
 
     /**

@@ -49,18 +49,18 @@
         @csrf
         <div class="mx-2 grid grid-cols-6 auto-col-max-6 gap-1">
             {{-- email address --}}
-            <x-srdd.form-label class="col-span-1" for="email" :value="__('Email')" />
+            <x-srdd.form-label class="col-span-1 text-std" for="email" :value="__('Email')" />
             <x-srdd.form-txt-input class="col-span-4" id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <div class="col-span-1">&nbsp;</div>
             {{-- password --}}
-            <x-srdd.form-label class="col-span-1" for="password" :value="__('Password')" />
+            <x-srdd.form-label class="col-span-1 text-std" for="password" :value="__('Password')" />
             <x-srdd.form-txt-input class="col-span-4" type="password" name="password" required autocomplete="current-password" />
             <div class="col-span-1">&nbsp;</div>
             {{-- Store in session --}}
             <div class="col-span-1">&nbsp;</div>
             <div class="col-span-2 mt-1">
-                <input id="remember_me" type="checkbox" class="text-right rounded border-indigo-900 text-slate-600" name="remember">
-                <x-srdd.form-label class="col-span-1" for="remember_me" :value="__('Remember me')" />
+                <input id="remember_me" type="checkbox" class="text-right rounded border-indigo-900" name="remember">
+                <x-srdd.form-label class="col-span-1 text-std" for="remember_me" :value="__('Remember me')" />
             </div> 
             <div class="col-span-3">&nbsp;</div>
             {{-- Buttons --}}
@@ -94,15 +94,14 @@
         This link will allow you to register for a non-UA account that can be used to build a calendar or (if you are leading a session)
         get reports on session attendees.
     </span>
-
+ 
     <div class="mx-2 grid grid-cols-6 auto-col-max-6 gap-1">
         <div class="col-span-3 mt-2">
-            <a class="inline-flex items-center mt-2 px-4 py-2 
-                    bg-white border border-gray-300 rounded-md 
-                    font-semibold text-xs text-gray-700 uppercase 
-                    tracking-widest shadow-sm hover:bg-gray-50 
-                    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
-                    disabled:opacity-25 transition ease-in-out duration-150"
+            <a class="px-4 py-2 
+                    bg-green-500 border border-green-300 rounded-md 
+                      font-semibold text-xs text-std uppercase tracking-widest 
+                      shadow-sm hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
+                      disabled:opacity-25 transition ease-in-out duration-150"
                 href="{{ route('register') }}">           
                 {{__('ui.link.register') }}
             </a>

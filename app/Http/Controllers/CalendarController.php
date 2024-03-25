@@ -111,8 +111,8 @@ class CalendarController extends Controller
                         . "textColor: \"" . config('constants.colors.tracks_css.0') . "\", " 
                         . "borderColor: \"" . '#292524' . "\", "
                      )
-                    // only have a valid URL if the user is not already registered
-                 .  "url: \"" . (($_isReg)?'#':route('schedule.add', $session)) . "\", "
+                    // URL for adding this session
+                 .  "url: \"" . route('schedule.add', $session) . "\", "
                  . "}, ";
         }
         $this->out .= "], ";

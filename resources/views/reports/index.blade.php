@@ -20,6 +20,9 @@
     ;
     $regArray = $reg->values()->toArray();
     $my_events = Auth::user()->events();
+
+    // random user (not root and has alaska.edu email)
+    $r_user = User::whereNot('id', 1)->where('email', 'like', '%@alaska.edu')->get()->random();
  ?>
 @extends('template.app')
 
@@ -38,19 +41,31 @@
 
     <x-srdd.notice :title="__('Registration Totals')">
         <span>
+            <i class="bi bi-calendar text-emerald-800 dark:text-emerald-300"></i> &nbsp;
+            There are {{ Session::all()->where('date_held', config('constants.db_srdd_date'))->count() }} total 
+            sessions for this year's SRDD.
+            <br/>
             <i class="bi bi-check2-circle text-emerald-800 dark:text-emerald-300"></i> &nbsp;
             There are a total of {{ Schedule::all()->unique('user_id')->count('user_id') }} accounts registered 
             for sessions in the {{ config('constants.srdd_year') }} SRDD.  
+            <br/>
+            <i class="bi bi-basket text-emerald-800 dark:text-emerald-300"></i> &nbsp;
+            {{ Schedule::where('session_id', 2)->count('user_id') }} attendees are registered for lunch.
+            <br/>
         </span>
     </x-srdd.notice>
 
     @if(Auth::user()->level >= config('constants.auth_level')['admin'])
         
-        <x-srdd.dialog :title="__('Registration For All Sessions on ' . Carbon::parse(env('SRD_DAY', now()))->toFormattedDateString())">
-            <x-srdd.success :title="__('User Selection')">
-                Get a random user ...
-            </x-srdd.success>
+        <x-srdd.success :title="__('User Selection')">
+            Random registered user: {{ $r_user->name }} &lt;{{ $r_user->email }}&gt; 
+            <a class="ml-2 pr-2 px-1 py-1 border bg-indigo-400 border-indigo-200 shadow-sm font-semibold text-xs text-std uppercase rounded-md" 
+               href="{{route('reports')}}">
+                <i class="bi bi-arrow-clockwise"></i>&nbsp;update
+            </a>
+        </x-srdd.success>
 
+        <x-srdd.dialog :title="__('Registration For All Sessions on ' . Carbon::parse(env('SRD_DAY', now()))->toFormattedDateString())">
             <div class="mx-2 grid grid-cols-10 gap-0 auto-cols-max-10">
                 <div class="px-2 table-header col-span-1">Id</div>
                 <div class="px-2 table-header col-span-2">Event Title</div>
