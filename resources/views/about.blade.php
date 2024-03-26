@@ -3,8 +3,13 @@
      *  All about this application
      */
 
+    use Illuminate\Support\Str;
+
     // current Laravel Framework version
     $laravel_ver = Illuminate\Foundation\Application::VERSION;
+
+    // current version of Bootstrap Icons (grep out of header)
+    $bi_ver = Str::betweenFirst( shell_exec("grep bootstrap-icons " . base_path('resources/views/components/global/header.blade.php')), '@', '/');
 
     // current tailwinds version
     $tw_ver = json_decode(file_get_contents( base_path('node_modules/tailwindcss/package.json')), true );
@@ -70,7 +75,7 @@
             <div class="px-2 table-row col-span-2"><a href="https://laravel.com" target="_blank">Laravel Home</a></div>
 
             <div class="px-2 table-row col-span-3">Bootstrap Icons</div>
-            <div class="px-2 table-row col-span-1">1.10.3</div>
+            <div class="px-2 table-row col-span-1">{{ $bi_ver }}</div>
             <div class="px-2 table-row col-span-4">SVG/font for symbols</div>
             <div class="px-2 table-row col-span-2">{!! $lic_mit !!}</div>
             <div class="px-2 table-row col-span-2"><a href="https://icons.getbootstrap.com" target="_blank">Bootstrap Icons</a></div>
