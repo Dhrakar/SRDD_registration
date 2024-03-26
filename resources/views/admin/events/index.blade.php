@@ -184,7 +184,11 @@
                 <div class="px-2 table-header col-span-1">Edit/Delete</div>
                 @foreach(Event::all()->sortBy('year') as $event)
                     <div class="table-row col-span-1">{{ $event->id  }}</div>
-                    <div class="table-row col-span-1">{{ $event->track->title }}</div>
+                    <div class="table-row col-span-1">
+                        @isset($event->track->title)
+                          {{ $event->track->title }}
+                        @endisset
+                    </div>
                     <div class="table-row col-span-2">
                         @if($event->user_id > 0) 
                           {{ $event->instructor->name }}
