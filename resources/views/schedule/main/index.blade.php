@@ -38,7 +38,8 @@
              - Sessions for <i>core</i> events can be automatically added to new schedules  
         </x-srdd.notice>
         <x-srdd.title-box :title="__('Event Track Colors')">
-                <span class="font-bold block w-1/2 mx-8 m-2 px-4 rounded-sm text-slate-200" style="background-color: {{ config('constants.colors.tracks_css.0') }}">Online Zoom Session</span>
+                {{-- not using track 0 for now --}}
+                <!-- <span class="font-bold block w-1/2 mx-8 m-2 px-4 rounded-sm text-slate-200" style="background-color: {{ config('constants.colors.tracks_css.0') }}">Online Zoom Session</span> -->
             @foreach(Track::all() as $track) {{-- iterate thru the defined tracks --}}
                 @php 
                     $bgc = config('constants.colors.tracks.' . $track->color);
