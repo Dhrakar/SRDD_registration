@@ -76,10 +76,10 @@ class CalendarController extends Controller
             $this->out .= "{ "
                  .  "id: \""    . $session->id . "\", "
                  .  "title: \""
-                 .    $session->event->title 
                  .    " " . (   // show the check icon if already registered
-                             ($_isReg)?'✅':''
-                            )        
+                             ($_isReg)?'✅ ':''
+                            )  
+                 .    $session->event->title       
                  .    " " . ( // show the calendar icon if this session needs registration
                              ($session->event->needs_reg)?'📋':''
                             ) 
