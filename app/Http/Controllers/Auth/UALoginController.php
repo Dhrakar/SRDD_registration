@@ -81,8 +81,11 @@ class UALoginController extends Controller
                 'login_count' => 0,
                 'email_verified_at'  => now(),
             ]);
+          // set the init schedule flag
+          $_doInit = 1;
         } else {
             Log::debug(" -> Account " . $data['email'] . " already exists");
+          $_doInit = 0;
         }
 
         // set the previous login date
@@ -105,8 +108,14 @@ class UALoginController extends Controller
         // delete the token session var
         session()->forget('uaToken');
 
-        // zip back over to the main home view
-        return redirect()->intended('login');
+        // was this a new user?
+        if( $_doInit ) {
+          // yes, so go init the schedule
+          return redirect( route('schedule.init', $user));
+        } else {
+          // no, zip back over to the main home view
+          return redirect()->intended('login');
+        }
     }
 
 }
