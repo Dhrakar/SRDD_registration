@@ -272,17 +272,27 @@
                 <div class="table-row col-span-1"
                     @if($session->event->user_id > 0) 
                         data-tippy-content="{{ $session->event->instructor->name }}"
-                        @endif
+                    @endif
                 >
                     {{ $session->event->title }}</div>
-                <div class="table-row col-span-2">{{ $session->venue->location}}</div>
-                <div class="table-row col-span-1">{{ $session->date_held}}</div>
                 <div class="table-row col-span-2">
-                    <i>{{$session->slot->title}}</i> <br/> 
-                    {{$session->slot->start_time}} to {{$session->slot->end_time}}
+                    {{ $session->venue->location}}
                 </div>
-                <div class="table-row col-span-1">{{ $session->start_time}}</div>
-                <div class="table-row col-span-1">{{ $session->end_time}}</div>
+                <div class="table-row col-span-1">
+                    {{ $session->date_held}}
+                </div>
+
+                {{-- if the custom slot, show the custom times otherwise, show slot times --}}
+                <div class="table-row col-span-2">
+                    {{$session->slot->title}}
+                </div>
+                <div class="table-row col-span-1">
+                    {{ ( $session->slot->id == 1)?$session->start_time:$session->slot->start_time }}
+                </div>
+                <div class="table-row col-span-1">
+                    {{ ( $session->slot->id == 1)?$session->end_time:$session->slot->end_time }}
+                </div>
+
                 <div class="table-row col-span-1 text-2xl">
                     @if ($session->is_closed == 0)
                     <i class="bi bi-calendar-check text-green-500"></i>
