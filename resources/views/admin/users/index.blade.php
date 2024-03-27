@@ -23,9 +23,9 @@
                 Adding new users should only be done for presenters.  This process
                 will create a new 'stub' user account that will have a random password.  A UA
                 employee can later on login to this account <i>if</i></br>
-                &nbsp;- The email you enter is their UA @alsaka.edu address</br>
+                &nbsp;- The email you enter is their UA @alaska.edu address</br>
                 &nbsp;- They use the Google UA login (which matches by email address)
-                Other non-UA users will need to use the <b>Forgot my Password</b> feature
+                </br>Other non-UA users will need to use the <b>Forgot my Password</b> feature
                 to reset their password using the email you entered.
             </span> 
         </x-srdd.warning>
