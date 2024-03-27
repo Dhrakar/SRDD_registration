@@ -4,10 +4,14 @@
      */
 
      use App\Models\Track;
+     use App\Models\Session;
      use App\Http\Controllers\CalendarController;
 
     // format the srdd date for use with teh DATE field
     $srdd_date = config('constants.db_srdd_date'); 
+    
+    // set the status var if the flash seesion is set
+    $status = Str::of(session('status'));
  ?>
 @extends('template.app')
 
@@ -49,13 +53,43 @@
         </x-srdd.title-box>
     </x-srdd.callout>
     {{-- Do we have a return status from the schedulecontroller? --}}
-    @if (session('status') == 'OK')
+    @if ($status->startsWith('OK'))
         {{-- Yes, and the session add was successful --}}
         <x-srdd.success :title="__('')">
-            This session has been added to your calendar.
+            <i>{{ $status->substr(Str::position($status, ':')+1) }}</i> has been added to your calendar.
         </x-srdd.success>
+    @elseif ($status->startsWith('WARN'))
+        {{-- yes, and it was a warning about overlapping sessions --}}
+        <x-srdd.warning :title="__('Session overlap')">
+            @php 
+                session()->flash('status','CONFIRM'); // set thee flag for if adding anyway
+                $_title = $status->substr(Str::position($status, ':')+1);
+                $_id = $status->substr(Str::position($status, '|')+1, (Str::position($status, ':') - Str::position($status, '|'))-1);
+                $_sess = Session::where('id', $_id)->first();
+            @endphp
+            The session you are adding: <i>"{{ $_sess->event->title }}"</i> overlaps in time with: <i>"{{ $_title }}"</i> .  <br/>
+            Are sure you want to add this session?
+            <div class="mt-2 mb-4 ml-4 flex gap-1">
+                <a class="px-1 py-2 
+                        bg-white border border-gray-300 rounded-md 
+                          font-semibold text-xs text-gray-700 uppercase tracking-widest 
+                          shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
+                          disabled:opacity-25 transition ease-in-out duration-150"
+                   href="{{route('calendar')}}">
+                    {{__('ui.button.cancel')}}
+                </a>
+                <a class="px-1 py-2 
+                        bg-green-500 border border-green-300 rounded-md 
+                          font-semibold text-xs text-std uppercase tracking-widest 
+                          shadow-sm hover:green-50
+                          disabled:opacity-25 transition ease-in-out duration-150"
+                    href="{{ route('schedule.add', $_sess ) }}">
+                    {{__('ui.button.ok')}}
+                </a>
+            </div>
+        </x-srdd.warning>
+    @elseif ($status->startsWith('ERR'))
         {{-- yes, and it was an error of some sort --}}
-    @elseif (session('status'))
         <x-srdd.error :title="__('Session not added')">
             <span class="italic">
                 {{ session('status') }}

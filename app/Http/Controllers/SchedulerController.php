@@ -35,28 +35,64 @@ class SchedulerController extends Controller
     public function store(Request $request, Session $session): RedirectResponse
     { 
         
-        Log::debug("ScheduleController::__store()");
+        Log::debug("ScheduleController::__store(" . $session->id . ")");
+        Log::debug(" IN -> Status: " . session('status'));
 
-        // check to see if we can add this event session
+        // build an array of the sessions this person is already registered for (if any)
+        $_regSess = Schedule::where('user_id', auth()->user()->id)->pluck('session_id')->toArray();
+
+        // check for errors in adding to this session
         if($session->is_closed) {
-            session()->flash('status','This session is not open for registration and has not been added to your calendar.');
+            session()->flash('status','ERR:This session is not open for registration and has not been added to your calendar.');
+
         // now check to see if there are any available seats
         } elseif ( ($session->venue->max_seats - $session->schedules->count()) == 0 ) {
-            session()->flash('status','This session has no more room and has not been added to your calendar.');
+            session()->flash('status','ERR:This session has no more room and has not been added to your calendar.');
+
         // lastly, check to see if this person is already registered
-        } elseif ( Schedule::where('session_id', $session->id)->where('user_id', auth()->user()->id)->count() > 0 ) {
-            session()->flash('status','You are already registered for "' . $session->event->title . '"');
-        // ok, good to go for adding
-        } else {
-            session()->flash('status','OK');
-            DB::table('schedules')->insert([
-                'year' => config('constants.srdd_year'),
-                'user_id' => auth()->user()->id,
-                'session_id' => $session->id
-            ]);
+        } elseif ( in_array($session->id, $_regSess)) {  // true if already in this session            
+                session()->flash('status','ERR:You are already registered for "' . $session->event->title . '"');  
+        }
+
+        // see if we need to warn about overlapping sessions
+        if( session('status') == 'CONFIRM') {
+            // just clear the status since we are confirming an eariler overlap and skip checking for other overlaps
+            session()->forget('status');
+        } elseif(session()->missing('status')) {
+            // iterate through the list of registered sessions to see if there are overlaps
+            foreach($_regSess as $_id) {
+                $_tmpSess = Session::where('id', $_id)->first();
+
+                // see if the slots are set
+                if( isset($_tmpSess->slot->id) && isset($session->slot->id) ) {
+                    // if the 'custom' time slot, check the individual start/stop times
+                    if( $session->slot->id == 1 && $_tmpSess->slot->id == 1 ) {
+                        // if the session to add start is >= the check session start and the add session end <= compare session end
+                        if( isset($_tmpSess->start_time) && isset($session->start_time)&& isset($_tmpSess->end_time) && isset($session->end_time)
+                          && $_tmpSess->start_time >= $session->start_time 
+                          && $_tmpSess->end_time >= $session->end_time ) 
+                        {
+                            session()->flash('status','WARN|' . $session->id . ':' . $_tmpSess->event->title);
+                        }
+                        // if this is a regular time slot, see it if matches the registered session
+                    } elseif($_tmpSess->slot->id == $session->slot->id ) {
+                        session()->flash('status','WARN|' . $session->id . ':' . $_tmpSess->event->title);
+                    }
+                }
+            }
+        }
+        // if no errors or warnings, 
+        if(session('status') === null ) {
+          // ok, good to go for adding             
+          session()->flash('status','OK:' . $session->event->title);
+          DB::table('schedules')->insert([
+            'year' => config('constants.srdd_year'),
+            'user_id' => auth()->user()->id,
+            'session_id' => $session->id
+          ]);
         }
         
-        Log::debug(" -> Status: " . session('status'));
+        Log::debug(" OUT -> Status: " . session('status'));
 
         return redirect(route('calendar'));
     }

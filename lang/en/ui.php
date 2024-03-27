@@ -43,6 +43,7 @@ return [
     'button' => [
          'cancel' => 'Cancel',
          'delete' => 'Delete!',
+             'ok' => 'OK',
       'new-event' => "Save New Event",
     'new-session' => "Save New Session",
        'new-slot' => "Save New Time Slot",

@@ -35,4 +35,13 @@ class ReportController extends Controller
         return view('reports.index');
     }
 
+    /**
+     * Shows the listing for an individual session
+     */
+    public function show(Request $request, Session $session)
+    {
+        return view('reports.show', [
+            'session' => $session,
+        ]);
+    }
 }
