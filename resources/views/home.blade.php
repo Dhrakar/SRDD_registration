@@ -29,7 +29,7 @@
                 <a class="dark:text-amber-400 underline" href="https://media.uaf.edu/home" target="_blank">UAF Media Stream</a> server, while the 
                 remaining fun/development sessions may be presented via individual Zoom Conference. Please 
                 be sure to sign up for the sessions you are interested in so that we can send you any Zoom 
-                informaiton for these sessions.  Registration will also help us plan for future Staff 
+                information for these sessions.  Registration will also help us plan for future Staff 
                 Recognition days.
             </p>
         </x-srdd.callout>
