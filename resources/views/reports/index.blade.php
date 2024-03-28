@@ -125,18 +125,54 @@
                                     Your Session has noone registered yet
                                 @else 
                                     @php
-                                        // build an array of all the registered user IDs
-                                        $usrArray = DB::table('schedules')
-                                            ->select('user_id')
-                                            ->where('year', config('constants.srdd_year'))
-                                            ->where('session_id', $my_sess->id)
-                                            ->get()
-                                            ->toArray();
-                                    foreach($usrArray as $usr) {
-                                        $userObj = User::where('id',$usr->user_id)->first()->toArray();
-                                        echo $userObj['name'] . '&nbsp;' . $userObj['email'] . '</br>';
-                                    }
+                                        $_regNo = 1;
+                                        $_usrColl = Schedule::where('year', config('constants.srdd_year'))->where('session_id', $my_sess->id)->get()->pluck('user_id');
                                     @endphp
+                                    <div class="ml-2 font-sans text-base text-gray-900">
+                                        <table class="w-full table-fixed border-collapse" >
+                                            <thead>
+                                                <tr class="table-header">
+                                                    <th>#</th>
+                                                    <th>Name</th>
+                                                    <th>Email Address</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                              {{-- Check to see if there are actually any registrations --}}
+                                              @if($_usrColl->count() < 1)
+                                              <tr class="table-row">
+                                                <td colspan="3">There are no registered attendees for this session</td>
+                                              </tr>
+                                              @else
+                                              @foreach($_usrColl as $_usr)  
+                                                @php
+                                                    // get User object for this id (use first() so that there is only 1 item in collection)
+                                                    $_usrObj = User::where('id',$_usr)->first(); 
+                                                @endphp
+                                                {{-- If this object is not null, then continue --}}
+                                                @if($_usrObj !== null)
+                                                    <tr class="table-row">
+                                                        <td>{{ $_regNo++ }}</td>
+                                                        <td>{{ $_usrObj->name  }}</td>
+                                                        <td>{{ $_usrObj->email }}</td>
+                                                    </tr>
+                                                @endif
+                                              @endforeach
+                                              @endif
+                                            </tbody>
+                                        </table>
+                                    </div> 
+                                    <div class="flex gap-2 h-8 pl-4 mt-4">
+                                        <a class="ml-8 px-4 py-2 
+                                                bg-green-500 border border-green-300 rounded-md 
+                                                font-semibold text-xs text-std uppercase tracking-widest 
+                                                shadow-sm hover:green-50
+                                                disabled:opacity-25 transition ease-in-out duration-150"
+                                            href="{{route('reports.session', $my_sess)}}">
+                                            <i class="bi bi-search"></i>
+                                            {{__('Get Session Details')}}
+                                        </a>   
+                                    </div>
                                 @endif
                             @endforeach
                             <x-srdd.divider/>
