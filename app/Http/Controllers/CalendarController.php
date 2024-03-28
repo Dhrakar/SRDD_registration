@@ -78,8 +78,7 @@ class CalendarController extends Controller
                  .  "title: \""
                  .    " " . (   // show the check icon if already registered
                              ($_isReg)?'✅ ':''
-                            )  
-                 .    $session->event->title       
+                            )      
                  .    " " . ( // show the calendar icon if this session needs registration
                              ($session->event->needs_reg)?'📋':''
                             ) 
@@ -87,6 +86,7 @@ class CalendarController extends Controller
                              ($session->is_closed)?'🔓': 
                              " " . (((($session->venue->max_seats - $_reg) < 1 ) && ($session->venue->max_seats > 0))?'🚫':'')
                             )
+                .    $session->event->title   
                  .    "\", "
                  .  "description: \""
                  .   'Presenter -- ' 
