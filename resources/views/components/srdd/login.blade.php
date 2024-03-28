@@ -117,7 +117,7 @@
     $(document).ready( function () {
       google.accounts.id.initialize({
          callback: handleCredentialResponse,
-        client_id: "{{ env('UA_CLIENT_ID') }}",
+        client_id: "{{ config('constants.ua_google_client_id') }}",
                hd: 'alaska.edu', // limit to just the UA domain
       });
       google.accounts.id.renderButton(

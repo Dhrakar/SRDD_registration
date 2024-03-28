@@ -28,7 +28,8 @@ return [
     ],
 
     // application defaults
-       'ua_passwd' => env('UA_DEF_PASSWD'),
+             'ua_passwd' => env('UA_DEF_PASSWD'),
+   'ua_google_client_id' => env('UA_CLIENT_ID'),
 
     // default colors
     'colors' => [
