@@ -39,6 +39,12 @@
         </span>
     </x-srdd.callout>
 
+    @if(session('status') !== null)
+        <x-srdd.error :title="__('Cannot Show Session')">
+            Access to that session is not permitted since you are not logged in with an Admin level account or
+            the instructor for that session.
+        </x-srdd.error>
+    @endisset
     <x-srdd.notice :title="__('Registration Totals')">
         <span>
             <i class="bi bi-calendar text-emerald-800 dark:text-emerald-300"></i> &nbsp;
@@ -74,7 +80,7 @@
                 <div class="px-2 table-header col-span-1">Attendees</div>
                 @foreach(Session::all()->where('date_held', config('constants.db_srdd_date')) as $session) {{-- iterate thru the defined sessions for this year --}}
                     <div class="table-row col-span-1">
-                        <A href="{{ route('reports.session', $session) }}"
+                        <a href="{{ route('reports.session', $session) }}">
                             {{ $session->id }}
                         </a>
                     </div>
