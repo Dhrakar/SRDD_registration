@@ -14,16 +14,21 @@ return [
     
 
     // date of SRDD
+       'srdd_date' => env("SRD_DAY", now()),
     'db_srdd_date' => Carbon::parse(env("SRD_DAY", now()))->format('Y-m-d'),
-    'srdd_year' => Carbon::parse(env("SRD_DAY", now()))->format('Y'),
+   'fmt_srdd_date' => Carbon::parse(env('SRD_DAY', now()))->toFormattedDateString(),
+       'srdd_year' => Carbon::parse(env("SRD_DAY", now()))->format('Y'),
 
-    // User authorizatio levels
+    // User authorization levels
     'auth_level' => [
            'guest' => 0,
         'attendee' => 1,
            'admin' => 5,
             'root' => 9,
     ],
+
+    // application defaults
+       'ua_passwd' => env('UA_DEF_PASSWD'),
 
     // default colors
     'colors' => [

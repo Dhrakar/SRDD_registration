@@ -76,7 +76,7 @@ class UALoginController extends Controller
             $user = User::create([
                 'name' => $data['name'], 
                 'email' => $data['email'],
-                'password' => Hash::make(env('UA_DEF_PASSWD')),
+                'password' => Hash::make(config('constants.ua_passwd')),
                 'level' => config('constants.auth_level')['attendee'],
                 'login_count' => 0,
                 'email_verified_at'  => now(),
