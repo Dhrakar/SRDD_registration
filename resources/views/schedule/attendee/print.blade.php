@@ -14,7 +14,7 @@
     // format the srdd date for use with teh DATE field
     $srdd_date = config('constants.db_srdd_date'); 
     // reformat the SRDD date for the header
-    $_date = Carbon::parse(env('SRD_DAY', now()))->format('jS \\of F, Y');
+    $_date = Carbon::parse(config('constants.srdd_date'))->format('jS \\of F, Y');
     // get the event list for the schedule
     $_sched = new SchedulerController();
     $_events = $_sched->get_sched_json($user);

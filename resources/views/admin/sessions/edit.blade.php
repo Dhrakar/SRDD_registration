@@ -194,7 +194,7 @@
         window.onload = function () {
             flatpickr("#date_held", {
                 enableTime: false,
-                defaultDate: Date.parse('{{ env("SRD_DAY", now()) }}'),
+                defaultDate: Date.parse('{{ config('constants.srdd_date') }}'),
             });
             flatpickr("#start_time", {
                 enableTime: true,

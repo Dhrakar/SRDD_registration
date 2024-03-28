@@ -5,7 +5,7 @@
     use Illuminate\Support\Carbon;
 
     // reformat the SRDD date for the header
-    $_date = Carbon::parse(env('SRD_DAY', now()))->toFormattedDateString();
+    $_date = Carbon::parse(config('constants.fmt_srdd_date'))->toFormattedDateString();
 ?>
 <div class="bg-[#236192] flex justify-between pt-1 pl-2">
     <div class="flex-none py-2">

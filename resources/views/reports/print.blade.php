@@ -9,7 +9,7 @@
     use App\Models\User;
 
     // reformat the SRDD date
-    $_date = Carbon::parse(env('SRD_DAY', now()))->toFormattedDateString();
+    $_date = config('constants.fmt_srdd_date');
     // Calculated number for each attendee 
     $_regNo = 1;
     // build an collection of the userIDs for this session (if any)

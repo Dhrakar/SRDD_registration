@@ -2,7 +2,7 @@
     // get user info
     $_usr = Illuminate\Support\Facades\Auth::user(); 
     // reformat the SRDD date
-    $_date = Illuminate\Support\Carbon::parse(env('SRD_DAY', now()))->toFormattedDateString();
+    $_date = config('constants.fmt_srdd_date');
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">

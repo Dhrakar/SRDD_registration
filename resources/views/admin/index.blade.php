@@ -5,7 +5,7 @@
     use Illuminate\Support\Carbon;
 
     // reformat the SRDD date
-    $_date = Carbon::parse(env('SRD_DAY', now()))->toFormattedDateString();
+    $_date = config('constants.fmt_srdd_date');
 
      $min = App\Models\Venue::all()->keys();
 

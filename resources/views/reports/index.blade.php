@@ -71,7 +71,7 @@
             </a>
         </x-srdd.success>
 
-        <x-srdd.dialog :title="__('Registration For All Sessions on ' . Carbon::parse(env('SRD_DAY', now()))->toFormattedDateString())">
+        <x-srdd.dialog :title="__('Registration For All Sessions on ' . config('constants.fmt_srdd_date'))">
             <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
                 <div class="px-2 table-header col-span-1">Id</div>
                 <div class="px-2 table-header col-span-2">Event Title</div>
