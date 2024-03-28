@@ -12,7 +12,7 @@
 <div class="bg-slate-700 dark:bg-slate-700 text-sm text-slate-200 hover:text-teal-200 font-bold py-1 w-screen" style="list-style-type: none;">
     <ui class="flex">
         <li class="mx-2">
-            <button id="theme-toggle" type="button" title="Toggle Dark/Light Mode">
+            <button id="theme-toggle" type="button" data-tippy-content="Toggle Dark/Light Mode">
                 <span id="theme-toggle-dark-icon" class="hidden">
                     <i class="bi bi-moon-stars "></i>
                 </span>

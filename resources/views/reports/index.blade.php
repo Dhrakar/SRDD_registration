@@ -72,25 +72,31 @@
         </x-srdd.success>
 
         <x-srdd.dialog :title="__('Registration For All Sessions on ' . Carbon::parse(env('SRD_DAY', now()))->toFormattedDateString())">
-            <div class="mx-2 grid grid-cols-10 gap-0 auto-cols-max-10">
+            <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
                 <div class="px-2 table-header col-span-1">Id</div>
                 <div class="px-2 table-header col-span-2">Event Title</div>
-                <div class="px-2 table-header col-span-4">Description</div>
+                <div class="px-2 table-header col-span-3">Description</div>
                 <div class="px-2 table-header col-span-2">Presenter</div>
-                <div class="px-2 table-header col-span-1">Attendees</div>
+                <div class="px-2 table-header col-span-1"># Reg.</div>
+                <div class="px-2 table-header col-span-2">Location</div>
+                <div class="px-2 table-header col-span-1" data-tippy-content="Venue capacity - # Attendees">Seats</div>
                 @foreach(Session::all()->where('date_held', config('constants.db_srdd_date')) as $session) {{-- iterate thru the defined sessions for this year --}}
                     <div class="table-row col-span-1">
                         <a href="{{ route('reports.session', $session) }}">
                             {{ $session->id }}
                         </a>
                     </div>
-                    <div class="table-row col-span-2">{{ $session->event->title }}</div>
-                    <div class="table-row col-span-4">{{ $session->event->description }}</div>
+                    <div class="table-row col-span-2">
+                        {{ $session->event->title ?? '---' }}
+                    </div>
+                    <div class="table-row col-span-3" data-tippy-content="{{ $session->event->description ?? '---' }}">
+                        {{ substr($session->event->description,0,25) . '...' ?? '---' }}
+                    </div>
                     <div class="table-row col-span-2">
                         @if($session->event->user_id > 0) 
                                 {{ $session->event->instructor->name }}
                             @else
-                                &dash;
+                                ---
                             @endif
                     </div>
                     <div class="table-row col-span-1">
@@ -98,6 +104,17 @@
                             {{-- Only grab a total if this session has any schedule entries --}}
                             @if($reg->id == $session->id) 
                                 {{ $reg->cnt }} 
+                            @endif
+                        @endforeach
+                    </div>
+                    <div class="table-row col-span-2">
+                        {{ $session->venue->location ?? '---' }}
+                    </div>
+                    <div class="table-row col-span-1">
+                        @foreach($regArray as $reg)
+                            {{-- Only grab a total if this session has any schedule entries --}}
+                            @if($reg->id == $session->id && isset($session->venue->max_seats)) 
+                                {!! ($session->venue->max_seats == -1)?'<i class="bi bi-infinity"></i>':$session->venue->max_seats - $reg->cnt !!} 
                             @endif
                         @endforeach
                     </div>
