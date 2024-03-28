@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\LOG;
 use App\Models\Event;
 use App\Models\Track;
 use App\Models\User;
@@ -40,8 +41,40 @@ class ReportController extends Controller
      */
     public function show(Request $request, Session $session)
     {
-        return view('reports.show', [
-            'session' => $session,
-        ]);
+        if( $this->_validate_access($session) ) {
+            return view('reports.show', [
+                'session' => $session,
+            ]); 
+        } else {
+            session()->flash('status', 'ERR');
+            return redirect(route('reports'));
+        }
+    }
+
+    /**
+     * Prints out a session (must be either an admin or the instructor)
+     */
+    public function print(Request $request, Session $session)
+    {
+        if( $this->_validate_access($session) ) {
+            return view('reports.print', [
+                'session' => $session,
+            ]); 
+        } else {
+            session()->flash('status', 'ERR');
+            return redirect(route('reports'));
+        }
+    }
+
+    /**
+     * Internal function for checking if a person can load/print the session
+     */
+    protected function _validate_access(Session $session) 
+    {
+        $_usr = Auth::user();
+
+        // check to see if the current user is the lead or is admin
+        return ($_usr->level >= config('constants.auth_level')['admin'] || $session->event->user_id == $_usr->id);
+          
     }
 }
