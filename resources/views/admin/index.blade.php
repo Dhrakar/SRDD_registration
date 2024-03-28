@@ -27,7 +27,7 @@
         Event Date: {{ $_date }}
         </div>
     </x-srdd.title-box>
-    @if(env('APP_DEBUG', false) === true)
+    @if(config('app.debug') === true)
         <div class="flex border-2 border-sky-600">
             <a href="{{ url('/test') }}">Widget Test Page</a>
             <a href="{{ url('/mailable') }}">Email Test Page</a>

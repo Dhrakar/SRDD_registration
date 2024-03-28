@@ -7,5 +7,5 @@ import './bootstrap';
 export var my_app = {
 
     // base URL address
-    baseurl: '{{ env("APP_URL"); }}',
+    baseurl: '{{ config("app.url"); }}',
 };

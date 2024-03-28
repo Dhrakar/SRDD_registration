@@ -21,8 +21,9 @@
                     <a href="{{ route('home') }}"
                        class="inline-flex items-center px-1 pt-1
                         {{ 
-                            (   url()->current() == env('APP_URL')
+                            (   url()->current() == config('app.url')
                              || url()->current() == route('home') 
+                             || url()->current() == route('schedule') 
                              || url()->current() == route('profile.edit')
                             )?$m_text_sel:$m_text_def 
                         }}"
