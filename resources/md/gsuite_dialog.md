@@ -5,3 +5,6 @@
     SSO authentication, a dummy password is used to ensure that your account can't be signed in to via the non-SSO
     option. Once you have finished getting your UA authentication, the **NEED GOOGLE SIGN-IN** button will update
     to **Continue** and will be activated.  Click that button to finish logging in.
+<br/><br/>
+    Please refresh your browser window if you do not see the **Sign in with Google** button or if you get a _419_ 
+    error page.
