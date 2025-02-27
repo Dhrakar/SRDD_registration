@@ -181,7 +181,7 @@
             <div class="px-2 table-header col-span-3">Description</div>
             <div class="px-2 table-header col-span-1">Need Reg?</div>
             <div class="px-2 table-header col-span-1">Edit/Delete</div>
-            @foreach(Event::where('year', config('constants.srdd_year'))->all() as $event)
+            @foreach(Event::where('year', config('constants.srdd_year'))->get() as $event)
                 <div class="table-row col-span-1">{{ $event->id  }}</div>
                 <div class="table-row col-span-1">
                     @isset($event->track->title)
@@ -230,7 +230,7 @@
             <div class="px-2 table-header col-span-3">Description</div>
             <div class="px-2 table-header col-span-1">Need Reg?</div>
             <div class="px-2 table-header col-span-1">Edit/Delete</div>
-            @foreach(Event::where('year', '!=', config('constants.srdd_year')) as $event)
+            @foreach(Event::where('year', '!=', config('constants.srdd_year'))->get() as $event)
                 <div class="table-row col-span-1">{{ $event->id  }}</div>
                 <div class="table-row col-span-1">
                     @isset($event->track->title)
