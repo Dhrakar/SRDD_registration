@@ -62,7 +62,8 @@
 <div class="container w-full">
     <x-srdd.callout :title="__('Session Events')">
         The core of Staff Recognition and Development Day are the Events that are held.  Whether it is Breakfast or Airial Silks, Events are what are held in 
-        the Sessions and then organized by Tracks and presented in Venues. Events can be used for multiple years (like the Longevity ceremony).
+        the Sessions and then organized by Tracks and presented in Venues. Events can be used for multiple years (like the Longevity ceremony). Events for the
+        current SRDD can be edited while events from prior SRDDs can be viewed and duplicated for this year.
     </x-srdd.callout>
 
     {{-- Create a new Event --}}

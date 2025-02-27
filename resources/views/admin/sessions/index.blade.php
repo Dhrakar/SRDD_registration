@@ -68,7 +68,8 @@
 <div class="container w-full">
     <x-srdd.callout :title="__('Sessions')">
     Sessions are where it all comes together.  Each Session is a time and place where an Event is held.  Users sign up for Sessions that are then
-    added to their Schedule for the day.  
+    added to their Schedule for the day.  You can view the sessions for previous SRDD celebrations but they cannot be duplicated because most of the
+    session information (including the events for that session) are different from year to year.
     </x-srdd.callout>
     {{-- Create a new Session --}}
     <x-srdd.title-box :title="__('Add a New Session')"  :state="0">
@@ -330,7 +331,7 @@
                     Toggle Prior Year's Events
                 </button>
             </div>
-            <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
+            <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12" x-show="expanded" x-collapse>
                 <div class="px-2 table-header col-span-1">Id</div>
                 <div class="px-2 table-header col-span-1">Link</div>
                 <div class="px-2 table-header col-span-1">Event</div>
