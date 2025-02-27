@@ -325,9 +325,11 @@
     {{-- List prior sessions --}}
     <x-srdd.title-box :title="__('Prior Year Sessions')">
         <div x-data="{ expanded: false }">
-            <button @click="expanded = ! expanded" class="inline-flex items-center mx-5 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
-                Toggle Prior Year's Events
-            </button>
+            <div class="ml-4 my-2">
+                <button @click="expanded = ! expanded" class="inline-flex items-center mx-5 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+                    Toggle Prior Year's Events
+                </button>
+            </div>
             <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
                 <div class="px-2 table-header col-span-1">Id</div>
                 <div class="px-2 table-header col-span-1">Link</div>
