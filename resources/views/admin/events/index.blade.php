@@ -229,7 +229,7 @@
             <div class="px-2 table-header col-span-2">Title</div>
             <div class="px-2 table-header col-span-3">Description</div>
             <div class="px-2 table-header col-span-1">Need Reg?</div>
-            <div class="px-2 table-header col-span-1">Edit/Delete</div>
+            <div class="px-2 table-header col-span-1">Copy Event</div>
             @foreach(Event::where('year', '!=', config('constants.srdd_year'))->get() as $event)
                 <div class="table-row col-span-1">{{ $event->id  }}</div>
                 <div class="table-row col-span-1">
@@ -249,22 +249,19 @@
                 <div class="table-row col-span-3">{{ $event->description }}</div>
                 <div class="table-row col-span-1">{{ ($event->needs_reg == 1)?'YES':'NO' }}</div>
                 <div class="table-row col-span-1">
-                    @if ($event->year < config('constants.srdd_year') )  {{-- don't allow edits/deletion of historical events --}}
-                        <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
-                        <i class="text-slate-400 bi bi-trash mx-2"></i>
-                    @else
-                        <div class="flex justify-center">
-                            <a href="{{ route('events.edit', $event) }}">
-                                <i class="bi bi-pencil-square mx-2"></i>
-                            </a>
-                            <form name="event_{{ $event->id  }}" method="get" action="{{ route('events.index') }}">
-                                <input type="hidden" id="CONFIRM" name="CONFIRM" value="{{ $event->id  }}"/>
-                                <button type="submit" >
-                                    <i class="text-red-500 bi bi-trash mx-2"></i>
-                                </button>
-                            </form>
-                        </div>
-                    @endif
+                    {{-- create a small form for submitting this event as a new one with this year --}}
+                    <form name="copy_event" method="POST" action="{{ route('events.store') }}">
+                        @csrf
+                        <input type="hidden" name="track_id" value="{{ $event->track->id }}" />
+                        <input type="hidden" name="user_id" value="0" /> {{-- don't set the instructor for the copy --}}
+                        <input type="hidden" name="year" value="config('constants.srdd_year')" />
+                        <input type="hidden" name="title" value="{{ $event->title }}"  />
+                        <input type="hidden" name="description" value="{{ $event->description }}" />
+                        <input type="hidden" name="needs_reg" value="{{ $event->needs_reg }}" />
+                        <button type="submit" >
+                            <i class="bi bi-copy mx-2"></i>
+                        </button>
+                    </form>
                 </div>
             @endforeach
         </div>
