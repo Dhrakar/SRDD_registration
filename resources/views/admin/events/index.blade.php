@@ -254,7 +254,7 @@
                         @csrf
                         <input type="hidden" name="track_id" value="{{ $event->track->id }}" />
                         <input type="hidden" name="user_id" value="0" /> {{-- don't set the instructor for the copy --}}
-                        <input type="hidden" name="year" value="config('constants.srdd_year')" />
+                        <input type="hidden" name="year" value="{{ config('constants.srdd_year')}} " />
                         <input type="hidden" name="title" value="{{ $event->title }}"  />
                         <input type="hidden" name="description" value="{{ $event->description }}" />
                         <input type="hidden" name="needs_reg" value="{{ $event->needs_reg }}" />
