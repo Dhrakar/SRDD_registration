@@ -170,57 +170,104 @@
     </x-srdd.title-box>  
 
     {{-- List existing Events --}}
-  
-    <x-srdd.title-box :title="__('Currently Configured Events')">
-        <div x-data="{syr: {{ config('constants.srdd_year') }}}">
-            <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
-                <div class="px-2 table-header col-span-1">Id</div>
-                <div class="px-2 table-header col-span-1">Track</div>
-                <div class="px-2 table-header col-span-2">Instructor</div>
-                <div class="px-2 table-header col-span-1">Year</div>
-                <div class="px-2 table-header col-span-2">Title</div>
-                <div class="px-2 table-header col-span-3">Description</div>
-                <div class="px-2 table-header col-span-1">Need Reg?</div>
-                <div class="px-2 table-header col-span-1">Edit/Delete</div>
-                @foreach(Event::all()->sortBy('year') as $event)
-                    <div class="table-row col-span-1">{{ $event->id  }}</div>
-                    <div class="table-row col-span-1">
-                        @isset($event->track->title)
-                          {{ $event->track->title }}
-                        @endisset
-                    </div>
-                    <div class="table-row col-span-2">
-                        @if($event->user_id > 0) 
-                          {{ $event->instructor->name }}
-                        @else
-                           &dash;
-                        @endif
-                    </div>
-                    <div class="table-row col-span-1">{{ $event->year }}</div>
-                    <div class="table-row col-span-2">{{ $event->title }}</div>
-                    <div class="table-row col-span-3">{{ $event->description }}</div>
-                    <div class="table-row col-span-1">{{ ($event->needs_reg == 1)?'YES':'NO' }}</div>
-                    <div class="table-row col-span-1">
-                        @if ($event->year < config('constants.srdd_year') )  {{-- don't allow edits/deletion of historical events --}}
-                            <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
-                            <i class="text-slate-400 bi bi-trash mx-2"></i>
-                        @else
-                            <div class="flex justify-center">
-                                <a href="{{ route('events.edit', $event) }}">
-                                    <i class="bi bi-pencil-square mx-2"></i>
-                                </a>
-                                <form name="event_{{ $event->id  }}" method="get" action="{{ route('events.index') }}">
-                                    <input type="hidden" id="CONFIRM" name="CONFIRM" value="{{ $event->id  }}"/>
-                                    <button type="submit" >
-                                        <i class="text-red-500 bi bi-trash mx-2"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
+    
+    <x-srdd.title-box :title="__('Currently Configured Events')">   
+        <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
+            <div class="px-2 table-header col-span-1">Id</div>
+            <div class="px-2 table-header col-span-1">Track</div>
+            <div class="px-2 table-header col-span-2">Instructor</div>
+            <div class="px-2 table-header col-span-1">Year</div>
+            <div class="px-2 table-header col-span-2">Title</div>
+            <div class="px-2 table-header col-span-3">Description</div>
+            <div class="px-2 table-header col-span-1">Need Reg?</div>
+            <div class="px-2 table-header col-span-1">Edit/Delete</div>
+            @foreach(Event::where('year', config('constants.srdd_year')) as $event)
+                <div class="table-row col-span-1">{{ $event->id  }}</div>
+                <div class="table-row col-span-1">
+                    @isset($event->track->title)
+                      {{ $event->track->title }}
+                    @endisset
+                </div>
+                <div class="table-row col-span-2">
+                    @if($event->user_id > 0) 
+                      {{ $event->instructor->name }}
+                    @else
+                       &dash;
+                    @endif
+                </div>
+                <div class="table-row col-span-1">{{ $event->year }}</div>
+                <div class="table-row col-span-2">{{ $event->title }}</div>
+                <div class="table-row col-span-3">{{ $event->description }}</div>
+                <div class="table-row col-span-1">{{ ($event->needs_reg == 1)?'YES':'NO' }}</div>
+                <div class="table-row col-span-1">
+                    @if ($event->year < config('constants.srdd_year') )  {{-- don't allow edits/deletion of historical events --}}
+                        <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
+                        <i class="text-slate-400 bi bi-trash mx-2"></i>
+                    @else
+                        <div class="flex justify-center">
+                            <a href="{{ route('events.edit', $event) }}">
+                                <i class="bi bi-pencil-square mx-2"></i>
+                            </a>
+                            <form name="event_{{ $event->id  }}" method="get" action="{{ route('events.index') }}">
+                                <input type="hidden" id="CONFIRM" name="CONFIRM" value="{{ $event->id  }}"/>
+                                <button type="submit" >
+                                    <i class="text-red-500 bi bi-trash mx-2"></i>
+                                </button>
+                            </form>
+                        </div>
+                    @endif
+                </div>
+            @endforeach
         </div>
     </x-srdd.title-box> 
+    <x-srdd.title-box :title="__('Prior Year Events')">  
+        <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
+            <div class="px-2 table-header col-span-1">Id</div>
+            <div class="px-2 table-header col-span-1">Track</div>
+            <div class="px-2 table-header col-span-2">Instructor</div>
+            <div class="px-2 table-header col-span-1">Year</div>
+            <div class="px-2 table-header col-span-2">Title</div>
+            <div class="px-2 table-header col-span-3">Description</div>
+            <div class="px-2 table-header col-span-1">Need Reg?</div>
+            <div class="px-2 table-header col-span-1">Edit/Delete</div>
+            @foreach(Event::where('year', '!=', config('constants.srdd_year')) as $event)
+                <div class="table-row col-span-1">{{ $event->id  }}</div>
+                <div class="table-row col-span-1">
+                    @isset($event->track->title)
+                      {{ $event->track->title }}
+                    @endisset
+                </div>
+                <div class="table-row col-span-2">
+                    @if($event->user_id > 0) 
+                      {{ $event->instructor->name }}
+                    @else
+                       &dash;
+                    @endif
+                </div>
+                <div class="table-row col-span-1">{{ $event->year }}</div>
+                <div class="table-row col-span-2">{{ $event->title }}</div>
+                <div class="table-row col-span-3">{{ $event->description }}</div>
+                <div class="table-row col-span-1">{{ ($event->needs_reg == 1)?'YES':'NO' }}</div>
+                <div class="table-row col-span-1">
+                    @if ($event->year < config('constants.srdd_year') )  {{-- don't allow edits/deletion of historical events --}}
+                        <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
+                        <i class="text-slate-400 bi bi-trash mx-2"></i>
+                    @else
+                        <div class="flex justify-center">
+                            <a href="{{ route('events.edit', $event) }}">
+                                <i class="bi bi-pencil-square mx-2"></i>
+                            </a>
+                            <form name="event_{{ $event->id  }}" method="get" action="{{ route('events.index') }}">
+                                <input type="hidden" id="CONFIRM" name="CONFIRM" value="{{ $event->id  }}"/>
+                                <button type="submit" >
+                                    <i class="text-red-500 bi bi-trash mx-2"></i>
+                                </button>
+                            </form>
+                        </div>
+                    @endif
+                </div>
+            @endforeach
+        </div>
+    </x-srdd.title-box>
 </div>
 @endsection
