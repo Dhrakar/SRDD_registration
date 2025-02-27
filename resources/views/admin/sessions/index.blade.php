@@ -252,7 +252,7 @@
             <div class="px-2 table-header col-span-1">End Time</div>
             <div class="px-2 table-header col-span-1">Open?</div>
             <div class="px-2 table-header col-span-1">Edit/Delete</div>
-            @foreach(Session::all() as $session) {{-- iterate thru the defined sessions --}}
+            @foreach(Session::where('date_held', '!=', $srdd_date)->get() as $session) {{-- iterate thru this year's sessions --}}
                 <div class="table-row col-span-1">{{ $session->id }}</div>
                 <div class="table-row col-span-1 py-2">
                     @if($session->url === null)
@@ -319,6 +319,15 @@
                     @endif
                 </div>
             @endforeach
+        </div>
+    </x-srdd.title-box>
+
+    {{-- List prior sessions --}}
+    <x-srdd.title-box :title="__('Prior Year Sessions')">
+        <div class="mt-2 mb-4 ml-4 flex gap-1" x-data="{ expanded: false }">
+            <button @click="expanded = ! expanded" class="inline-flex items-center mx-5 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+                Toggle Prior Year's Events
+            </button>
         </div>
     </x-srdd.title-box>
     <script>
