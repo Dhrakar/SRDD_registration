@@ -252,7 +252,7 @@
             <div class="px-2 table-header col-span-1">End Time</div>
             <div class="px-2 table-header col-span-1">Open?</div>
             <div class="px-2 table-header col-span-1">Edit/Delete</div>
-            @foreach(Session::where('date_held', '!=', $srdd_date)->get() as $session) {{-- iterate thru this year's sessions --}}
+            @foreach(Session::where('date_held', '=', $srdd_date)->get() as $session) {{-- iterate thru this year's sessions --}}
                 <div class="table-row col-span-1">{{ $session->id }}</div>
                 <div class="table-row col-span-1 py-2">
                     @if($session->url === null)
@@ -328,6 +328,85 @@
             <button @click="expanded = ! expanded" class="inline-flex items-center mx-5 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
                 Toggle Prior Year's Events
             </button>
+            <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
+                <div class="px-2 table-header col-span-1">Id</div>
+                <div class="px-2 table-header col-span-1">Link</div>
+                <div class="px-2 table-header col-span-1">Event</div>
+                <div class="px-2 table-header col-span-2">Location</div>
+                <div class="px-2 table-header col-span-1">Date Held</div>
+                <div class="px-2 table-header col-span-2">Time Slot</div>
+                <div class="px-2 table-header col-span-1">Start Time</div>
+                <div class="px-2 table-header col-span-1">End Time</div>
+                <div class="px-2 table-header col-span-1">Open?</div>
+                <div class="px-2 table-header col-span-1">Edit/Delete</div>
+                @foreach(Session::where('date_held', '!=', $srdd_date)->orderBy('start_time')->get() as $session) {{-- iterate thru this year's sessions --}}
+                    <div class="table-row col-span-1">{{ $session->id }}</div>
+                    <div class="table-row col-span-1 py-2">
+                        @if($session->url === null)
+                            ---
+                        @else
+                        <a href="{{ $session->url }}"
+                           class="px-2 py-1 rounded-md bg-sky-700 text-slate-50 uppercase text-xs"
+                           id="SESS_{{ $session->id }}_URL"
+                           target="_blank"><i class="bi bi-link-45deg"></i>&nbsp;Link</a>
+                        <script type="module"> 
+                            tippy('#SESS_{{ $session->id }}_URL', { 
+                                content: "{{ $session->url }}",
+                            }); 
+                        </script>
+                        @endif
+                    </div>
+                    <div class="table-row col-span-1"
+                        @if($session->event->user_id > 0) 
+                            data-tippy-content="{{ $session->event->instructor->name }}"
+                        @endif
+                    >
+                        {{ $session->event->title }}</div>
+                    <div class="table-row col-span-2">
+                        {{ $session->venue->location}}
+                    </div>
+                    <div class="table-row col-span-1">
+                        {{ $session->date_held}}
+                    </div>
+    
+                    {{-- if the custom slot, show the custom times otherwise, show slot times --}}
+                    <div class="table-row col-span-2">
+                        {{$session->slot->title}}
+                    </div>
+                    <div class="table-row col-span-1">
+                        {{ ( $session->slot->id == 1)?$session->start_time:$session->slot->start_time }}
+                    </div>
+                    <div class="table-row col-span-1">
+                        {{ ( $session->slot->id == 1)?$session->end_time:$session->slot->end_time }}
+                    </div>
+    
+                    <div class="table-row col-span-1 text-2xl">
+                        @if ($session->is_closed == 0)
+                        <i class="bi bi-calendar-check text-green-500"></i>
+                        @else
+                        <i class="bi bi-calendar-x text-red-500"></i>
+                        @endif
+                    </div>
+                    <div class="table-row col-span-1">
+                        @if ($session->date_held < today() )  {{-- don't allow edits/deletion of historical sessions --}}
+                            <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
+                            <i class="text-slate-400 bi bi-trash mx-2"></i>
+                        @else
+                            <div class="flex justify-center">
+                                <a href="{{ route('sessions.edit', $session) }}">
+                                    <i class="bi bi-pencil-square mx-2"></i>
+                                </a>
+                                <form name="event_{{ $event->id  }}" method="get" action="{{ route('sessions.index') }}">
+                                    <input type="hidden" id="CONFIRM" name="CONFIRM" value="{{ $session->id  }}"/>
+                                    <button type="submit" >
+                                        <i class="text-red-500 bi bi-trash mx-2"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
         </div>
     </x-srdd.title-box>
     <script>
