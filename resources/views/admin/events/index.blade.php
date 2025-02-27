@@ -260,7 +260,7 @@
                             <input type="hidden" name="title" value="{{ $event->title }}"  />
                             <input type="hidden" name="description" value="{{ $event->description }}" />
                             <input type="hidden" name="needs_reg" value="{{ $event->needs_reg }}" />
-                            <button type="submit" >
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-emerald-700 focus:bg-green-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition ease-in-out duration-150" >
                                 <i class="bi bi-copy mx-2"></i>
                             </button>
                         </form>
