@@ -324,7 +324,7 @@
 
     {{-- List prior sessions --}}
     <x-srdd.title-box :title="__('Prior Year Sessions')">
-        <div class="mt-2 mb-4 ml-4 flex gap-1" x-data="{ expanded: false }">
+        <div x-data="{ expanded: false }">
             <button @click="expanded = ! expanded" class="inline-flex items-center mx-5 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
                 Toggle Prior Year's Events
             </button>
@@ -338,7 +338,7 @@
                 <div class="px-2 table-header col-span-1">Start Time</div>
                 <div class="px-2 table-header col-span-1">End Time</div>
                 <div class="px-2 table-header col-span-1">Open?</div>
-                <div class="px-2 table-header col-span-1">Edit/Delete</div>
+                <div class="px-2 table-header col-span-1"> - </div>
                 @foreach(Session::where('date_held', '!=', $srdd_date)->orderBy('start_time')->get() as $session) {{-- iterate thru this year's sessions --}}
                     <div class="table-row col-span-1">{{ $session->id }}</div>
                     <div class="table-row col-span-1 py-2">
@@ -388,22 +388,7 @@
                         @endif
                     </div>
                     <div class="table-row col-span-1">
-                        @if ($session->date_held < today() )  {{-- don't allow edits/deletion of historical sessions --}}
-                            <i class="text-slate-400 bi bi-pencil-square mx-2"></i>
-                            <i class="text-slate-400 bi bi-trash mx-2"></i>
-                        @else
-                            <div class="flex justify-center">
-                                <a href="{{ route('sessions.edit', $session) }}">
-                                    <i class="bi bi-pencil-square mx-2"></i>
-                                </a>
-                                <form name="event_{{ $event->id  }}" method="get" action="{{ route('sessions.index') }}">
-                                    <input type="hidden" id="CONFIRM" name="CONFIRM" value="{{ $session->id  }}"/>
-                                    <button type="submit" >
-                                        <i class="text-red-500 bi bi-trash mx-2"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        @endif
+                        &nbsp;
                     </div>
                 @endforeach
             </div>
