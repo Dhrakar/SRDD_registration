@@ -221,49 +221,52 @@
         </div>
     </x-srdd.title-box> 
     <x-srdd.title-box :title="__('Prior Year Events')">  
-        <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
-            <div class="px-2 table-header col-span-1">Id</div>
-            <div class="px-2 table-header col-span-1">Track</div>
-            <div class="px-2 table-header col-span-2">Instructor</div>
-            <div class="px-2 table-header col-span-1">Year</div>
-            <div class="px-2 table-header col-span-2">Title</div>
-            <div class="px-2 table-header col-span-3">Description</div>
-            <div class="px-2 table-header col-span-1">Need Reg?</div>
-            <div class="px-2 table-header col-span-1">Copy Event</div>
-            @foreach(Event::where('year', '!=', config('constants.srdd_year'))->get() as $event)
-                <div class="table-row col-span-1">{{ $event->id  }}</div>
-                <div class="table-row col-span-1">
-                    @isset($event->track->title)
-                      {{ $event->track->title }}
-                    @endisset
-                </div>
-                <div class="table-row col-span-2">
-                    @if($event->user_id > 0) 
-                      {{ $event->instructor->name }}
-                    @else
-                       &dash;
-                    @endif
-                </div>
-                <div class="table-row col-span-1">{{ $event->year }}</div>
-                <div class="table-row col-span-2">{{ $event->title }}</div>
-                <div class="table-row col-span-3">{{ $event->description }}</div>
-                <div class="table-row col-span-1">{{ ($event->needs_reg == 1)?'YES':'NO' }}</div>
-                <div class="table-row col-span-1">
-                    {{-- create a small form for submitting this event as a new one with this year --}}
-                    <form name="copy_event" method="POST" action="{{ route('events.store') }}">
-                        @csrf
-                        <input type="hidden" name="track_id" value="{{ $event->track->id }}" />
-                        <input type="hidden" name="user_id" value="0" /> {{-- don't set the instructor for the copy --}}
-                        <input type="hidden" name="year" value="{{ config('constants.srdd_year')}} " />
-                        <input type="hidden" name="title" value="{{ $event->title }}"  />
-                        <input type="hidden" name="description" value="{{ $event->description }}" />
-                        <input type="hidden" name="needs_reg" value="{{ $event->needs_reg }}" />
-                        <button type="submit" >
-                            <i class="bi bi-copy mx-2"></i>
-                        </button>
-                    </form>
-                </div>
-            @endforeach
+        <div x-data="{ expanded: false }">
+            <button @click="expanded = ! expanded">Show Prior Year's Events</button>
+            <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12" x-show="expanded" x-collapse>
+                <div class="px-2 table-header col-span-1">Id</div>
+                <div class="px-2 table-header col-span-1">Track</div>
+                <div class="px-2 table-header col-span-2">Instructor</div>
+                <div class="px-2 table-header col-span-1">Year</div>
+                <div class="px-2 table-header col-span-2">Title</div>
+                <div class="px-2 table-header col-span-3">Description</div>
+                <div class="px-2 table-header col-span-1">Need Reg?</div>
+                <div class="px-2 table-header col-span-1">Copy Event</div>
+                @foreach(Event::where('year', '!=', config('constants.srdd_year'))->get() as $event)
+                    <div class="table-row col-span-1">{{ $event->id  }}</div>
+                    <div class="table-row col-span-1">
+                        @isset($event->track->title)
+                          {{ $event->track->title }}
+                        @endisset
+                    </div>
+                    <div class="table-row col-span-2">
+                        @if($event->user_id > 0) 
+                          {{ $event->instructor->name }}
+                        @else
+                           &dash;
+                        @endif
+                    </div>
+                    <div class="table-row col-span-1">{{ $event->year }}</div>
+                    <div class="table-row col-span-2">{{ $event->title }}</div>
+                    <div class="table-row col-span-3">{{ $event->description }}</div>
+                    <div class="table-row col-span-1">{{ ($event->needs_reg == 1)?'YES':'NO' }}</div>
+                    <div class="table-row col-span-1">
+                        {{-- create a small form for submitting this event as a new one with this year --}}
+                        <form name="copy_event" method="POST" action="{{ route('events.store') }}">
+                            @csrf
+                            <input type="hidden" name="track_id" value="{{ $event->track->id }}" />
+                            <input type="hidden" name="user_id" value="0" /> {{-- don't set the instructor for the copy --}}
+                            <input type="hidden" name="year" value="{{ config('constants.srdd_year')}} " />
+                            <input type="hidden" name="title" value="{{ $event->title }}"  />
+                            <input type="hidden" name="description" value="{{ $event->description }}" />
+                            <input type="hidden" name="needs_reg" value="{{ $event->needs_reg }}" />
+                            <button type="submit" >
+                                <i class="bi bi-copy mx-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </x-srdd.title-box>
 </div>
