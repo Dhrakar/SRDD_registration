@@ -71,3 +71,13 @@
 -- Added Tester acct to user seeder
 --  
 
+** 2025 **
+
+27 Feb
+ - in order to clear up a 500 error for the Events index page, I needed to clear all caches:
+  phpa optimize:clear
+ - accordioning the Events admin page using the alpine collapse plugin
+ - set up the events to be duplicated from past years to curr.
+ - removed edit/delete from sessions for prior years
+  -- added reports to archived sessions
+

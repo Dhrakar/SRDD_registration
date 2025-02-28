@@ -341,7 +341,7 @@
                 <div class="px-2 table-header col-span-1">Start Time</div>
                 <div class="px-2 table-header col-span-1">End Time</div>
                 <div class="px-2 table-header col-span-1">Open?</div>
-                <div class="px-2 table-header col-span-1"> - </div>
+                <div class="px-2 table-header col-span-1">Report</div>
                 @foreach(Session::where('date_held', '!=', $srdd_date)->orderBy('start_time')->get() as $session) {{-- iterate thru this year's sessions --}}
                     <div class="table-row col-span-1">{{ $session->id }}</div>
                     <div class="table-row col-span-1 py-2">
@@ -391,7 +391,9 @@
                         @endif
                     </div>
                     <div class="table-row col-span-1">
-                        &nbsp;
+                        <a href="{{ route('reports.session', $session) }}">
+                            {{ $session->id }}
+                        </a>
                     </div>
                 @endforeach
             </div>
