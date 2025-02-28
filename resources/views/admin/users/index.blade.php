@@ -88,8 +88,11 @@
         </form>
     </x-srdd.title-box>
     {{-- List existing users --}}
-    <div class="overflow-y-auto">
+    <div class="overflow-y-auto" x-data="{ search: '%'}">
         <x-srdd.title-box :title="__('Currently Configured Users')">
+            <div class="float-end clear-both ">
+                <input type="text" x-model="search" />
+            </div>
             <div class="mx-2 grid grid-cols-12 gap-0 auto-cols-max-12">
                 <div class="px-2 table-header col-span-1">Id</div>
                 <div class="px-2 table-header col-span-2">Name</div>
@@ -127,6 +130,7 @@
                     @endif
                 @endforeach
             </div>
+            <span x-text="search"></span>
         </x-srdd.title-box>
     </div>
 </div>
