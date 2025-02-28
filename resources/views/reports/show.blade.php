@@ -138,7 +138,7 @@
                     font-semibold text-xs text-std uppercase tracking-widest 
                     shadow-sm hover:green-50
                     disabled:opacity-25 transition ease-in-out duration-150"
-                href="{{route('reports')}}">
+                href="{{url()->previous()}}">
                 <i class="bi bi-calendar-check"></i>&nbsp;{{__('Return')}}
             </a>
       </x-srdd.title-box>
