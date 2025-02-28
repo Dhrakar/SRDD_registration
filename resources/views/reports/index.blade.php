@@ -22,9 +22,7 @@
     $my_events = Auth::user()->events();
 
     // random user (not root and has alaska.edu email)
-    if(Schedule::where('year', 2025)->count() < 1) {
-        $r_user = '';
-    } else {
+    if(Schedule::where('year', 2025)->count() > 0) {
         $r_user = User::where('email', 'like', '%@alaska.edu')
                       ->where('id', Schedule::where('year', config('constants.srdd_year'))
                                             ->get()
@@ -74,7 +72,7 @@
     @if(Auth::user()->level >= config('constants.auth_level')['admin'])
         
         <x-srdd.success :title="__('User Selection')">
-            @if(isset($r_user))
+            @if(Schedule::where('year', 2025)->count() > 0)
             Random registered user: {{ $r_user->name }} &lt;{{ $r_user->email }}&gt; 
             <a class="ml-2 pr-2 px-1 py-1 border bg-indigo-400 border-indigo-200 shadow-sm font-semibold text-xs text-std uppercase rounded-md" 
                href="{{route('reports')}}">
