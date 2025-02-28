@@ -52,7 +52,7 @@
             sessions for this year's SRDD.
             <br/>
             <i class="bi bi-check2-circle text-emerald-800 dark:text-emerald-300"></i> &nbsp;
-            There are a total of {{ Schedule::all()->unique('user_id')->count('user_id') }} accounts registered 
+            There are a total of {{ Schedule::where('year', config('constants.srdd_year'))->get()->unique('user_id')->count('user_id') }} accounts registered 
             for sessions in the {{ config('constants.srdd_year') }} SRDD.  
             <br/>
             <i class="bi bi-basket text-emerald-800 dark:text-emerald-300"></i> &nbsp;
