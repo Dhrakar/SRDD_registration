@@ -96,7 +96,7 @@
                     // Calculated number for each attendee 
                     $_regNo = 1;
                     // build an collection of the userIDs for this session (if any)
-                    $_usrColl = Schedule::where('year', config('constants.srdd_year'))->where('session_id', $session->id)->get()->pluck('user_id');
+                    $_usrColl = Schedule::where('session_id', $session->id)->get()->pluck('user_id');
                 @endphp
                 <div class="ml-2 font-sans text-base text-gray-900">
                     <table class="w-1/2 border-collapse" >

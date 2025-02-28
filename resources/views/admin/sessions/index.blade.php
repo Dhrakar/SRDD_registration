@@ -390,9 +390,9 @@
                         <i class="bi bi-calendar-x text-red-500"></i>
                         @endif
                     </div>
-                    <div class="table-row col-span-1">
+                    <div class="table-row col-span-1 mt-4 mx-2 justify-center">
                         <a href="{{ route('reports.session', $session) }}">
-                            {{ $session->id }}
+                            <i class="bi bi-list-columns-reverse"></i>
                         </a>
                     </div>
                 @endforeach
