@@ -22,7 +22,7 @@
     $my_events = Auth::user()->events();
 
     // random user (not root and has alaska.edu email)
-    if(Schedule::where('year', 2025)->count() > 0) {
+    if(Schedule::where('year', config('constants.srdd_year'))->count() > 0) {
         $r_user = User::where('email', 'like', '%@alaska.edu')
                       ->where('id', Schedule::where('year', config('constants.srdd_year'))
                                             ->get()
