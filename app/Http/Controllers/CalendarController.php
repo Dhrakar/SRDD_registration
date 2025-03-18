@@ -104,10 +104,10 @@ class CalendarController extends Controller
                  .   (($session->venue->id == 2 )? 
                          // if this an online session, use distinctive colors
                           "backgroundColor: \"" . config('constants.colors.tracks_css.0') . "\","
-                        . "textColor: \"" . config('constants.colors.tracks_css.' . $session->event->track->id) . " \","
+                        . "textColor: \"" . config('constants.colors.tracks_css.' . $session->event->track->color) . " \","
                         . "borderColor: \"" . '#292524' . "\", "
                       :  // no, so use normal colors 
-                          "backgroundColor: \"" . config('constants.colors.tracks_css.' . $session->event->track->id) .  "\", "
+                          "backgroundColor: \"" . config('constants.colors.tracks_css.' . $session->event->track->color) .  "\", "
                         . "textColor: \"" . config('constants.colors.tracks_css.0') . "\", " 
                         . "borderColor: \"" . '#292524' . "\", "
                      )
