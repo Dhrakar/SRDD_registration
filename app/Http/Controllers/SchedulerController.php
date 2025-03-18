@@ -39,7 +39,10 @@ class SchedulerController extends Controller
         Log::debug(" IN -> Status: " . session('status'));
 
         // build an array of the sessions this person is already registered for (if any)
-        $_regSess = Schedule::where('user_id', auth()->user()->id)->pluck('session_id')->toArray();
+        $_regSess = Schedule::where('year',config('constants.srdd_year'))
+                            ->where('user_id', auth()->user()->id)
+                            ->pluck('session_id')
+                            ->toArray();
 
         // check for errors in adding to this session
         if($session->is_closed) {
@@ -114,7 +117,7 @@ class SchedulerController extends Controller
     public function init(Request $request, User $user): RedirectResponse
     {
         // iterate to grab just sessions with events that do not need registration and are open
-        foreach( Session::all() as $session) {
+        foreach( Session::where('date_held', config('constants.db_srdd_date'))->get() as $session) {
             if($session->event->needs_reg == 0 && ! $session->is_closed ) {
                 // add to the schedule
                 DB::table('schedules')->insert([
