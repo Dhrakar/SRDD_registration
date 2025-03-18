@@ -56,7 +56,7 @@
 @endisset
     <x-srdd.nav-home />
     {{-- check for any sessions for this user --}}
-    @if ($user->schedules->count() < 1) 
+    @if ($user->schedules->where('year', config('constants.srdd_year'))->count() < 1) 
     <x-srdd.notice :title="__('Nothing Scheduled')">
         <span class="mb-8">
             {{ __('You do not have any sessions currently scheduled') }}
