@@ -78,13 +78,13 @@
 
         {{-- Pick a random user if there are any registered for this year --}}
 
-        <x-srdd.success :title="__('User Selection')">
+        <x-srdd.dialog :title="__('User Selection')">
             @if($r_user === "NONE")
-                none
+                <span>No users are registered for sessions yet thie year</span>
             @else
-                some
+                Random registered user: 
             @endif
-        </x-srdd.success>
+        </x-srdd.dialog>
 
 
     @endif
