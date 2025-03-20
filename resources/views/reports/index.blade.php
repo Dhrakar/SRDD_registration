@@ -76,6 +76,8 @@
 
         {{-- Pick a random user if there are any registered for this year --}}
         @if(1)
+          Has sessions
+          <!--
             <x-srdd.success :title="__('User Selection')">
                 Random registered user: {{ $r_user->name }} &lt;{{ $r_user->email }}&gt;
                 <a class="ml-2 pr-2 px-1 py-1 
@@ -87,10 +89,14 @@
                     <i class="bi bi-arrow-clockwise"></i>&nbsp;update
                 </a>
             </x-srdd.success>
+        -->
         @else
+            NO sessions
+            <!--
             <x-srdd.warning :title="__('User Selection')">
                 <span>No users are registered for sessions yet thie year</span>
             </x-srdd.warning>
+        -->
         @endif
 
     @endif
