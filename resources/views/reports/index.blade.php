@@ -30,6 +30,8 @@
                                             ->pluck('user_id')
                                             ->random()
                              )->get();
+    } else {
+        $r_user = "NONE";
     }
  ?>
 @extends('template.app')
@@ -77,6 +79,11 @@
         {{-- Pick a random user if there are any registered for this year --}}
 
         <x-srdd.success :title="__('User Selection')">
+            @if($r_user === "NONE")
+                none
+            @else
+                some
+            @endif
         </x-srdd.success>
 
 
