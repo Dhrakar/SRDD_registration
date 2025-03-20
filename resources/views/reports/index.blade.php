@@ -55,5 +55,26 @@
         </x-srdd.error>
     @endisset
 
+    {{-- Limit this part to just admins --}}
+    @if(Auth::user()->level >= config('constants.auth_level')['admin'])
+
+        <x-srdd.notice :title="__('Registration Totals')">
+            <span>
+                <i class="bi bi-calendar text-emerald-800 dark:text-emerald-300"></i> &nbsp;
+                There are {{ Session::all()->where('date_held', config('constants.db_srdd_date'))->count() }} total
+                sessions for this year's SRDD.
+                <br/>
+                <i class="bi bi-check2-circle text-emerald-800 dark:text-emerald-300"></i> &nbsp;
+                There are a total of {{ Schedule::where('year', config('constants.srdd_year'))->get()->unique('user_id')->count('user_id') }} accounts registered
+                for sessions in the {{ config('constants.srdd_year') }} SRDD.
+                <br/>
+                <i class="bi bi-basket text-emerald-800 dark:text-emerald-300"></i> &nbsp;
+                {{ Schedule::where('session_id', 2)->count('user_id') }} attendees are registered for lunch.
+                <br/>
+            </span>
+        </x-srdd.notice>
+
+    @endif
+
 </div>
 @endsection
