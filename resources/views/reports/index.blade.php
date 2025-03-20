@@ -60,7 +60,7 @@
     {{-- Limit this part to just admins --}}
     @if(Auth::user()->level >= config('constants.auth_level')['admin'])
 
-        <x-srdd.notice :title="config('constants.srdd_year') . ' ' . __('Registration Totals')">
+        <x-srdd.notice :title="config('constants.srdd_year') . ' ' . __('Registration Overview')">
             <span>
                 <i class="bi bi-calendar text-emerald-800 dark:text-emerald-300"></i> &nbsp;
                 There are {{ Session::all()->where('date_held', config('constants.db_srdd_date'))->count() }} total
@@ -73,14 +73,12 @@
                 <i class="bi bi-basket text-emerald-800 dark:text-emerald-300"></i> &nbsp;
                 {{ Schedule::where('session_id', 2)->count('user_id') }} attendees are registered for lunch.
                 <br/>
-            </span>
-            <x-srdd.divider/>
-            <span>
-                <i class="bi bi-user text-emerald-800 dark:text-emerald-300"></i> &nbsp;
+                <i class="bi bi-people text-emerald-800 dark:text-emerald-300"></i> &nbsp;
+                Random registered user: &nbsp;
                 @if($r_user === "NONE")
                     <span>No users are registered for sessions yet thie year</span>
                 @else
-                    Random registered user: 
+                    <span>{{ $r_user->name }} &lt;{{ $r_user->email }}&gt;</span>
                 @endif
             </span>
         </x-srdd.notice>
