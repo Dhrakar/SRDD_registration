@@ -12,6 +12,8 @@
     use App\Models\Event;
     
 
+    dd(Auth::user()->level );
+    
     $reg = DB::table('schedules')
         ->select(DB::raw('session_id as id, count(user_id) as cnt '))
         ->where('schedules.year', config('constants.srdd_year'))
@@ -68,7 +70,7 @@
             <br/>
         </span>
     </x-srdd.notice>
-dd(Auth::user()->level );
+
     @if(Auth::user()->level >= config('constants.auth_level')['admin'])
         
         <x-srdd.success :title="__('User Selection')">
