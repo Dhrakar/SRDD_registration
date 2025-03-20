@@ -12,8 +12,6 @@
     use App\Models\Event;
     
 
-    dd(Auth::user()->level );
-    
     $reg = DB::table('schedules')
         ->select(DB::raw('session_id as id, count(user_id) as cnt '))
         ->where('schedules.year', config('constants.srdd_year'))
@@ -33,6 +31,8 @@
                                             ->random()
                              )->get();
     }
+
+    dd($my_events);
  ?>
 @extends('template.app')
 
