@@ -78,7 +78,14 @@
                 @if($r_user === "NONE")
                     <span>No users are registered for sessions yet thie year</span>
                 @else
-                    <span>{{ $r_user[0]->name . " <" . $r_user[0]->email . ">" }}</span>
+                    <span>
+                        {{ $r_user[0]->name . " <" . $r_user[0]->email . ">" }}
+                        <a class="ml-2 pr-2 px-1 py-1 border bg-indigo-400 border-indigo-200 shadow-sm font-semibold text-xs text-std uppercase rounded-md"
+                           href="{{route('reports')}}"
+                        >
+                            <i class="bi bi-arrow-clockwise"></i>&nbsp;Refresh
+                        </a>
+                    </span>
                 @endif
             </span>
         </x-srdd.notice>
