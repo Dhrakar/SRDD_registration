@@ -141,9 +141,18 @@
                 @endforeach
             </div>
         </x-srdd.dialog>
-
-
     @endif
+
+    {{--  If the logged in user is leading any events, show them here --}}
+    @if($my_events->count() == 0)
+        <x-srdd.notice>
+            You are not the lead for any events.  If you should be, please contact the SRDD committee.
+        </x-srdd.notice>
+    @else
+        <x-srdd.dialog :title="__('Registrations for events I am leading')">
+        </x-srdd.dialog>
+    @endif
+
 
 </div>
 @endsection
