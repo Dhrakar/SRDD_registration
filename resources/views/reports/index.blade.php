@@ -75,7 +75,7 @@
         </x-srdd.notice>
 
         {{-- Pick a random user if there are any registered for this year --}}
-        @if(Schedule::where('year', config('constants.srdd_year'))->count() > 0)
+        @if(1)
             <x-srdd.success :title="__('User Selection')">
                 Random registered user: {{ $r_user->name }} &lt;{{ $r_user->email }}&gt;
                 <a class="ml-2 pr-2 px-1 py-1 
