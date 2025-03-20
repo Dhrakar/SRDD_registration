@@ -33,6 +33,7 @@
     } else {
         $r_user = "NONE";
     }
+    dd($r_user);
  ?>
 @extends('template.app')
 
