@@ -77,19 +77,6 @@
         {{-- Pick a random user if there are any registered for this year --}}
 
         <x-srdd.success :title="__('User Selection')">
-            {!!
-             (Schedule::where('year', config('constants.srdd_year'))->count() > 0) ?
-                "Random registered user: {{ $r_user->name }} &lt;{{ $r_user->email }}&gt;
-                <a class=\"ml-2 pr-2 px-1 py-1 
-                          border bg-indigo-400 border-indigo-200 
-                          shadow-sm rounded-md
-                          font-semibold text-xs text-std uppercase\" 
-                    href=\"{{route('reports')}}\">
-                    <i class=\"bi bi-arrow-clockwise\"></i>&nbsp;update
-                </a>"
-            :
-            "<span>No users are registered for sessions yet thie year</span>"
-            !!}
         </x-srdd.success>
 
 
