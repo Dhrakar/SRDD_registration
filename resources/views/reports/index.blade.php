@@ -19,7 +19,7 @@
         ->get()
     ;
     $regArray = $reg->values()->toArray();
-    $my_events = Auth::user()->events(); dd($my_events->get());
+    $my_events = Auth::user()->events(); dd($my_events->get('year', 2025));
 
     // random user (not root and has alaska.edu email)
     if(Schedule::where('year', config('constants.srdd_year'))->count() > 0) {
