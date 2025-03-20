@@ -19,7 +19,7 @@
         ->get()
     ;
     $regArray = $reg->values()->toArray();
-    $my_events = Auth::user()->events()->where('year', config('constants.srdd_year')); dd($my_events->get());
+    $my_events = Auth::user()->events()->where('year', config('constants.srdd_year')); 
 
     // random user (not root and has alaska.edu email)
     if(Schedule::where('year', config('constants.srdd_year'))->count() > 0) {
@@ -145,8 +145,7 @@
 
     {{--  If the logged in user is leading any events, show them here --}}
     @if($my_events->count() > 0)
-        <x-srdd.dialog :title="__('Registrations for events I am leading')">
-
+        <x-srdd.dialog :title="__('Registrations for events I am leading this year')">
             @foreach($my_events->get() as $event)
                 <x-srdd.notice :title="__('Event # ' . $event->id . ' - ' . $event->title )">
                     @if($event->sessions()->count() == 0)
