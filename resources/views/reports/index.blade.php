@@ -33,8 +33,6 @@
     } else {
         $r_user = "NONE";
     }
-
-    dd($r_user->name . " " . $r_user->email);
  ?>
 @extends('template.app')
 
@@ -80,7 +78,7 @@
                 @if($r_user === "NONE")
                     <span>No users are registered for sessions yet thie year</span>
                 @else
-                    <span>user here</span>
+                    <span>{{ $r_user[0]->name . " <" . $r_user[0]->email . ">" }}</span>
                 @endif
             </span>
         </x-srdd.notice>
