@@ -46,5 +46,14 @@
             number of attendees as well as pull a random attendee record for any door-prize giveaways.
         </span>
     </x-srdd.callout>
+
+    {{-- Check for permission status to get to the requested session --}}
+    @if(session('status') !== null)
+        <x-srdd.error :title="__('Cannot Show Session')">
+            Access to that session is not permitted since you are not logged in with an Admin level account or
+            the instructor for that session.
+        </x-srdd.error>
+    @endisset
+
 </div>
 @endsection
