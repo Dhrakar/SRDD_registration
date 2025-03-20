@@ -78,7 +78,7 @@
                 @if($r_user === "NONE")
                     <span>No users are registered for sessions yet thie year</span>
                 @else
-                    <span>{{ $r_user->name }}</span>
+                    <span>user here</span>
                 @endif
             </span>
         </x-srdd.notice>
