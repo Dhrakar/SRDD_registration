@@ -58,7 +58,7 @@
     {{-- Limit this part to just admins --}}
     @if(Auth::user()->level >= config('constants.auth_level')['admin'])
 
-        <x-srdd.notice :title="__('Registration Totals')">
+        <x-srdd.notice :title="config('constants.srdd_year') . ' ' . __('Registration Totals')">
             <span>
                 <i class="bi bi-calendar text-emerald-800 dark:text-emerald-300"></i> &nbsp;
                 There are {{ Session::all()->where('date_held', config('constants.db_srdd_date'))->count() }} total
@@ -73,6 +73,25 @@
                 <br/>
             </span>
         </x-srdd.notice>
+
+        {{-- Pick a random user if there are any registered for this year --}}
+        @if(Schedule::where('year', config('constants.srdd_year'))->count() > 0)
+            <x-srdd.success :title="__('User Selection')">
+                Random registered user: {{ $r_user->name }} &lt;{{ $r_user->email }}&gt;
+                <a class="ml-2 pr-2 px-1 py-1 
+                          border bg-indigo-400 border-indigo-200 
+                          shadow-sm rounded-md
+                          font-semibold text-xs text-std uppercase" 
+                    href="{{route('reports')}}"
+                >
+                    <i class="bi bi-arrow-clockwise"></i>&nbsp;update
+                </a>
+            </x-srdd.success>
+        @else
+            <x-srdd.warning :title="__('User Selection')">
+                <span>No users are registered for sessions yet thie year</span>
+            </x-srdd.warning>
+        @endif
 
     @endif
 
