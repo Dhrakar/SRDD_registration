@@ -74,17 +74,16 @@
                 {{ Schedule::where('session_id', 2)->count('user_id') }} attendees are registered for lunch.
                 <br/>
             </span>
+            <x-srdd.divider/>
+            <span>
+                <i class="bi bi-user text-emerald-800 dark:text-emerald-300"></i> &nbsp;
+                @if($r_user === "NONE")
+                    <span>No users are registered for sessions yet thie year</span>
+                @else
+                    Random registered user: 
+                @endif
+            </span>
         </x-srdd.notice>
-
-        {{-- Pick a random user if there are any registered for this year --}}
-
-        <x-srdd.dialog :title="__('User Selection')">
-            @if($r_user === "NONE")
-                <span>No users are registered for sessions yet thie year</span>
-            @else
-                Random registered user: 
-            @endif
-        </x-srdd.dialog>
 
 
     @endif
