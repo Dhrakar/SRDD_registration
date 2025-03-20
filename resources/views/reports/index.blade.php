@@ -33,6 +33,8 @@
     } else {
         $r_user = "NONE";
     }
+
+    dd($r_user->name . " " . $r_user->email);
  ?>
 @extends('template.app')
 
